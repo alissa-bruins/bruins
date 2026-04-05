@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Team — Bruins 13U Gold</title>
+<title>Pitching — Bruins 13U Gold</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f7;color:#1d1d1f;font-size:15px;}
@@ -134,9 +134,9 @@ canvas{width:100%!important;}
   <div><span class="record-pill" id="rec-pill">24&ndash;7 &middot; +92 run diff</span></div>
 </div>
 <div class="page-nav" id="page-nav">
-  <a class="pn active" href="index.html">Team</a>
+  <a class="pn " href="index.html">Team</a>
   <a class="pn " href="batting.html">Batting</a>
-  <a class="pn " href="pitching.html">Pitching</a>
+  <a class="pn active" href="pitching.html">Pitching</a>
   <a class="pn " href="fielding.html">Fielding</a>
   <a class="pn " href="trends.html">Trends</a>
   <a class="pn " href="lineups.html">Lineups</a>
@@ -146,23 +146,29 @@ canvas{width:100%!important;}
 </div>
 <div class="content" style="flex:1;padding-bottom:20px;">
 
-<div class="g4">
-  <div class="mc"><div class="mc-l">Record</div><div class="mc-v g" id="i-rec">24-7</div></div>
-  <div class="mc"><div class="mc-l">Run diff</div><div class="mc-v g">+92</div></div>
-  <div class="mc"><div class="mc-l">RS/G</div><div class="mc-v">6.5</div></div>
-  <div class="mc"><div class="mc-l">Titles</div><div class="mc-v g">2</div></div>
+<div class="note b"><strong>ERA note:</strong> 7-inning basis (13U standard). Swartz: full ERA / healthy ERA (illness outings removed). Healthy ERA removes all Feb-Mar outings when migraines and mono were active.</div>
+<div class="sl">Staff summary</div>
+<div class="table-wrap" id="pitch-tbl"></div>
+<div class="chart-card">
+  <div class="chart-title">ERA comparison — full season vs healthy</div>
+  <div style="position:relative;height:160px"><canvas id="era-c"></canvas></div>
+</div>
+<div class="note r"><strong>Swartz protocol (return Apr 21 min):</strong> 60P max per outing. Never pitches game 2 on any day he pitches game 1. 5-day rest minimum. RF/LF in field — no arm stress while recovering.</div>
+<div class="note g"><strong>Demmin right now:</strong> 0.47 ERA last 4 outings. 10K in each of last 2 starts. Best arm available. Manage his dual 1B + pitching workload.</div>
+<div class="note b"><strong>Lopes:</strong> Temecula Mar15 — 3 IP, 7K, 0BB, 32P at 87.5% strikes. Most efficient outing of the season by any Bruin. Best K/BB on staff (2.29).</div>
+<div class="sl">Pitch counts — all outings</div>
+<div class="chart-card">
+  <div class="chart-title">Swartz pitch count per outing (red = illness period)</div>
+  <div style="position:relative;height:140px"><canvas id="swp-c"></canvas></div>
 </div>
 <div class="chart-card">
-  <div class="chart-title">Runs scored vs allowed — per game by tournament</div>
-  <div style="position:relative;height:160px"><canvas id="run-c"></canvas></div>
+  <div class="chart-title">Demmin pitch count per outing</div>
+  <div style="position:relative;height:120px"><canvas id="dep-c"></canvas></div>
 </div>
-<div class="sl">Tournament log</div>
-<div id="t-list"></div>
-<div class="sl">By opponent class (USSSA)</div>
-<div class="card" id="class-breakdown"></div>
-<div class="note g"><strong>Best result:</strong> Won The Chiller OC (Feb, Irvine) — 13AAA BB State Qualifier. Beat LOS CRUSHERS (PR 984), SoCal PJX (PR 909), West Coast Shockers (PR 865). Won it with Swartz managing migraines.</div>
-<div class="note a"><strong>Competition note:</strong> SB Spring Break (T8 — 10.2 RS/G, 4-0) came against a lighter field. SCV Knights went 12-23 on the season (PR 599). Numbers are real but contextual.</div>
-<div class="updated" id="upd-text">Updated: Apr 5, 2026</div>
+<div class="chart-card">
+  <div class="chart-title">Lopes pitch count per outing</div>
+  <div style="position:relative;height:120px"><canvas id="lop-c"></canvas></div>
+</div>
 
 </div>
 </div>
@@ -403,50 +409,50 @@ function ud(){for(let i=0;i<4;i++)document.getElementById('d'+i).classList.toggl
 function unlock(){document.getElementById('auth').style.display='none';document.getElementById('app').style.display='flex';onUnlock();}
 
 function onUnlock(){ 
-  document.getElementById('upd-text').textContent = 'Updated: '+TEAM.lastUpdated;
-  // Tourney list
-  const tl=document.getElementById('t-list');
-  tl.innerHTML=TEAM.tournaments.map(t=>{
-    const diff=t.rs-t.ra;
-    const dc=t.w>t.l?'#2e7d32':t.w<t.l?'#c62828':'#bf6f00';
-    const champ=t.champ?'<span class="badge g" style="margin-left:4px">Champion</span>':'';
-    const pl=t.place!=='—'?`<span class="badge b" style="margin-left:4px">${t.place}</span>`:'';
-    return `<div class="card" style="margin-bottom:8px;padding:12px 14px">
-      <div style="display:flex;align-items:flex-start;gap:10px">
-        <div style="width:10px;height:10px;border-radius:50%;background:${dc};margin-top:4px;flex-shrink:0"></div>
-        <div style="flex:1">
-          <div style="font-size:14px;font-weight:700">${t.name}${champ}${pl}</div>
-          <div style="font-size:11px;color:#888;margin-top:2px">${t.date} &middot; ${t.cls} &middot; ${t.note}</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0">
-          <div style="font-size:14px;font-weight:700">${t.w}&ndash;${t.l}</div>
-          <div style="font-size:12px;color:${diff>0?'#2e7d32':diff<0?'#c62828':'#888'}">${diff>0?'+':''}${diff} runs</div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-  // Class breakdown
-  const classes=[
-    {cls:'vs 13AA',  w:6, l:0,rs:7.83,ra:2.67,pct:100},
-    {cls:'vs 13AAA', w:10,l:4,rs:6.07,ra:4.00,pct:71},
-    {cls:'vs 13Major',w:3,l:3,rs:4.67,ra:3.33,pct:50},
-  ];
-  document.getElementById('class-breakdown').innerHTML=classes.map(c=>`
-    <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0f0;">
-      <div style="font-size:13px;font-weight:600;width:80px;flex-shrink:0">${c.cls}</div>
-      <div style="flex:1;height:7px;background:#f0f0f0;border-radius:4px;overflow:hidden"><div style="width:${c.pct}%;height:100%;background:#1565a3;border-radius:4px"></div></div>
-      <div style="font-size:12px;font-weight:700;color:${c.w>c.l?'#2e7d32':c.w<c.l?'#c62828':'#555'};min-width:36px;text-align:right">${c.w}&ndash;${c.l}</div>
-      <div style="font-size:11px;color:#888;min-width:50px;text-align:right">${c.rs.toFixed(1)} RS</div>
-    </div>`).join('');
-  // Run chart
-  new Chart(document.getElementById('run-c'),{type:'line',data:{
-    labels:TEAM.tournaments.map(t=>t.name.split(' ')[0]),
+  const P=TEAM.pitching;
+  document.getElementById('pitch-tbl').innerHTML=`<table><thead><tr>
+    <th class="l">Pitcher</th><th class="l">Role</th><th>IP</th><th>ERA</th><th>ERA&#x2020;</th><th>WHIP</th><th>K</th><th>BB</th><th>K/9</th><th>BB/9</th><th>S%</th><th>#P</th><th class="l">Status</th>
+  </tr></thead><tbody>${P.map((p,i)=>{
+    const ec=p.era<=3?'g':p.era>=5?'r':'';
+    const pc=p.p>=700?'r':p.p>=500?'a':'';
+    const st=p.status==='out'?'<span class="badge r">Out</span>':'<span class="badge g">Active</span>';
+    return`<tr><td class="l">${p.name}</td><td class="l d">${p.role}</td><td>${p.ip}</td>
+      <td class="${ec}">${p.era.toFixed(2)}</td><td class="g">${p.eraH.toFixed(2)}</td>
+      <td>${p.whip.toFixed(2)}</td><td>${p.k}</td><td>${p.bb}</td>
+      <td class="${p.k9>=14?'g':''}">${p.k9.toFixed(1)}</td>
+      <td class="${p.bb9>=9?'r':''}">${p.bb9.toFixed(1)}</td>
+      <td>${p.sp.toFixed(1)}%</td><td class="${pc}">${p.p}</td><td class="l">${st}</td></tr>`;
+  }).join('')}</tbody></table>`;
+
+  new Chart(document.getElementById('era-c'),{type:'bar',data:{
+    labels:P.map(p=>p.name),
     datasets:[
-      {label:'RS/G',data:TEAM.tournaments.map(t=>+(t.rs/(t.w+t.l)).toFixed(1)),borderColor:'#1565a3',tension:.3,pointRadius:4,pointBackgroundColor:'#1565a3',fill:false,borderWidth:2},
-      {label:'RA/G',data:TEAM.tournaments.map(t=>+(t.ra/(t.w+t.l)).toFixed(1)),borderColor:'#c62828',borderDash:[4,3],tension:.3,pointRadius:4,pointBackgroundColor:'#c62828',fill:false,borderWidth:2}
+      {label:'Full ERA',data:P.map(p=>Math.min(p.era,12)),backgroundColor:'rgba(21,101,163,0.5)',borderRadius:4},
+      {label:'Healthy ERA',data:P.map(p=>Math.min(p.eraH,12)),backgroundColor:'rgba(46,125,50,0.7)',borderRadius:4}
     ]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:12}}},
+    scales:{x:{ticks:{font:{size:10}},grid:{display:false}},y:{min:0,max:8,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+
+  const sw=P[0];
+  new Chart(document.getElementById('swp-c'),{type:'bar',data:{
+    labels:sw.gameDates,
+    datasets:[{data:sw.gamePitches,backgroundColor:sw.gameSick.map(s=>s?'rgba(198,40,40,0.7)':'rgba(21,101,163,0.6)'),borderRadius:3}]
   },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{font:{size:9},maxRotation:30},grid:{display:false}},y:{min:0,max:13,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+    scales:{x:{ticks:{font:{size:7},maxRotation:45},grid:{display:false}},y:{min:0,max:80,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+
+  const dm=P[1];
+  new Chart(document.getElementById('dep-c'),{type:'bar',data:{
+    labels:dm.gameDates,
+    datasets:[{data:dm.gamePitches,backgroundColor:dm.gamePitches.map(p=>p>=75?'rgba(198,40,40,0.7)':p>=60?'rgba(191,111,0,0.7)':'rgba(46,125,50,0.6)'),borderRadius:3}]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{ticks:{font:{size:8},maxRotation:45},grid:{display:false}},y:{min:0,max:110,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+
+  const lo=P[2];
+  new Chart(document.getElementById('lop-c'),{type:'bar',data:{
+    labels:lo.gameDates,
+    datasets:[{data:lo.gamePitches,backgroundColor:lo.gamePitches.map(p=>p>=75?'rgba(198,40,40,0.7)':p>=60?'rgba(191,111,0,0.7)':'rgba(46,125,50,0.6)'),borderRadius:3}]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{ticks:{font:{size:8},maxRotation:45},grid:{display:false}},y:{min:0,max:90,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
  }
 </script>
 </body>
