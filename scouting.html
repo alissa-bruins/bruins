@@ -121,6 +121,29 @@ canvas { width: 100% !important; }
 <div class="cc"><div class="ct">Wins vs losses by opponent power rating</div><div style="position:relative;height:150px"><canvas id="pr-c"></canvas></div></div>
 <div class="note g"><strong>Best wins vs rated opponents:</strong> Legacy (PR 1164) W9-3, Vipers (PR 1145) W6-3, LOS CRUSHERS (PR 984) W6-5, Five Tools LA (PR 996) W11-1</div>
 <div class="note a"><strong>Losses in context:</strong> BC Pirates (PR 1010) beat us twice. Camarillo Elite (PR 1290 — highest rated opp all season) beat us once. Good losses.</div></div>
+
+<div id="bs-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;">
+  <div style="background:#fff;border-radius:16px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;margin:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #DAEBFE;position:sticky;top:0;background:#fff;border-radius:16px 16px 0 0;">
+      <div style="font-size:14px;font-weight:700;color:#003B5C" id="bs-title"></div>
+      <button onclick="closeBox()" style="border:none;background:none;font-size:22px;color:#8BB8E8;cursor:pointer;padding:0 4px;">&#10005;</button>
+    </div>
+    <div style="padding:14px 16px;">
+      <pre id="bs-body" style="font-family:-apple-system,monospace;font-size:11px;color:#003B5C;white-space:pre-wrap;line-height:1.6;margin:0;"></pre>
+    </div>
+  </div>
+<div id="bs-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9998;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;">
+  <div style="background:#fff;border-radius:16px;width:100%;max-width:680px;margin:auto;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #DAEBFE;background:#2774AE;">
+      <div style="font-size:13px;font-weight:700;color:#fff" id="bs-title"></div>
+      <button onclick="closeBox()" style="border:none;background:rgba(255,255,255,.2);color:#fff;border-radius:50%;width:28px;height:28px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;">&#10005;</button>
+    </div>
+    <div style="padding:14px 16px;max-height:75vh;overflow-y:auto;">
+      <pre id="bs-body" style="font-family:-apple-system,BlinkMacSystemFont,monospace;font-size:11px;color:#003B5C;white-space:pre-wrap;line-height:1.65;margin:0;"></pre>
+    </div>
+  </div>
+</div>
+</div>
 </div>
 <script>
 
@@ -348,6 +371,2214 @@ const LINEUPS = {
   },
 };
 
+var _BOX = {
+  'Oct25|Game Speed': `Goodland Bruins 13U 2 - 3 GameSpeed 13U
+Away Saturday October 25, 2025
+1 2 3 4 5 R H E
+GDLN 0 0 1 1 0 2 6 1
+GMSP 0 0 1 2 X 3 3 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO GameSpeed 13U AB R H RBI BB SO
+J Demmin #17 (1B) 2 0 0 0 0 1 Jackson G #12 (2B) 1 0 1 0 1 0
+J Short #2 (3B) 2 0 1 0 0 0 Austin Y #2 1 0 0 0 1 1
+C Firesto… #15 (SS) 2 1 0 0 0 0 Alex S #32 (1B) 1 1 0 0 1 0
+A Herrera #5 (C) 2 0 0 0 0 0 Micah S #31 2 1 1 1 0 0
+B Gomez #39 (1B) 2 0 2 1 0 0 Liam C #8 (P) 2 0 0 0 0 0
+M Conant #34 (CF) 2 0 1 0 0 1 Danny B #7 2 0 0 0 0 1
+J Murdo… #24 (2B) 2 0 0 0 0 1 Ryan P #13 1 0 0 0 0 1
+R Denny #50 (CF) 2 0 0 0 0 0 Jaime C #10 (3B) 0 1 0 0 1 0
+W Torres #3 (LF) 1 1 1 0 0 0 Ryder D #27 (3B) 1 0 0 0 0 0
+E Swartz #22 (P) 2 0 0 0 0 0 Sebastian G #03 1 0 0 0 0 1
+T Newen… #32 (LF) 1 0 0 0 1 1 Kellan A #23 (C) 1 0 1 1 0 0
+T Wiser #4 (RF) 2 0 1 1 0 0 Caleb H #35 (SS) 1 0 0 0 0 0
+Totals 22 2 6 2 1 4 Totals 14 3 3 2 4 4
+2B: B Gomez, TB: W Torres, B Gomez 3, M Conant, J 2B: Kellan A, Micah S, TB: Kellan A 2, Micah S 2,
+Short, T Wiser, HBP: W Torres, SB: W Torres 2, B Jackson G, CS: Jackson G, SB: Austin Y, Jaime C, LOB:
+Gomez, C Firestone, J Short, LOB: 7 3
+PITCHING
+Goodland… IP H R ER BB SO HR GameSpee… IP H R ER BB SO HR
+E Swartz #22 3.0 1 1 1 3 3 0 Liam C #8 3.0 3 1 0 0 4 0
+M Con… #34 1.0 2 2 1 1 1 0 Jaime C #10 2.0 3 1 0 1 0 0
+Totals 4.0 3 3 2 4 4 0 Totals 5.0 6 2 0 1 4 0
+P-S: M Conant 32-20, E Swartz 56-28, WP: M Conant, P-S: Jaime C 33-23, Liam C 55-32, WP: Liam C, HBP:
+BF: M Conant 6, E Swartz 12, E: W Torres Liam C, BF: Jaime C 11, Liam C 13, E: Caleb H
+Scorekeeping. Stats. Live Game Updates.`,
+  'Oct25|BATRS Camero': `Goodland Bruins 13U 6 - 5 BATRS 13U Cameron
+Away Saturday October 25, 2025
+1 2 3 4 5 R H E
+GDLN 1 1 2 0 2 6 7 0
+BTRS 1 3 0 0 1 5 5 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO BATRS 13U Cam… AB R H RBI BB SO
+J Demmin #17 (P) 2 3 1 0 1 0 Ari S 2 1 1 2 1 0
+J Short #2 (C) 3 1 1 0 0 0 Beckett M 3 1 2 0 0 1
+C Firesto… #15 (3B) 2 1 1 1 0 0 Richard R (P) 1 0 0 0 2 0
+A Herrera #5 (SS) 1 0 0 2 0 0 Fred J 2 0 1 0 1 1
+B Gomez #39 (1B) 3 0 3 2 0 0 Beckett S (P) 3 0 0 0 0 2
+J Murdo… #24 (2B) 3 0 0 0 0 1 Bodhi M 1 1 1 1 2 0
+W Torres #3 (RF) 2 0 0 0 1 1 Brady Z 3 0 0 0 0 1
+R Denny #50 (CF) 2 1 1 0 0 0 Jeferson P 2 0 0 0 0 0
+E Swartz #22 (RF) 1 0 0 0 1 1 Walter M #7 1 1 0 0 1 1
+T Newen… #32 (LF) 1 0 0 0 1 1 Ethan K 1 1 0 0 1 0
+T Wiser #4 (LF) 2 0 0 0 0 1 Totals 19 5 5 3 8 6
+Totals 22 6 7 5 4 5
+TB: C Firestone, R Denny, B Gomez 3, J Demmin, J 2B: Ari S, TB: Bodhi M, Beckett M 2, Ari S 2, Fred J, SB:
+Short, SF: A Herrera 2, HBP: C Firestone, SB: B Gomez Walter M, LOB: 7
+2, J Demmin, J Short 2, LOB: 8
+PITCHING
+Goodland… IP H R ER BB SO HR BATRS 13U… IP H R ER BB SO HR
+J Dem… #17 1.2 1 4 4 5 2 0 Richard R 2.0 2 3 2 2 3 0
+B Gomez #39 1.1 2 0 0 1 3 0 Beckett S 2.0 3 2 1 2 1 0
+C Fires… #15 2.0 2 1 1 2 1 0 Totals 5.0 7 6 4 4 5 0
+Totals 5.0 5 5 5 8 6 0
+P-S: C Firestone 39-22, B Gomez 26-18, J Demmin P-S: Beckett S 54-27, Richard R 39-25, WP: Beckett S,
+51-20, WP: B Gomez, J Demmin 2, BF: C Firestone 10, B Richard R 3, BF: Beckett S 12, Richard R 11
+Gomez 7, J Demmin 10
+Scorekeeping. Stats. Live Game Updates.`,
+  'Oct26|Total Baseba': `Total Baseball Vipers 13U
+3 - 6 Goodland Bruins 13U
+Santhon
+Home Sunday October 26, 2025
+1 2 3 4 5 R H E
+TTLB 1 1 1 0 0 3 3 0
+GDLN 1 0 1 1 3 6 10 4
+BATTING
+Total Baseball Vi… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Jon L #1 2 2 0 0 1 0 J Demmin #17 (1B) 1 2 1 1 0 0
+Nathaniel B #42 3 0 0 0 0 1 J Short #2 (3B) 2 0 1 0 1 0
+Connor W #4 (C) 3 0 1 0 0 0 C Firesto… #15 (SS) 3 0 2 1 0 1
+CJ H #31 2 0 0 0 0 2 A Herrera #5 (C) 1 1 1 2 0 0
+Matt N #5 2 0 0 0 0 0 B Gomez #39 (1B) 2 0 0 0 0 2
+Vem A #14 2 0 0 0 0 0 W Torres #3 (RF) 1 0 1 0 1 0
+Julian O #14 1 0 0 0 1 1 M Conant #34 (LF) 2 0 1 0 0 0
+Jacob S #21 (P) 1 1 1 0 1 0 J Murdo… #24 (2B) 2 0 1 0 0 0
+Peter R #44 2 0 1 0 0 1 R Denny #50 (CF) 2 1 1 0 0 0
+Harrison B #30 1 0 0 0 1 0 E Swartz #22 (P) 2 1 0 0 0 0
+Desi W #32 (P) 2 0 0 0 0 2 T Newen… #32 (LF) 0 1 0 0 2 0
+Totals 21 3 3 0 4 7 T Wiser #4 (LF) 2 0 1 1 0 0
+Totals 20 6 10 5 4 3
+2B: Peter R, TB: Connor W, Peter R 2, Jacob S, SB: 2B: J Short, HR: A Herrera, TB: T Wiser, C Firestone 2,
+Connor W, Nathaniel B, LOB: 7 W Torres, M Conant, J Demmin, J Murdock, A Herrera 4,
+R Denny, J Short 2, SF: J Demmin, A Herrera, HBP: J
+Demmin, SB: J Demmin, LOB: 5
+PITCHING
+Total Base… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Desi W #32 4.0 7 3 3 3 3 1 E Swartz #22 2.1 2 3 1 3 3 0
+Jacob S #21 0.2 3 3 3 1 0 0 J Dem… #17 2.2 1 0 0 1 4 0
+Totals 4.2 10 6 6 4 3 1 Totals 5.0 3 3 1 4 7 0
+P-S: Jacob S 27-14, Desi W 72-40, WP: Jacob S, HBP: P-S: J Demmin 47-29, E Swartz 48-24, WP: J Demmin,
+Desi W, BF: Jacob S 7, Desi W 20 E Swartz, BF: J Demmin 11, E Swartz 14, E: C Firestone,
+W Torres, A Herrera, E Swartz
+Scorekeeping. Stats. Live Game Updates.`,
+  'Oct26|Legacy': `Legacy 13U Select 3 - 9 Goodland Bruins 13U
+Home Sunday October 26, 2025
+1 2 3 4 5 6 R H E
+LGCY 1 1 1 0 0 0 3 5 3
+GDLN 0 0 2 4 3 X 9 12 2
+BATTING
+Legacy 13U Select AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Alexand… #50 (LF) 3 0 1 0 0 1 J Demmin #17 (1B) 3 2 3 1 1 0
+Julian V #13 (SS) 3 2 1 0 0 0 J Short #2 (C) 4 0 1 1 0 0
+Christian F #3 (C) 3 0 0 0 0 3 C Firesto… #15 (3B) 4 0 2 0 0 0
+Jeremy R #10 (P) 1 0 0 0 1 1 A Herrera #5 (SS) 3 0 0 2 0 0
+Parker B #12 (1B) 2 0 1 0 0 1 B Gomez #39 (P) 1 0 1 0 0 0
+Parker S #7 (2B) 2 0 0 0 0 1 E Swartz #22 (P) 2 1 1 0 0 0
+William S (RF) 2 1 1 0 0 0 W Torres #3 (RF) 2 2 1 0 1 0
+Edwin S #24 (CF) 1 0 0 0 1 1 T Newe… #32 (RF) 0 0 0 0 0 0
+Nolan M #14 2 0 0 0 0 1 M Conant #34 (LF) 2 0 0 0 0 0
+Lincoln M #55 (3B) 2 0 0 0 0 0 J Murdo… #24 (2B) 3 2 0 1 0 0
+Cameron A #22 1 0 1 0 1 0 R Denny #50 (CF) 3 2 3 2 0 0
+Kash V #2 1 0 0 0 1 1 Totals 27 9 12 7 2 0
+Totals 23 3 5 0 4 10
+TB: Julian V, Alexander C, Cameron A, William S, Parker 2B: J Short, J Demmin, TB: W Torres, E Swartz, J Short
+B, SB: Julian V 4, William S, LOB: 5 2, B Gomez, C Firestone 2, R Denny 3, J Demmin 4,
+HBP: M Conant, SB: J Murdock 2, J Short, R Denny,
+LOB: 6
+PITCHING
+Legacy 13… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Jeremy R #10 3.0 6 2 2 0 0 0 B Gomez #39 2.1 5 3 3 3 3 0
+Edwin S #24 1.0 4 4 3 0 0 0 E Swartz #22 1.2 0 0 0 0 4 0
+Lincoln… #55 1.0 2 3 3 2 0 0 M Con… #34 2.0 0 0 0 1 3 0
+Totals 5.0 12 9 8 2 0 0 Totals 6.0 5 3 3 4 10 0
+P-S: Jeremy R 37-23, Edwin S 23-14, Lincoln M 33-17, P-S: M Conant 34-19, E Swartz 23-17, B Gomez 55-28,
+WP: Lincoln M 2, HBP: Lincoln M, BF: Jeremy R 14, WP: B Gomez 2, BF: M Conant 7, E Swartz 5, B Gomez
+Edwin S 8, Lincoln M 8, E: Christian F, Parker S 2 15, E: J Murdock, J Short
+Scorekeeping. Stats. Live Game Updates.`,
+  'Nov08|Braves Baseb': `Braves Baseball
+3 - 5 Goodland Bruins 13U
+Academy BBA 13U
+Home Saturday November 08, 2025
+1 2 3 4 R H E
+BRVS 0 1 2 0 3 3 0
+GDLN 3 0 2 X 5 4 1
+BATTING
+Braves Baseball… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Max V #44 1 0 0 0 1 0 R Lopes #13 (P) 1 2 1 0 1 0
+Caleb L #50 1 1 0 0 1 1 J Short #2 (3B) 1 1 0 0 1 1
+Colton S #7 (C) 2 0 1 0 0 1 J Demmin #17 (1B) 1 2 1 2 1 0
+Jayden C #5 (P) 1 0 0 0 1 1 A Herrera #5 (C) 2 0 1 2 0 0
+Anthony C #21 (3B) 1 0 0 1 1 0 C Firesto… #15 (SS) 2 0 0 0 0 2
+Andrew S #10 (C) 2 1 1 0 0 0 W Torres #3 (2B) 1 0 0 0 1 1
+#81 2 0 1 1 0 0 J Murdo… #24 (RF) 1 0 0 0 0 0
+Cash B #99 (1B) 0 0 0 0 2 0 R Denny #50 (CF) 1 0 1 0 0 0
+Matisse M #88 (P) 1 0 0 0 1 1 E Swartz #22 (RF) 1 0 0 0 0 1
+Abe G #1 (2B) 2 0 0 0 0 1 B Zant #27 (LF) 1 0 0 0 0 0
+Leo G #2 (SS) 0 1 0 0 1 0 T Wiser #4 (LF) 1 0 0 0 0 1
+DJ M #24 (RF) 1 0 0 0 0 1 Totals 13 5 4 4 4 6
+Totals 14 3 3 2 8 6
+2B: Andrew S, TB: #81, Colton S, Andrew S 2, SB: Cash 2B: A Herrera, R Lopes, TB: R Denny, A Herrera 2, J
+B, Leo G, Max V, LOB: 7 Demmin, R Lopes 2, SB: J Short, W Torres, J Demmin, R
+Lopes 2, LOB: 3
+PITCHING
+Braves Bas… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Jayden C #5 1.0 1 3 3 3 1 0 R Lopes #13 2.0 2 1 1 3 4 0
+Matiss… #88 2.0 3 2 2 1 5 0 J Dem… #17 1.0 1 2 2 4 1 0
+Totals 3.0 4 5 5 4 6 0 E Swartz #22 1.0 0 0 0 1 1 0
+Totals 4.0 3 3 3 8 6 0
+P-S: Jayden C 34-18, Matisse M 41-29, WP: Jayden C, P-S: E Swartz 19-12, J Demmin 43-22, R Lopes 47-26,
+Matisse M, BF: Jayden C 7, Matisse M 10 WP: J Demmin, R Lopes 2, BF: E Swartz 4, J Demmin 8,
+R Lopes 10, E: J Demmin
+Scorekeeping. Stats. Live Game Updates.`,
+  'Nov08|BC Pirates': `Goodland Bruins 13U 8 - 9 BC Pirates 13U
+Away Saturday November 08, 2025
+1 2 3 4 5 6 R H E
+GDLN 1 0 7 0 0 0 8 9 1
+BCPR 1 0 2 1 2 3 9 10 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO BC Pirates 13U AB R H RBI BB SO
+R Lopes #13 (CF) 3 2 3 3 0 0 Demitri M #2 (SS) 3 2 2 1 1 1
+J Short #2 (3B) 3 1 1 0 0 1 Easton L #22 (3B) 3 1 2 0 0 0
+C Firesto… #15 (SS) 3 1 0 0 0 1 Kai Q #6 (RF) 3 1 1 2 0 1
+J Demmin #17 (1B) 1 1 0 0 1 1 Sam O #8 (P) 2 0 1 2 1 0
+A Herrera #5 (C) 3 0 1 0 0 0 Leo R #15 (C) 3 1 1 1 0 1
+W Torres #3 (2B) 2 1 1 0 0 0 Cruz P #1 (1B) 2 1 1 0 1 0
+J Murdo… #24 (2B) 3 0 1 2 0 0 Trent W #23 (2B) 2 1 1 0 1 0
+R Denny #50 (RF) 2 0 1 0 0 0 Josh R #99 (CF) 2 1 1 1 1 0
+E Swartz #22 (P) 3 0 0 0 0 1 Drew T #11 (2B) 2 0 0 0 1 1
+B Zant #27 (LF) 2 1 0 0 0 0 Wyatt G #44 (1B) 2 0 0 0 1 0
+T Wiser #4 (LF) 1 1 1 0 1 0 Tyson P #42 (2B) 1 1 0 0 1 1
+Totals 26 8 9 5 2 4 Totals 25 9 10 7 8 5
+2B: J Short, HR: R Lopes 2, TB: J Murdock, R Lopes 9, 2B: Cruz P, Demitri M, HR: Kai Q, TB: Easton L 2, Cruz P
+T Wiser, W Torres, R Denny, A Herrera, J Short 2, CS: T 2, Trent W, Kai Q 4, Leo R, Sam O, Josh R, Demitri M 3,
+Wiser, HBP: J Demmin, W Torres, R Denny, B Zant, SB: HBP: Tyson P, SB: Easton L, Demitri M, LOB: 6
+W Torres, LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR BC Pirates… IP H R ER BB SO HR
+E Swartz #22 2.0 2 1 1 2 1 0 Sam O #8 2.0 2 1 1 0 3 1
+R Denny #50 1.0 4 3 3 0 1 1 Leo R #15 0.2 6 7 7 0 0 1
+J Dem… #17 2.0 2 2 2 3 2 0 Drew T #11 3.1 1 0 0 2 1 0
+B Zant #27 0.0 1 2 2 1 0 0 Totals 6.0 9 8 8 2 4 2
+C Firest… #15 0.1 1 1 1 1 1 0
+R Lopes #13 0.0 0 0 0 1 0 0
+Totals 5.1 10 9 9 8 5 1
+Scorekeeping. Stats. Live Game Updates.
+P-S: E Swartz 32-20, C Firestone 21-10, R Lopes 4-0, J
+Demmin 40-21, R Denny 20-12, B Zant 13-7, WP: C
+Firestone, B Zant, HBP: C Firestone, BF: E Swartz 10, C
+Firestone 4, R Lopes, J Demmin 10, R Denny 7, B Zant 2,
+E: J Short
+P-S: Drew T 55-28, Leo R 19-10, Sam O 32-22, WP:
+Drew T, Leo R 2, HBP: Drew T, Leo R 3, BF: Drew T 13,
+Leo R 11, Sam O 8, E: Drew T
+Scorekeeping. Stats. Live Game Updates.`,
+  'Nov09|Renegades': `Renegades National 1 - 5 Goodland Bruins 13U
+Home Sunday November 09, 2025
+1 2 3 4 5 6 R H E
+RNGD 0 0 1 0 0 0 1 3 1
+GDLN 1 3 1 0 0 X 5 5 1
+BATTING
+Renegades Nati… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+#8 (SS) 2 0 0 0 1 0 R Lopes #13 (CF) 3 0 1 0 0 2
+#3 (C) 2 0 1 0 1 0 J Short #2 (3B) 2 1 1 1 1 0
+#23 (3B) 2 0 0 0 1 1 J Demmin #17 (1B) 3 0 0 0 0 1
+#7 (1B) 2 0 0 0 0 2 A Herrera #5 (C) 3 0 0 0 0 0
+#20 (1B) 1 0 1 0 1 0 C Firesto… #15 (SS) 2 2 1 0 0 0
+#10 (P) 2 0 0 0 0 0 B Zant #27 (LF) 0 1 0 0 2 0
+#22 (2B) 2 0 0 0 0 0 J Murdo… #24 (2B) 1 1 0 0 2 0
+#5 (2B) 1 1 0 0 1 0 R Denny #50 (LF) 1 0 0 0 1 1
+#6 (CF) 2 0 1 0 0 1 T Wiser #4 (RF) 2 0 1 2 0 0
+#1 (3B) 2 0 0 0 0 2 E Swartz #22 (P) 2 0 1 0 0 0
+#9 2 0 0 0 0 0 Totals 19 5 5 3 6 4
+Totals 20 1 3 0 5 6
+TB: #3, #20, #6, LOB: 6 2B: T Wiser, HR: J Short, TB: J Short 4, T Wiser 2, E
+Swartz, R Lopes, C Firestone, CS: A Herrera, HBP: B
+Zant, C Firestone, SB: J Murdock, B Zant, C Firestone 2,
+LOB: 6
+PITCHING
+Renegades… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+#10 2.0 4 4 4 3 3 1 E Swartz #22 4.0 3 1 1 4 3 0
+#7 0.1 0 1 1 1 0 0 J Dem… #17 2.0 0 0 0 1 3 0
+#20 2.2 1 0 0 2 1 0 Totals 6.0 3 1 1 5 6 0
+Totals 5.0 5 5 5 6 4 1
+P-S: #10 54-33, #20 32-19, #7 15-6, WP: #10 2, #7, P-S: J Demmin 21-14, E Swartz 73-44, WP: E Swartz,
+HBP: #7 2, BF: #10 13, #20 10, #7 4, E: #8 BF: J Demmin 7, E Swartz 18, E: J Murdock
+Scorekeeping. Stats. Live Game Updates.`,
+  'Nov09|BC Pirates': `BC Pirates 13U 4 - 1 Goodland Bruins 13U
+Home Sunday November 09, 2025
+1 2 3 4 5 6 7 R H E
+BCPR 0 0 0 1 2 0 1 4 7 1
+GDLN 0 1 0 0 0 0 0 1 6 4
+BATTING
+BC Pirates 13U AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Demitri M #2 (P) 2 1 1 0 1 0 R Lopes #13 (P) 4 0 1 0 0 2
+Easton L #22 (3B) 3 0 1 0 0 0 J Short #2 (3B) 3 0 0 0 1 0
+Kai Q #6 (RF) 3 0 1 1 0 1 J Demmin #17 (1B) 2 0 0 0 1 1
+Sam O #8 (CF) 3 0 0 0 0 0 A Herrera #5 (C) 3 0 3 0 0 0
+Tyson P #42 2 0 0 0 1 1 C Firesto… #15 (SS) 3 1 1 0 0 0
+Leo R #15 (C) 3 1 0 0 0 2 J Murdo… #24 (2B) 3 0 0 0 0 0
+Cruz P #1 (1B) 3 1 2 0 0 0 R Denny #50 (CF) 3 0 0 1 0 0
+Trent W #23 (2B) 2 1 1 0 1 0 T Wiser #4 (LF) 2 0 1 0 1 1
+Josh R #99 (SS) 2 0 1 1 0 0 B Zant #27 (RF) 2 0 0 0 0 2
+Drew T #11 (LF) 3 0 0 0 0 0 W Torres #3 (RF) 1 0 0 0 0 0
+Wyatt G #44 (1B) 2 0 0 0 0 1 E Swartz #22 (P) 0 0 0 0 0 0
+Totals 28 4 7 2 3 5 Totals 26 1 6 1 3 6
+3B: Cruz P, TB: Kai Q, Trent W, Josh R, Demitri M, Cruz 2B: A Herrera, TB: A Herrera 4, R Lopes, C Firestone, T
+P 4, Easton L, SF: Josh R, SB: Kai Q, Demitri M, Cruz P, Wiser, SB: C Firestone, LOB: 7
+Leo R, LOB: 7
+PITCHING
+BC Pirates… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Demitri M #2 4.0 3 1 1 3 4 0 R Lopes #13 5.0 5 3 2 2 4 0
+Cruz P #1 3.0 3 0 0 0 2 0 E Swartz #22 1.0 1 0 0 0 1 0
+Totals 7.0 6 1 1 3 6 0 B Zant #27 1.0 1 1 0 1 0 0
+Totals 7.0 7 4 2 3 5 0
+P-S: Demitri M 69-36, Cruz P 37-25, WP: Demitri M, P-S: B Zant 20-10, R Lopes 71-50, E Swartz 9-6, BF: B
+BF: Demitri M 18, Cruz P 11, E: Kai Q Zant 5, R Lopes 23, E Swartz 4, E: W Torres, J Demmin,
+R Lopes, C Firestone
+Scorekeeping. Stats. Live Game Updates.`,
+  'Dec13|Clubhouse 80': `Clubhouse 805 Black
+3 - 5 Goodland Bruins 13U
+13U
+Home Saturday December 13, 2025
+1 2 3 4 5 R H E
+CLBH 0 1 0 2 0 3 4 4
+GDLN 2 0 3 0 X 5 5 2
+BATTING
+Clubhouse 805… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Ty G 3 0 0 0 0 2 R Lopes #13 (CF) 1 2 1 1 1 0
+Baron Y (P) 2 0 2 0 1 0 J Demmin #17 (1B) 2 1 1 0 0 0
+Charlie S 3 0 0 0 0 1 A Herrera #5 (C) 2 0 1 2 0 0
+Greyson K 3 0 1 0 0 0 B Gomez #39 (3B) 2 1 1 1 0 0
+Franco A 2 1 0 0 0 1 B Zant #27 (RF) 1 0 0 0 1 0
+Kase P 2 1 1 0 0 0 J Murdo… #24 (2B) 2 0 0 0 0 0
+AJ C (P) 1 1 0 0 1 0 R Denny #50 (LF) 1 0 0 0 1 0
+Mike M 1 0 0 0 1 1 E Swartz #22 (P) 2 0 0 0 0 0
+Liebs #21 1 0 0 1 1 0 W Torres #3 (SS) 2 0 1 0 0 0
+Max P #0 1 0 0 0 1 0 O Lee #32 (RF) 1 0 0 0 1 0
+Cash H #42 1 0 0 0 1 1 B Caldwell #34 (LF) 2 1 0 0 0 0
+Totals 20 3 4 1 6 6 Totals 18 5 5 4 4 0
+TB: Baron Y 2, Kase P, Greyson K, HBP: Franco A, SB: 2B: B Gomez, TB: A Herrera, W Torres, R Lopes, B
+Franco A 2, Mike M, AJ C, Max P, LOB: 9 Gomez 2, J Demmin, CS: B Zant, SB: W Torres, LOB: 5
+PITCHING
+Clubhouse… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Baron Y 3.0 4 5 2 2 0 0 E Swartz #22 2.0 3 1 0 1 5 0
+AJ C 1.0 1 0 0 2 0 0 J Dem… #17 1.0 0 0 0 1 1 0
+Totals 4.0 5 5 2 4 0 0 B Gomez #39 0.1 0 2 2 2 0 0
+R Denny #50 1.2 1 0 0 2 0 0
+Totals 5.0 4 3 2 6 6 0
+P-S: Baron Y 53-29, AJ C 19-8, WP: Baron Y 4, BF: P-S: R Denny 24-13, E Swartz 42-25, B Gomez 20-6, J
+Baron Y 17, AJ C 5, E: Baron Y Demmin 18-9, WP: E Swartz, B Gomez, HBP: B Gomez,
+BF: R Denny 8, E Swartz 11, B Gomez 4, J Demmin 4, E:
+R Denny, O Lee
+Scorekeeping. Stats. Live Game Updates.`,
+  'Dec13|BATRS Fleish': `Goodland Bruins 13U 8 - 1 Batrs 13U Fleisher
+Away Saturday December 13, 2025
+1 2 3 4 5 6 R H E
+GDLN 1 0 2 2 0 3 8 5 0
+BTRS 0 0 1 0 0 0 1 3 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO Batrs 13U Fleisher AB R H RBI BB SO
+R Lopes #13 (CF) 3 2 3 1 0 0 Walter M #7 3 0 0 0 0 2
+J Demmin #17 (1B) 3 1 1 2 0 0 Bohdi M #13 3 0 0 0 0 3
+A Herrera #5 (C) 3 1 0 0 0 0 Sawyer A #30 (P) 1 0 1 0 2 0
+B Gomez #39 (P) 3 1 1 1 0 0 Sawyer S #21 1 0 0 0 2 1
+B Zant #27 (RF) 2 1 0 0 1 0 Joshua L #21 3 0 1 0 0 2
+J Murdo… #24 (2B) 2 0 0 1 1 0 D’Angelo C #24 1 0 0 0 1 1
+R Denny #50 (LF) 2 0 0 0 0 0 Zachary R #31 2 0 0 0 0 2
+E Swartz #22 (LF) 2 0 0 0 0 0 Charlie R #7 2 0 0 0 0 2
+W Torres #3 (SS) 1 1 0 0 0 0 Charlie #1 2 1 1 0 0 1
+O Lee #32 (RF) 0 1 0 0 2 0 Brady Z #17 (P) 2 0 0 1 0 1
+B Caldw… #34 (RF) 1 0 0 0 1 0 Totals 20 1 3 1 5 15
+Totals 22 8 5 5 5 0
+2B: R Lopes 2, B Gomez, TB: R Lopes 5, J Demmin, B TB: Charlie, Sawyer A, Joshua L, CS: Sawyer A, SB:
+Gomez 2, HBP: W Torres, SB: O Lee, R Lopes 2, J Charlie, Sawyer A, Sawyer S, D’Angelo C 2, LOB: 6
+Murdock, B Zant, J Demmin, W Torres 2, LOB: 2
+PITCHING
+Goodland… IP H R ER BB SO HR Batrs 13U… IP H R ER BB SO HR
+B Gomez #39 2.0 0 0 0 2 6 0 Brady Z #17 3.0 2 3 3 3 0 0
+B Zant #27 1.0 1 1 1 0 1 0 Sawyer A #30 3.0 3 5 3 2 0 0
+R Lopes #13 2.0 1 0 0 2 6 0 Totals 6.0 5 8 6 5 0 0
+J Murd… #24 1.0 1 0 0 1 2 0
+Totals 6.0 3 1 1 5 15 0
+P-S: R Lopes 41-23, J Murdock 20-10, B Zant 16-9, B P-S: Brady Z 41-15, Sawyer A 48-29, WP: Brady Z,
+Gomez 38-24, WP: J Murdock, B Zant, BF: R Lopes 9, J Sawyer A 3, HBP: Brady Z, BF: Brady Z 13, Sawyer A 15
+Murdock 4, B Zant 4, B Gomez 8
+Scorekeeping. Stats. Live Game Updates.`,
+  'Dec14|Clubhouse 80': `Clubhouse 805 Blue 13U 0 - 8 Goodland Bruins 13U
+Home Sunday December 14, 2025
+1 2 3 4 5 6 7 R H E
+CLBH 0 0 0 0 0 0 0 0 3 1
+GDLN 4 0 1 0 3 0 X 8 12 2
+BATTING
+Clubhouse 805… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+#11 (3B) 3 0 1 0 0 1 R Lopes #13 (CF) 4 0 0 0 0 0
+#5 (2B) 3 0 0 0 0 2 J Demmin #17 (1B) 4 2 2 0 0 1
+#9 (SS) 3 0 0 0 0 0 A Herrera #5 (C) 3 1 2 0 0 0
+Mikey T #3 (C) 3 0 1 0 0 0 B Gomez #39 (1B) 2 1 2 1 1 0
+#8 (P) 2 0 1 0 1 0 W Oswald #9 (3B) 2 2 2 3 0 0
+#12 (1B) 3 0 0 0 0 0 J Murdo… #24 (2B) 2 1 0 0 1 0
+#7 (C) 2 0 0 0 0 1 W Torres #3 (SS) 3 1 2 1 0 0
+#17 (RF) 2 0 0 0 0 1 R Denny #50 (RF) 3 0 2 2 0 0
+#2 1 0 0 0 1 1 E Swartz #22 (P) 1 0 0 0 0 0
+#36 (LF) 1 0 0 0 1 1 O Lee #32 0 0 0 0 1 0
+#55 (1B) 2 0 0 0 0 1 B Zant #27 (LF) 2 0 0 0 0 2
+Totals 25 0 3 0 3 8 B Cald… #34 (LF) 1 0 0 0 0 0
+Totals 27 8 12 7 3 3
+TB: #11, #8, Mikey T, LOB: 7 2B: R Denny, B Gomez, W Torres 2, W Oswald, TB: R
+Denny 3, J Demmin 2, B Gomez 3, W Torres 4, W
+Oswald 3, A Herrera 2, SAC: E Swartz, HBP: W Oswald,
+SB: J Demmin, LOB: 6
+PITCHING
+Clubhouse… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+#8 3.0 7 5 5 2 1 0 E Swartz #22 4.0 2 0 0 1 4 0
+#11 3.0 5 3 3 1 2 0 J Dem… #17 2.0 1 0 0 1 4 0
+Totals 6.0 12 8 8 3 3 0 J Murd… #24 1.0 0 0 0 1 0 0
+Totals 7.0 3 0 0 3 8 0
+P-S: #11 48-27, #8 57-30, WP: #8 3, HBP: #8, BF: #11 P-S: E Swartz 50-32, J Demmin 26-15, J Murdock 13-6,
+14, #8 18 WP: E Swartz, J Demmin, BF: E Swartz 16, J Demmin 8,
+J Murdock 4, E: J Demmin, W Torres
+Scorekeeping. Stats. Live Game Updates.`,
+  'Dec14|Swag Basebal': `Swag Baseball Club 13U 9 - 1 Goodland Bruins 13U
+Home Sunday December 14, 2025
+1 2 3 4 5 6 7 R H E
+SWGB 0 0 0 2 2 2 3 9 10 0
+GDLN 0 0 0 1 0 0 0 1 6 2
+BATTING
+Swag Baseball C… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Michael P #24 4 1 2 1 0 0 R Lopes #13 (CF) 3 0 0 0 0 0
+demitri m #0 (SS) 4 2 3 3 0 0 J Demmin #17 (1B) 2 1 1 0 1 0
+Josiah L #10 4 1 1 2 0 3 A Herrera #5 (C) 3 0 1 0 0 1
+Jayden A #15 (P) 4 0 1 0 0 1 B Gomez #39 (1B) 3 0 1 0 0 1
+Jacob R #66 1 1 1 0 2 0 B Cald… #34 (LF) 0 0 0 0 0 0
+Isaiah B #9 (C) 4 0 0 0 0 3 W Oswald #9 (3B) 3 0 1 1 0 1
+trevor a #00 3 1 1 2 0 0 J Murdo… #24 (2B) 2 0 1 0 1 1
+Aylen #0 3 1 0 0 0 2 W Torres #3 (SS) 2 0 1 0 0 0
+kayden h #18 3 1 1 0 0 2 R Denny #50 (RF) 1 0 0 0 1 0
+Anthony M #3 2 0 0 0 0 2 O Lee #32 (RF) 0 0 0 0 0 0
+Austin H #12 0 1 0 0 1 0 E Swartz #22 (P) 2 0 0 0 0 0
+Totals 32 9 10 8 3 13 B Zant #27 (LF) 2 0 0 0 0 1
+Totals 23 1 6 1 3 5
+2B: demitri m, HR: Josiah L, trevor a, TB: Josiah L 4, 2B: A Herrera, TB: W Torres, A Herrera 2, J Demmin, W
+Jacob R, Michael P 2, demitri m 4, Jayden A, kayden h, Oswald, J Murdock, B Gomez, CS: W Torres, LOB: 4
+trevor a 4, HBP: Jacob R, SB: Michael P, demitri m 2,
+Austin H, LOB: 6
+PITCHING
+Swag Base… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Jayden A #15 7.0 6 1 1 3 5 0 E Swartz #22 2.0 2 0 0 0 1 0
+Totals 7.0 6 1 1 3 5 0 J Dem… #17 2.0 3 2 2 1 4 1
+R Lopes #13 3.0 5 7 5 2 8 1
+Totals 7.0 10 9 7 3 13 2
+P-S: Jayden A 94-59, WP: Jayden A, BF: Jayden A 26 P-S: E Swartz 21-14, J Demmin 40-25, R Lopes 78-49,
+WP: R Lopes, HBP: R Lopes, BF: E Swartz 7, J Demmin
+10, R Lopes 19, E: W Torres, J Murdock
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan17|Prime All': `Goodland Bruins 13U 2 - 3 Prime 13u X
+Away Saturday January 17, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 0 0 0 0 2 2 5 2
+PRM1 0 0 2 0 0 1 3 4 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO Prime 13u X AB R H RBI BB SO
+R Lopes #13 (P) 3 0 0 1 0 0 R S #28 3 1 2 2 0 1
+J Short #2 (1B) 3 0 0 0 0 0 J R #2 3 0 0 0 0 0
+W Oswald #9 (SS) 2 0 1 0 0 0 C R #9 2 0 0 0 0 1
+J Demmin #17 (RF) 2 0 1 0 0 1 L P #88 2 0 1 0 0 0
+A Herrera #5 (C) 2 0 0 0 0 0 C M #11 2 0 1 0 0 0
+D Del Gi… #53 (3B) 2 0 0 0 0 0 JT H #5 2 0 0 0 0 2
+C Firesto… #15 (3B) 2 0 0 0 0 0 M R #25 2 0 0 0 0 1
+J Murdo… #24 (2B) 2 0 0 0 0 1 L B #35 (P) 1 0 0 0 1 1
+R Denny #50 (LF) 2 1 1 0 0 0 Henry #16 1 1 0 0 1 1
+E Swartz #22 (LF) 1 0 0 0 1 1 Arnav #23 (P) 2 1 0 0 0 0
+B Zant #27 (CF) 2 1 1 0 0 0 Totals 20 3 4 2 2 7
+W Torres #3 (RF) 2 0 1 1 0 0
+Totals 25 2 5 2 1 3
+TB: W Oswald, J Demmin, W Torres, B Zant, R Denny, 2B: R S 2, TB: R S 4, C M, L P, SB: C M 2, LOB: 3
+LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR Prime 13u X IP H R ER BB SO HR
+R Lopes #13 1.0 0 0 0 0 2 0 L B #35 3.0 3 0 0 1 0 0
+R Denny #50 2.0 3 2 0 1 2 0 Arnav #23 3.0 2 2 2 0 3 0
+C Fires… #15 2.0 1 1 0 1 3 0 Totals 6.0 5 2 2 1 3 0
+Totals 5.0 4 3 0 2 7 0
+P-S: C Firestone 33-19, R Denny 35-21, R Lopes 14-9, P-S: Arnav 36-25, L B 44-28, BF: Arnav 13, L B 13
+WP: C Firestone, BF: C Firestone 9, R Denny 10, R
+Lopes 3, E: C Firestone, D Del Giorgio
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan17|Top Level': `Goodland Bruins 13U 8 - 3 Top Level Blue 13U
+Away Saturday January 17, 2026
+1 2 3 4 R H E
+GDLN 4 0 0 4 8 9 4
+TPLV 3 0 0 0 3 1 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO Top Level Blue 1… AB R H RBI BB SO
+R Lopes #13 (CF) 3 1 1 0 0 2 William H #17 1 0 0 0 1 0
+J Short #2 (1B) 2 1 1 0 1 0 Maxwell Y #88 0 0 0 0 2 0
+W Oswald #9 (SS) 2 2 1 1 1 0 Levi S #32 (P) 1 1 0 0 1 0
+A Herrera #5 (C) 3 2 3 4 0 0 Jin M #27 1 1 1 1 1 0
+D Del Gi… #53 (3B) 3 0 1 0 0 2 Perrish M #44 (P) 0 1 0 0 1 0
+C Firesto… #15 (3B) 2 0 1 1 0 0 Remy M #35 2 0 0 0 0 1
+J Murdo… #24 (2B) 2 0 0 0 0 0 Oliver C #8 1 0 0 0 1 0
+R Denny #50 (LF) 1 0 0 0 0 1 Jax #28 1 0 0 0 1 0
+B Zant #27 (CF) 1 0 0 0 0 0 H Wyman #6 2 0 0 0 0 2
+W Torres #3 (RF) 0 1 0 0 2 0 River W #50 1 0 0 0 0 0
+E Swartz #22 (P) 0 0 0 0 0 0 Blake T #13 1 0 0 0 0 1
+J Demm… #17 (LF) 1 1 1 0 0 0 Totals 11 3 1 1 8 4
+Totals 20 8 9 6 4 5
+2B: A Herrera, 3B: A Herrera, TB: D Del Giorgio, J TB: Jin M, CS: Maxwell Y, Jin M, William H, SB: Perrish
+Demmin, W Oswald, J Short, R Lopes, A Herrera 6, C M, Oliver C, Maxwell Y 2, Remy M, William H, Levi S 2,
+Firestone, SAC: E Swartz, CS: A Herrera, SB: J LOB: 5
+Murdock, J Short, LOB: 5
+PITCHING
+Goodland… IP H R ER BB SO HR Top Level… IP H R ER BB SO HR
+E Swartz #22 2.0 1 3 0 2 1 0 Perrish… #44 3.0 7 4 4 2 3 0
+R Lopes #13 2.0 0 0 0 6 3 0 Levi S #32 1.0 2 4 3 2 2 0
+Totals 4.0 1 3 0 8 4 0 Totals 4.0 9 8 7 4 5 0
+P-S: R Lopes 53-21, E Swartz 36-20, WP: R Lopes, BF: P-S: Perrish M 72-45, Levi S 27-12, WP: Levi S 2, BF:
+R Lopes 10, E Swartz 10, E: W Oswald, E Swartz, A Perrish M 18, Levi S 7
+Herrera, C Firestone
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan18|Camarillo El': `Goodland Bruins 13U 3 - 6 Camarillo Elite 13U
+Away Sunday January 18, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 0 1 0 0 2 3 9 2
+CMRL 1 0 0 2 3 0 6 6 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO Camarillo Elite 1… AB R H RBI BB SO
+R Lopes #13 (CF) 1 1 0 0 2 0 Julius G #66 (SS) 3 1 1 1 0 1
+J Short #2 (1B) 3 0 1 1 0 0 Ryan S #24 2 1 2 2 1 0
+W Oswald #9 (2B) 3 0 1 0 0 0 Jack C #27 (C) 3 1 0 0 0 0
+A Herrera #5 (C) 3 0 3 2 0 0 Levi S #13 (3B) 2 1 1 1 1 0
+J Demmin #17 1 0 0 0 0 1 Joseph H #50 (1B) 3 0 0 0 0 1
+D Del G… #53 (1B) 2 0 1 0 0 1 Mason C #35 (LF) 2 0 0 0 1 0
+C Firesto… #15 (3B) 3 0 1 0 0 1 Brendan… #33 (2B) 2 0 0 0 1 1
+J Murdo… #24 (SS) 2 0 0 0 0 1 Beckett J #2 (CF) 3 0 0 0 0 1
+R Denny #50 (LF) 1 0 0 0 0 0 Easton #55 (P) 2 1 1 0 0 0
+E Swartz #22 (RF) 1 0 0 0 0 0 Matt #4 (RF) 2 0 0 0 0 0
+W Torres #3 (RF) 1 1 0 0 1 0 Sam #99 (3B) 1 1 1 0 0 0
+B Zant #27 (P) 2 1 2 0 0 0 Totals 25 6 6 4 4 4
+Totals 23 3 9 3 3 4
+2B: A Herrera, TB: D Del Giorgio, C Firestone, J Short, B 2B: Easton, Levi S, TB: Easton 2, Levi S 2, Sam, Julius
+Zant 2, A Herrera 4, W Oswald, CS: C Firestone, R G, Ryan S 2, HBP: Sam, SB: Julius G, Jack C, LOB: 6
+Lopes, LOB: 5
+PITCHING
+Goodland… IP H R ER BB SO HR Camarillo… IP H R ER BB SO HR
+B Zant #27 3.0 2 1 1 1 4 0 Easton #55 3.0 4 1 1 2 2 0
+D Del G… #53 2.0 4 5 3 2 0 0 Sam #99 3.0 5 2 2 1 2 0
+J Mur… #24 0.2 0 0 0 1 0 0 Totals 6.0 9 3 3 3 4 0
+Totals 5.2 6 6 4 4 4 0
+P-S: D Del Giorgio 53-31, J Murdock 14-8, B Zant P-S: Easton 37-23, Sam 33-22, WP: Sam, BF: Easton
+41-26, WP: D Del Giorgio 2, B Zant, HBP: D Del Giorgio, 12, Sam 14, E: Easton
+BF: D Del Giorgio 15, J Murdock 3, B Zant 12, E: J
+Murdock, W Oswald
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan19|Top Level': `Top Level Blue 13U 4 - 5 Goodland Bruins 13U
+Home Monday January 19, 2026
+1 2 3 4 5 6 R H E
+TPLV 4 0 0 0 0 0 4 4 0
+GDLN 1 0 1 0 3 X 5 5 0
+BATTING
+Top Level Blue 1… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+William H #17 (2B) 2 1 1 0 1 1 R Lopes #13 (CF) 2 3 2 3 1 0
+Maxwell Y #88 (SS) 3 1 1 0 0 1 J Short #2 (C) 3 0 2 2 0 0
+Levi S #32 (DH) 2 1 0 0 0 0 W Oswald #9 3 0 0 0 0 1
+Jin M #27 (LF) 2 1 0 1 1 0 A Herrera #5 (LF) 2 0 0 0 0 0
+Perrish M #44 (1B) 3 0 1 1 0 0 D Del Gi… #53 (1B) 2 0 1 0 0 0
+Remy M #35 (C) 2 0 1 1 0 0 C Firesto… #15 (SS) 1 0 0 0 1 1
+Jackson M #1 (P) 2 0 0 0 1 1 B Zant #27 (3B) 2 0 0 0 0 1
+H Wyman #6 (P) 2 0 0 0 1 2 W Torres #3 (RF) 1 1 0 0 0 1
+Oliver C #8 (RF) 1 0 0 1 1 1 R Denny #50 (CF) 1 1 0 0 0 0
+River W #50 (CF) 2 0 0 0 0 1 J Murdo… #24 (2B) 2 0 0 0 0 1
+Totals 21 4 4 4 5 7 Totals 19 5 5 5 2 5
+TB: Remy M, Maxwell Y, William H, Perrish M, CS: Remy 2B: J Short, 3B: R Lopes, HR: R Lopes, TB: J Short 3, R
+M, HBP: Remy M, Levi S, SB: Remy M, William H, LOB: Lopes 7, D Del Giorgio, SAC: R Denny, CS: J Short,
+6 HBP: W Torres, SB: J Short, LOB: 3
+PITCHING
+Top Level… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Jackson M #1 4.1 4 4 4 2 5 0 E Swartz #22 0.0 1 4 4 2 0 0
+H Wyman #6 0.2 1 1 1 0 0 1 R Lopes #13 5.0 3 0 0 3 6 0
+Totals 5.0 5 5 5 2 5 1 B Zant #27 1.0 0 0 0 0 1 0
+Totals 6.0 4 4 4 5 7 0
+P-S: H Wyman 5-4, Jackson M 77-45, WP: Jackson M P-S: E Swartz 13-3, B Zant 12-7, R Lopes 79-51, HBP: E
+2, HBP: Jackson M, BF: H Wyman 3, Jackson M 20 Swartz, B Zant, BF: E Swartz 4, B Zant 3, R Lopes 22
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan19|Five Tools': `Goodland Bruins 13U 11 - 1 TBD- 01/19/26, 5:00 PM
+Away Monday January 19, 2026
+1 2 3 4 R H E
+GDLN 7 3 1 0 11 8 1
+TBD 0 1 0 0 1 0 4
+BATTING
+Goodland Bruins… AB R H RBI BB SO TBD- 01/19/26,… AB R H RBI BB SO
+R Lopes #13 (CF) 2 1 1 0 1 1 J Choy #18 2 0 0 0 0 0
+J Short #2 (3B) 3 1 1 1 0 0 C Gayden #0 2 0 0 0 0 0
+J Demmin #17 (P) 2 2 0 1 1 1 D Cooper #12 1 0 0 0 0 0
+A Herrera #5 (LF) 1 2 1 0 0 0 #19 1 0 0 0 0 0
+W Oswald #9 1 0 0 0 0 0 A Morales #1 1 0 0 0 0 0
+D Del Gi… #53 (1B) 3 2 1 0 0 0 B Pillar #24 0 1 0 0 1 0
+C Firesto… #15 (SS) 2 2 1 2 1 0 J Brendel #7 1 0 0 0 0 1
+B Zant #27 (RF) 2 0 0 1 0 1 A Hubberman #33 1 0 0 1 0 1
+R Denny #50 (RF) 0 0 0 0 1 0 A Tran #22 0 0 0 0 1 0
+W Torres #3 (2B) 2 0 1 1 1 1 Romero #48 (P) 0 0 0 0 1 0
+E Swartz #22 (P) 3 1 1 2 0 0 F Ruiz #21 1 0 0 0 0 0
+J Murdock #24 (C) 2 0 1 2 0 1 Totals 10 1 0 1 3 2
+Totals 23 11 8 10 5 5
+2B: E Swartz, J Murdock, TB: J Short, A Herrera, D Del CS: A Tran, A Hubberman, SB: A Hubberman, B Pillar
+Giorgio, R Lopes, C Firestone, E Swartz 2, J Murdock 2,
+W Torres, CS: W Oswald, HBP: A Herrera, SB: W
+Oswald, R Lopes, LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR TBD- 01/19… IP H R ER BB SO HR
+E Swartz #22 3.0 0 1 0 3 2 0 #13 0.2 5 7 2 1 2 0
+J Dem… #17 1.0 0 0 0 0 0 0 Romero #48 3.1 3 4 1 4 3 0
+Totals 4.0 0 1 0 3 2 0 Totals 4.0 8 11 3 5 5 0
+P-S: J Demmin 10-7, E Swartz 58-28, WP: E Swartz, P-S: #13 43-24, Romero 80-38, WP: #13 3, Romero 5,
+BF: J Demmin 3, E Swartz 10, E: E Swartz HBP: #13, BF: #13 11, Romero 18
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb21|Swing City': `Swing City Black 13U 3 - 7 Goodland Bruins 13U
+Home Saturday February 21, 2026
+1 2 3 4 5 R H E
+SWNG 1 0 0 2 0 3 3 1
+GDLN 5 2 0 0 X 7 11 3
+BATTING
+Swing City Black… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Nicolas A #00 1 2 0 0 1 0 R Lopes #13 (CF) 1 1 1 1 2 0
+Esteban W #17 2 0 0 1 0 0 J Short #2 (1B) 3 1 1 0 0 0
+Kaden R #14 (P) 2 0 0 0 0 2 J Demmin #17 (LF) 2 1 0 0 1 1
+Landon L #13 1 1 1 0 0 0 W Oswald #9 (SS) 1 1 1 1 2 0
+Wyatt B #26 2 0 1 1 0 1 A Herrera #5 (C) 3 1 2 3 0 0
+Riley H #42 2 0 0 0 0 2 C Firesto… #15 (3B) 2 0 1 1 0 1
+Dean B #31 2 0 0 0 0 2 J Murdo… #24 (2B) 1 1 0 0 1 0
+Cole H #44 (P) 2 0 0 0 0 0 T Wiser #4 (LF) 1 0 1 0 1 0
+Anthony R #34 (P) 2 0 1 0 0 1 R Denny #50 (RF) 2 0 2 1 0 0
+#23 1 0 0 0 0 1 E Swartz #22 (P) 2 0 1 0 0 0
+Benjamin N #88 1 0 0 0 0 0 W Torres #3 (RF) 1 1 1 0 1 0
+Totals 18 3 3 2 1 9 Totals 19 7 11 7 8 2
+TB: Anthony R, Landon L, Wyatt B, HBP: Landon L, SB: 2B: W Oswald, W Torres, 3B: A Herrera, HR: R Lopes,
+Landon L, LOB: 2 TB: W Oswald 2, T Wiser, J Short, E Swartz, R Lopes 4,
+A Herrera 4, C Firestone, W Torres 2, R Denny 2, CS: C
+Firestone, SB: T Wiser, J Short 2, J Demmin, LOB: 8
+PITCHING
+Swing City… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Kaden R #14 1.2 7 7 7 4 1 1 E Swartz #22 1.0 0 1 0 0 2 0
+Anthon… #34 1.1 3 0 0 2 1 0 J Dem… #17 1.0 0 0 0 0 2 0
+Cole H #44 1.0 1 0 0 2 0 0 R Denny #50 2.0 2 2 2 1 4 0
+Totals 4.0 11 7 7 8 2 1 W Torres #3 1.0 1 0 0 0 1 0
+Totals 5.0 3 3 2 1 9 0
+P-S: Anthony R 26-12, Kaden R 47-29, Cole H 20-9, P-S: E Swartz 20-13, J Demmin 17-10, W Torres 9-5, R
+BF: Anthony R 7, Kaden R 14, Cole H 6 Denny 37-22, WP: R Denny, HBP: E Swartz, BF: E
+Swartz 5, J Demmin 3, W Torres 3, R Denny 9, E: W
+Oswald, J Short, J Demmin
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb21|LOS CRUSHERS': `Goodland Bruins 13U 4 - 5 Los Crushers 13u
+Away Saturday February 21, 2026
+1 2 3 4 5 R H E
+GDLN 2 0 2 0 0 4 8 1
+LSCR 0 0 2 0 3 5 5 0
+BATTING
+Goodland Bruins… AB R H RBI BB SO Los Crushers 13u AB R H RBI BB SO
+R Lopes #13 (P) 3 1 2 0 0 1 Rafael M #42 2 2 1 0 1 1
+J Short #2 (1B) 3 1 1 0 0 0 #6 1 1 0 1 2 0
+J Demmin #17 (LF) 2 1 1 1 1 0 Jayden M #9 (P) 2 0 1 2 1 1
+W Oswald #9 (SS) 2 1 1 1 0 0 Lucas M #50 (C) 1 0 1 0 2 0
+A Herrera #5 (C) 2 0 1 1 0 1 Eduardo A #35 2 0 0 0 1 2
+C Firesto… #15 (3B) 0 0 0 0 2 0 Ricky H #22 3 0 0 0 0 2
+J Murdo… #24 (2B) 2 0 1 1 0 1 Patrick Z #21 2 0 0 0 0 1
+T Wiser #4 (RF) 2 0 0 0 0 0 Helmet 13 #13 (P) 2 0 1 0 0 0
+R Denny #50 (CF) 2 0 0 0 0 1 Brayan E #3 1 1 0 0 1 1
+E Swartz #22 (LF) 2 0 0 0 0 0 #37 2 1 1 0 0 1
+W Torres #3 (RF) 2 0 1 0 0 0 Totals 18 5 5 3 8 9
+Totals 22 4 8 4 3 4
+2B: A Herrera, R Lopes, W Oswald, TB: J Short, A TB: Lucas M, Rafael M, Helmet 13, Jayden M, #37, CS:
+Herrera 2, J Murdock, J Demmin, R Lopes 3, W Torres, Helmet 13, SB: #6, Lucas M 2, Rafael M, Helmet 13,
+W Oswald 2, SB: J Short 2, A Herrera, LOB: 6 LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR Los Crushe… IP H R ER BB SO HR
+R Lopes #13 2.0 1 0 0 3 5 0 Jayden M #9 3.0 6 4 4 3 3 0
+J Dem… #17 1.0 1 2 0 2 3 0 Helmet… #13 2.0 2 0 0 0 1 0
+C Fires… #15 2.0 3 3 3 3 1 0 Totals 5.0 8 4 4 3 4 0
+Totals 5.0 5 5 3 8 9 0
+P-S: C Firestone 33-15, J Demmin 28-14, R Lopes P-S: Helmet 13 22-13, Jayden M 63-35, WP: Helmet 13,
+43-24, WP: J Demmin 2, BF: C Firestone 11, J Demmin BF: Helmet 13 7, Jayden M 18
+6, R Lopes 9, E: J Demmin
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb22|SoCal PJX': `Goodland Bruins 13U 6 - 4 PJX SoCal 13U
+Away Sunday February 22, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 0 0 0 0 6 6 7 2
+PJXS 2 0 0 2 0 0 4 11 3
+BATTING
+Goodland Bruins… AB R H RBI BB SO PJX SoCal 13U AB R H RBI BB SO
+R Lopes #13 (CF) 3 1 0 0 0 2 A A #2 (2B) 3 1 1 0 0 0
+J Short #2 (3B) 2 1 1 0 1 0 E F #3 (SS) 3 0 3 0 0 0
+J Demmin #17 (1B) 3 1 1 0 0 1 B H #27 3 0 0 0 0 2
+P McGinn #39 (1B) 3 1 1 2 0 0 R L #31 2 1 0 0 1 0
+A Herrera #5 (C) 1 1 0 0 2 1 H M #52 3 0 2 2 0 0
+C Firesto… #15 (SS) 2 1 1 1 1 1 J A #13 3 1 2 0 0 0
+J Murdo… #24 (2B) 1 0 0 0 1 0 K A #9 (1B) 3 1 1 1 0 0
+W Torres #3 (LF) 2 0 1 2 1 1 E B #5 1 0 1 1 1 0
+E Swartz #22 (P) 3 0 0 0 0 2 M P #21 (P) 2 0 1 0 0 0
+T Wiser #4 (LF) 3 0 1 0 0 1 Z C #10 2 0 0 0 0 0
+R Denny #50 (RF) 1 0 1 0 1 0 J C #24 2 0 0 0 0 0
+Totals 24 6 7 5 7 9 Totals 27 4 11 4 2 2
+TB: C Firestone, P McGinn, R Denny, T Wiser, W Torres, 2B: H M, K A, TB: M P, A A, H M 3, E F 3, E B, K A 2, J A
+J Demmin, J Short, SAC: J Murdock, CS: T Wiser, SB: R 2, SB: R L, LOB: 6
+Lopes, J Short 2, LOB: 8
+PITCHING
+Goodland… IP H R ER BB SO HR PJX SoCal… IP H R ER BB SO HR
+E Swartz #22 4.0 9 4 2 2 1 0 B H #7 5.0 3 0 0 4 8 0
+P McGi… #39 2.0 2 0 0 0 1 0 M P #21 0.1 2 5 4 2 0 0
+Totals 6.0 11 4 2 2 2 0 E F #3 0.2 2 1 1 1 1 0
+Totals 6.0 7 6 5 7 9 0
+P-S: P McGinn 32-23, E Swartz 61-34, BF: P McGinn 8, P-S: M P 21-8, E F 18-11, B H 87-51, WP: E F, B H, BF:
+E Swartz 21, E: C Firestone, J Demmin M P 6, E F 5, B H 21, E: E F, B H
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb22|West Coast': `West Coast Shockers
+Goodland Bruins 13U 5 - 0
+13U
+Away Sunday February 22, 2026
+1 2 3 4 5 6 7 R H E
+GDLN 0 0 1 0 1 1 2 5 11 2
+WSTC 0 0 0 0 0 0 0 0 3 0
+BATTING
+Goodland Bruins… AB R H RBI BB SO West Coast Sho… AB R H RBI BB SO
+J Short #2 (C) 4 2 2 0 0 1 #35 0 0 0 0 0 0
+R Lopes #13 (CF) 3 1 2 1 1 0 Gavin P #35 4 0 1 0 0 1
+J Demmin #17 (P) 4 1 2 1 0 1 #88 3 0 0 0 0 2
+P McGinn #39 (3B) 4 0 1 1 0 0 #3 (P) 3 0 1 0 0 2
+A Herrera #5 (SS) 3 1 1 0 1 0 #77 1 0 0 0 2 0
+C Firesto… #15 (1B) 3 0 1 1 1 0 Jake L #16 3 0 0 0 0 1
+J Murdo… #24 (2B) 2 0 1 0 0 0 #24 3 0 0 0 0 1
+R Denny #50 (RF) 3 0 1 1 0 0 Parker H #7 3 0 0 0 0 0
+W Torres #3 (LF) 3 0 0 0 0 0 #11 3 0 0 0 0 1
+Totals 29 5 11 5 3 2 #12 (P) 3 0 1 0 0 1
+Totals 26 0 3 0 2 9
+2B: J Short, J Demmin, TB: J Murdock, R Lopes 2, J TB: #12, Gavin P, #3, SB: #3, LOB: 7
+Short 3, J Demmin 3, R Denny, P McGinn, A Herrera, C
+Firestone, SAC: J Murdock, SB: J Short, J Demmin, P
+McGinn, LOB: 7
+PITCHING
+Goodland… IP H R ER BB SO HR West Coas… IP H R ER BB SO HR
+J Dem… #17 5.0 2 0 0 2 8 0 #12 4.0 5 1 1 1 2 0
+P McGi… #39 2.0 1 0 0 0 1 0 #3 3.0 6 4 4 2 0 0
+Totals 7.0 3 0 0 2 9 0 Totals 7.0 11 5 5 3 2 0
+P-S: J Demmin 82-53, P McGinn 26-19, WP: J Demmin P-S: #12 44-25, #3 41-26, BF: #12 17, #3 16
+3, BF: J Demmin 20, P McGinn 8, E: A Herrera 2
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb22|LOS CRUSHERS': `Goodland Bruins 13U 6 - 5 Los Crushers 13u
+Away Sunday February 22, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 2 0 0 2 2 6 13 2
+LSCR 0 0 3 1 1 0 5 9 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO Los Crushers 13u AB R H RBI BB SO
+J Short #2 (C) 3 1 0 0 1 0 Helmet 13 #13 3 1 1 0 0 0
+R Lopes #13 (P) 3 1 2 0 1 0 #6 3 1 0 1 0 1
+J Demmin #17 (RF) 4 0 2 2 0 0 Crhis (P) 2 0 2 1 1 0
+P McGinn #39 (1B) 3 1 2 0 1 0 Lucas M #50 (P) 3 0 1 1 0 2
+A Herrera #5 (SS) 4 2 3 0 0 1 Eduardo A #35 3 0 0 0 0 1
+C Firesto… #15 (3B) 3 1 1 2 1 1 Emilio J #7 (P) 3 0 1 0 0 0
+J Murdo… #24 (2B) 1 0 1 1 0 0 Lalo 3 0 0 0 0 0
+T Wiser #4 (2B) 1 0 0 0 0 0 Patrick Z #21 3 1 1 0 0 1
+R Denny #50 (CF) 3 0 1 1 0 0 Brayan E #3 2 1 2 1 0 0
+W Torres #3 (LF) 2 0 1 0 0 1 #37 2 1 1 0 0 1
+Totals 27 6 13 6 4 3 Totals 27 5 9 4 1 6
+2B: A Herrera, TB: C Firestone, J Murdock, J Demmin 2, 2B: Brayan E, Emilio J, 3B: Brayan E, TB: Brayan E 5,
+P McGinn 2, R Denny, W Torres, R Lopes 2, A Herrera 4, Emilio J 2, Helmet 13, #37, Patrick Z, Lucas M, Crhis 2,
+SAC: W Torres, CS: R Lopes, HBP: J Murdock, SB: J SB: Helmet 13, Crhis, LOB: 5
+Murdock, W Torres, LOB: 9
+PITCHING
+Goodland… IP H R ER BB SO HR Los Crushe… IP H R ER BB SO HR
+E Swartz #22 1.0 0 0 0 1 1 0 Emilio J #7 2.0 3 2 2 2 0 0
+R Lopes #13 3.0 7 4 3 0 3 0 Lucas M #50 3.0 9 4 4 2 3 0
+P McGi… #39 2.0 2 1 1 0 2 0 Crhis 1.0 1 0 0 0 0 0
+Totals 6.0 9 5 4 1 6 0 Totals 6.0 13 6 6 4 3 0
+P-S: P McGinn 24-15, R Lopes 59-39, E Swartz 14-8, P-S: Emilio J 43-27, Lucas M 61-34, Crhis 6-4, HBP:
+BF: P McGinn 8, R Lopes 16, E Swartz 4, E: C Firestone, Lucas M, BF: Emilio J 11, Lucas M 19, Crhis 3
+R Denny
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar14|G1 Cruz': `Goodland Bruins 13U 7 - 5 G1 Cruz 13u
+Away Saturday March 14, 2026
+1 2 3 4 R H E
+GDLN 4 1 1 1 7 7 4
+G1CR 3 0 1 1 5 5 3
+BATTING
+Goodland Bruins… AB R H RBI BB SO G1 Cruz 13u AB R H RBI BB SO
+J Demmin #17 (1B) 1 2 0 0 2 0 Izaiah C #44 (CF) 3 2 2 0 0 0
+R Lopes #13 (CF) 2 1 2 2 1 0 Jaxon A #40 (RF) 0 1 0 0 1 0
+J Short #2 (3B) 3 0 0 0 0 0 Jayden L #40 (RF) 0 0 0 0 1 0
+A Herrera #5 (C) 2 0 0 1 0 1 Max M #6 (P) 2 0 0 0 0 0
+W Oswald #9 (SS) 2 1 1 1 0 0 Gio G #18 (3B) 2 1 0 0 0 0
+R Denny #50 (RF) 1 1 0 0 1 1 Ethan G #4 1 0 0 1 1 0
+C Firesto… #15 (1B) 2 1 2 2 0 0 Daniel G #21 (1B) 2 0 1 0 0 0
+J Murdo… #24 (2B) 2 0 1 1 0 0 Wyatt Z #10 (2B) 2 0 0 0 0 0
+T Wiser #4 (RF) 2 0 0 0 0 1 Kyle W #52 (C) 2 1 1 1 0 0
+E Swartz #22 (P) 2 1 1 0 0 0 Maxwell G #14 (LF) 1 0 0 0 1 0
+B Zant #27 (LF) 2 0 0 0 0 0 Carter C #7 1 0 1 0 1 0
+Totals 21 7 7 7 4 3 Noah M #2 (SS) 2 0 0 0 0 0
+Totals 18 5 5 2 5 0
+2B: R Lopes, TB: C Firestone 2, E Swartz, J Murdock, R 2B: Izaiah C, HR: Kyle W, TB: Carter C, Kyle W 4, Daniel
+Lopes 3, W Oswald, SB: J Demmin, LOB: 6 G, Izaiah C 3, CS: Maxwell G, SB: Carter C, Jaxon A,
+Izaiah C, LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR G1 Cruz 13u IP H R ER BB SO HR
+E Swartz #22 1.0 2 3 0 1 0 0 Max M #6 0.2 2 4 4 3 0 0
+B Zant #27 3.0 3 2 1 4 0 1 Noah M #2 3.1 5 3 2 1 3 0
+Totals 4.0 5 5 1 5 0 1 Totals 4.0 7 7 6 4 3 0
+W: B Zant, P-S: E Swartz 21-11, B Zant 55-32, WP: B L: Noah M, P-S: Noah M 59-37, Max M 35-15, WP:
+Zant, BF: E Swartz 7, B Zant 16, E: C Firestone, T Wiser, Noah M, Max M 2, BF: Noah M 18, Max M 7, E: Ken S,
+A Herrera, J Short Max M 2
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar14|GBG South Ba': `GBG South Bay Blue 13U 3 - 15 Goodland Bruins 13U
+Home Saturday March 14, 2026
+1 2 3 4 R H E
+GBGS 0 0 0 3 3 2 5
+GDLN 3 4 1 7 15 14 1
+BATTING
+GBG South Bay… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Caden K #28 (CF) 1 1 0 0 1 1 J Demmin #17 (1B) 3 3 3 1 0 0
+River N #4 (P) 1 1 0 0 1 1 R Lopes #13 (CF) 3 3 3 2 0 0
+Mac C (RF) 1 1 1 1 0 0 J Short #2 (3B) 3 1 1 2 0 0
+Dylan F #5 (1B) 2 0 0 0 0 1 A Herrera #5 (SS) 3 1 2 2 0 0
+Wylie N #8 (RF) 2 0 1 1 0 0 W Oswald #9 (C) 3 1 2 0 0 0
+Rylan C #11 (C) 2 0 0 0 0 0 R Denny #50 (P) 3 1 2 1 0 0
+Kellen O #17 (3B) 1 0 0 0 0 0 C Firesto… #15 (1B) 1 2 1 1 1 0
+Chase S #23 (SS) 1 0 0 0 0 0 J Murdo… #24 (2B) 3 0 0 1 0 0
+Neil S #0 (LF) 1 0 0 0 0 0 T Wiser #4 (RF) 1 1 0 0 1 0
+Mazin F #42 (LF) 1 0 0 0 0 1 E Swartz #22 (RF) 1 0 0 0 0 1
+Kaden M #9 (2B) 1 0 0 0 0 0 B Zant #27 (LF) 0 2 0 0 1 0
+Totals 14 3 2 2 2 4 Totals 24 15 14 10 3 1
+TB: Wylie N, Mac C, LOB: 1 2B: J Demmin, C Firestone, R Lopes, J Short, TB: J
+Demmin 4, C Firestone 2, R Lopes 4, J Short 2, R Denny
+2, A Herrera 2, W Oswald 2, SAC: E Swartz, HBP: C
+Firestone, B Zant, SB: C Firestone, R Lopes 2, J Short, R
+Denny, B Zant, A Herrera, W Oswald 2, LOB: 4
+PITCHING
+GBG South… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+River N #4 1.0 4 3 3 0 0 0 R Denny #50 3.0 0 0 0 0 3 0
+Kellen O #17 1.0 3 4 4 2 0 0 J Murd… #24 1.0 2 3 3 2 1 0
+Rylan C #11 1.0 0 1 0 1 1 0 Totals 4.0 2 3 3 2 4 0
+Mazin F #42 0.2 7 7 6 0 0 0
+Totals 3.2 14 15 13 3 1 0
+P-S: River N 35-18, Kellen O 27-14, Rylan C 17-9, Mazin P-S: R Denny 33-23, J Murdock 28-15, WP: J Murdock
+F 25-15, HBP: River N, Mazin F, BF: River N 8, Kellen O 2, BF: R Denny 9, J Murdock 7, E: A Herrera
+8, Rylan C 5, Mazin F 9, E: Kellen O, Mac C, Rylan C,
+Chase S
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar15|G1 Cruz': `G1 Cruz 13u 4 - 5 Goodland Bruins 13U
+Home Sunday March 15, 2026
+1 2 3 4 5 6 R H E
+G1CR 3 0 0 0 0 1 4 8 0
+GDLN 0 0 1 4 0 X 5 8 2
+BATTING
+G1 Cruz 13u AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Izaiah C #44 (CF) 3 1 1 0 0 2 J Demmin #17 (1B) 3 0 1 0 0 0
+Jayden L #40 (RF) 3 0 0 1 0 1 R Lopes #13 (CF) 2 1 1 1 1 1
+Max M #6 (SS) 3 2 2 2 0 0 J Short #2 (3B) 3 1 1 0 0 0
+Gio G #18 (3B) 3 1 1 0 0 2 A Herrera #5 (C) 2 1 1 1 0 0
+Ethan G #4 (P) 3 0 2 1 0 0 W Oswald #9 (SS) 1 0 1 0 1 0
+Kyle W #52 2 0 0 0 1 2 R Denny #50 (RF) 2 1 0 1 0 0
+Daniel G #21 (1B) 3 0 2 0 0 1 C Firesto… #15 (1B) 2 0 0 0 0 1
+Wyatt Z #10 (2B) 0 0 0 0 1 0 J Murdo… #24 (2B) 1 1 1 1 1 0
+Noah M #2 (LF) 2 0 0 0 0 1 T Wiser #4 (RF) 2 0 1 0 0 1
+Maxwell G #14 (C) 2 0 0 0 0 1 E Swartz #22 (P) 2 0 0 1 0 1
+Carter C #7 (LF) 1 0 0 0 1 1 B Zant #27 (LF) 2 0 1 0 0 1
+Totals 25 4 8 4 3 11 Totals 22 5 8 5 3 5
+2B: Ethan G, 3B: Izaiah C, HR: Max M 2, TB: Max M 8, 3B: A Herrera, HR: R Lopes, TB: J Short, W Oswald, J
+Izaiah C 3, Daniel G 2, Gio G, Ethan G 3, CS: Maxwell G, Murdock, A Herrera 3, R Lopes 4, T Wiser, B Zant, J
+SB: Kyle W, Gio G, Ethan G, LOB: 7 Demmin, SB: J Murdock 2, T Wiser, R Denny, LOB: 5
+PITCHING
+G1 Cruz 13u IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Ethan G #4 3.0 5 3 3 1 2 1 E Swartz #22 0.1 4 3 3 0 0 1
+Jayden L #40 2.0 3 2 2 2 3 0 J Dem… #17 5.0 2 1 1 3 10 1
+Totals 5.0 8 5 5 3 5 1 R Lopes #13 0.2 2 0 0 0 1 0
+Totals 6.0 8 4 4 3 11 2
+L: Jayden L, P-S: Jayden L 39-24, Ethan G 50-31, BF: W: J Demmin, P-S: E Swartz 13-9, R Lopes 10-6, J
+Jayden L 11, Ethan G 14 Demmin 96-58, WP: R Lopes, BF: E Swartz 5, R Lopes
+3, J Demmin 21, E: W Oswald, A Herrera
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar15|Temecula': `Temecula Icon Baseball
+Goodland Bruins 13U 7 - 6
+13U
+Away Sunday March 15, 2026
+1 2 3 4 5 6 7 R H E
+GDLN 2 0 5 0 0 0 0 7 12 2
+TMCL 0 2 2 2 0 0 0 6 8 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO Temecula Icon B… AB R H RBI BB SO
+J Demmin #17 (RF) 4 1 2 0 0 1 Jonathan H #88 (C) 3 0 1 0 0 0
+R Lopes #13 (CF) 3 2 2 1 1 0 Oliver L #99 (2B) 3 1 1 0 0 2
+J Short #2 (1B) 3 2 1 2 1 1 Blake T #23 (CF) 3 1 1 1 0 2
+A Herrera #5 (SS) 4 0 2 0 0 2 Iker Y #34 3 0 0 0 0 2
+W Oswald #9 (C) 4 1 2 2 0 1 Hunter G #33 2 1 1 1 0 1
+C Firesto… #15 (3B) 3 1 1 1 0 1 Jacob S #42 (1B) 3 0 2 0 0 0
+J Murdo… #24 (2B) 3 0 2 1 0 0 Jack B #7 (SS) 3 1 1 0 0 1
+E Swartz #22 (P) 2 0 0 0 0 1 Clint N #9 (LF) 2 1 0 0 1 1
+R Denny #50 (P) 1 0 0 0 0 0 John G #17 (3B) 2 0 0 0 1 0
+B Zant #27 (LF) 2 0 0 0 0 1 Grady M #21 (P) 2 1 1 1 0 1
+T Wiser #4 1 0 0 0 0 1 #17 1 0 0 0 0 0
+Totals 30 7 12 7 2 9 Michael M #50 2 0 0 1 1 1
+Totals 29 6 8 4 3 11
+2B: C Firestone, HR: R Lopes, TB: C Firestone 2, R TB: Blake T, Jonathan H, Oliver L, Jack B, Jacob S 2,
+Lopes 5, J Short, J Demmin 2, W Oswald 2, J Murdock Hunter G, Grady M, SF: Hunter G, SB: Jonathan H 3,
+2, A Herrera 2, CS: R Lopes, E Swartz, J Murdock, SB: C Oliver L, Clint N, Hunter G, LOB: 6
+Firestone, J Short, LOB: 4
+PITCHING
+Goodland… IP H R ER BB SO HR Temecula I… IP H R ER BB SO HR
+E Swartz #22 2.1 5 4 2 2 3 0 Grady M #21 2.1 9 7 6 1 2 1
+R Denny #50 1.2 2 2 1 1 1 0 Gio A #23 4.2 3 0 0 1 7 0
+R Lopes #13 3.0 1 0 0 0 7 0 Totals 7.0 12 7 6 2 9 1
+Totals 7.0 8 6 3 3 11 0
+W: E Swartz, P-S: R Denny 32-24, R Lopes 32-28, E L: Grady M, P-S: Gio A 55-42, Grady M 50-32, BF: Gio
+Swartz 57-34, BF: R Denny 9, R Lopes 9, E Swartz 15, A 16, Grady M 16, E: Jonathan H
+E: C Firestone, W Oswald
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar22|Swag Basebal': `Goodland Bruins 13U 3 - 7 Swag Baseball Club 13U
+Away Sunday March 22, 2026
+1 2 3 4 5 6 R H E
+GDLN 1 0 2 0 0 0 3 6 4
+SWGB 4 2 1 0 0 X 7 7 0
+BATTING
+Goodland Bruins… AB R H RBI BB SO Swag Baseball C… AB R H RBI BB SO
+J Demmin #17 (1B) 3 2 2 0 0 1 Austin H #12 2 1 1 0 1 0
+J Short #2 (3B) 3 1 2 2 0 0 Michael P #24 (P) 3 1 1 2 0 0
+R Lopes #13 (CF) 3 0 1 0 0 0 Josiah L #10 1 1 0 0 2 0
+A Herrera #5 (C) 1 0 0 0 2 0 Jayden A #15 (P) 3 1 1 0 0 0
+C Firesto… #15 (SS) 1 0 0 0 2 0 Tony #3 2 1 1 1 1 0
+J Murdo… #24 (2B) 2 0 0 0 0 0 Isaiah B #9 3 0 0 1 0 0
+O Lee #32 (2B) 2 0 0 0 0 2 Jacob R #66 3 0 0 0 0 2
+R Denny #50 (LF) 2 0 1 0 0 0 kayden h #18 3 1 1 0 0 1
+N Diaz #44 (RF) 2 0 0 0 0 2 Andre 3 1 2 0 0 1
+E Swartz #22 (P) 2 0 0 0 0 1 Totals 23 7 7 4 4 4
+J Matis #34 (LF) 2 0 0 0 0 2
+T Wiser #4 (RF) 2 0 0 0 0 0
+Totals 25 3 6 2 4 8
+2B: J Demmin, 3B: J Demmin, TB: R Denny, J Demmin TB: Austin H, kayden h, Jayden A, Andre 2, Michael P,
+5, R Lopes, J Short 2, CS: J Short, HBP: J Murdock, SB: Tony, SB: Austin H, Andre, Michael P, Isaiah B 2, Tony,
+R Denny, C Firestone, A Herrera, LOB: 9 LOB: 5
+PITCHING
+Goodland… IP H R ER BB SO HR Swag Base… IP H R ER BB SO HR
+E Swartz #22 2.0 4 6 3 4 2 0 Michae… #24 3.0 4 3 3 4 4 0
+R Denny #50 3.0 3 1 1 0 2 0 Jayden A #15 3.0 2 0 0 0 4 0
+Totals 5.0 7 7 4 4 4 0 Totals 6.0 6 3 3 4 8 0
+P-S: R Denny 39-28, E Swartz 52-26, WP: E Swartz 4, P-S: Jayden A 36-28, Michael P 61-30, WP: Michael P
+BF: R Denny 12, E Swartz 15, E: J Demmin, O Lee, J 2, HBP: Michael P, BF: Jayden A 12, Michael P 18
+Short 2
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar22|Clubhouse 80': `Goodland Bruins 13U 7 - 0 Clubhouse 805 Blue 13U
+Away Sunday March 22, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 0 2 1 0 4 7 11 0
+CLBH 0 0 0 0 0 0 0 1 0
+BATTING
+Goodland Bruins… AB R H RBI BB SO Clubhouse 805… AB R H RBI BB SO
+J Demmin #17 (P) 3 1 1 2 1 0 #8 3 0 1 0 0 2
+J Short #2 (3B) 4 0 3 1 0 0 Mikey T #3 1 0 0 0 1 1
+R Lopes #13 (CF) 3 0 0 0 0 1 #12 (P) 1 0 0 0 1 0
+A Herrera #5 (C) 3 0 0 0 0 1 Austyn L #6 (SS) 2 0 0 0 0 2
+C Firesto… #15 (1B) 2 2 2 0 1 0 #5 (2B) 2 0 0 0 0 1
+J Murdo… #24 (SS) 2 0 0 0 0 0 #36 (CF) 1 0 0 0 1 1
+R Denny #50 (LF) 3 1 2 1 0 0 #15 2 0 0 0 0 2
+E Swartz #22 (RF) 2 2 2 2 0 0 #52 (P) 1 0 0 0 1 1
+J Matis #34 0 0 0 0 0 0 #17 1 0 0 0 1 1
+N Diaz #44 (RF) 1 0 0 0 0 0 #55 (1B) 2 0 0 0 0 2
+T Wiser #4 (2B) 2 1 1 1 0 0 #7 (LF) 1 0 0 0 1 1
+O Lee #32 (LF) 1 0 0 0 0 0 #66 (2B) 2 0 0 0 0 2
+Totals 26 7 11 7 2 2 Totals 19 0 1 0 6 16
+2B: R Denny, T Wiser, HR: J Demmin, TB: R Denny 3, J TB: #8, SB: #36, LOB: 7
+Demmin 4, C Firestone 2, T Wiser 2, E Swartz 2, J Short
+3, CS: C Firestone, R Lopes, HBP: J Murdock, SB: J
+Short, LOB: 4
+PITCHING
+Goodland… IP H R ER BB SO HR Clubhouse… IP H R ER BB SO HR
+J Dem… #17 4.0 1 0 0 4 10 0 #12 4.0 5 3 3 1 2 1
+R Lopes #13 2.0 0 0 0 2 6 0 #52 2.0 6 4 4 1 0 0
+Totals 6.0 1 0 0 6 16 0 Totals 6.0 11 7 7 2 2 1
+P-S: J Demmin 79-48, R Lopes 40-21, BF: J Demmin 17, P-S: #52 30-16, #12 73-42, WP: #52, HBP: #12, BF:
+R Lopes 8 #52 12, #12 17
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar28|Swag Basebal': `Goodland Bruins 13U 6 - 3 Swag Baseball Club 13U
+Away Saturday March 28, 2026
+1 2 3 4 5 6 7 R H E
+GDLN 0 1 0 0 2 0 3 6 6 1
+SWGB 2 0 1 0 0 0 0 3 9 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO Swag Baseball C… AB R H RBI BB SO
+J Short #2 (3B) 3 0 0 0 0 0 Stats #0 3 0 0 0 0 2
+B Zant #27 (CF) 3 0 0 0 0 0 Michael P #24 (P) 3 1 2 0 0 0
+W Oswald #9 (C) 3 0 1 0 0 0 Josiah L #10 2 2 2 0 0 0
+P McGinn #39 (1B) 3 1 1 0 0 2 Jayden A #15 (P) 3 0 2 0 0 0
+O Lee #32 (RF) 2 1 1 0 0 0 Tony #5 (P) 3 0 2 2 0 0
+J Hooper #53 (SS) 2 2 1 1 1 0 Isaac #16 3 0 0 1 0 0
+C Firesto… #15 (SS) 3 2 1 2 0 1 Jacob R #66 3 0 0 0 0 1
+J Murdo… #24 (2B) 1 0 0 1 1 1 Jaden #1 3 0 0 0 0 1
+R Denny #50 (P) 3 0 1 2 0 0 kayden h #18 3 0 0 0 0 1
+J Hooper #34 (LF) 3 0 0 0 0 1 Andrew #00 3 0 1 0 0 0
+Totals 26 6 6 6 2 5 Totals 29 3 9 3 0 5
+2B: J Hooper, TB: P McGinn, O Lee, J Hooper 2, R 2B: Andrew, TB: Jayden A 2, Tony 2, Michael P 2,
+Denny, W Oswald, C Firestone, SAC: J Murdock, CS: W Josiah L 2, Andrew 2, HBP: Josiah L, SB: Isaac, Jaden,
+Oswald, HBP: O Lee, SB: J Hooper, W Oswald, C LOB: 6
+Firestone, LOB: 3
+PITCHING
+Goodland… IP H R ER BB SO HR Swag Base… IP H R ER BB SO HR
+R Denny #50 3.0 6 3 3 0 2 0 Tony #5 3.0 2 1 1 0 1 0
+B Zant #27 4.0 3 0 0 0 3 0 Michae… #24 3.2 1 3 2 1 4 0
+Totals 7.0 9 3 3 0 5 0 Jayden A #15 0.1 3 2 2 1 0 0
+Totals 7.0 6 6 5 2 5 0
+P-S: B Zant 45-28, R Denny 50-32, WP: R Denny, HBP: P-S: Jayden A 15-7, Tony 33-22, Michael P 55-29, WP:
+R Denny, BF: B Zant 13, R Denny 17, E: O Lee Tony, Michael P, HBP: Michael P, BF: Jayden A 5, Tony
+11, Michael P 14, E: Michael P
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar28|SCV Knights': `SCV Knights 13U 3 - 15 Goodland Bruins 13U
+Home Saturday March 28, 2026
+1 2 3 4 R H E
+SCVK 1 1 0 1 3 4 2
+GDLN 3 8 4 X 15 17 0
+BATTING
+SCV Knights 13U AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Blake #21 2 0 0 0 0 2 J Short #2 (C) 3 3 3 0 0 0
+Tommy C #31 1 0 0 0 1 1 B Zant #27 (P) 3 2 2 2 0 1
+Fernando L #14 (P) 1 1 0 0 1 0 W Oswald #9 (SS) 3 3 3 0 0 0
+Seth A #23 (P) 2 0 1 1 0 0 P McGinn #39 (3B) 2 2 1 0 0 0
+Jett L #10 2 1 1 0 0 0 J Hooper #53 (CF) 3 2 2 3 0 1
+Liam T #32 1 1 0 0 1 0 C Firesto… #15 (1B) 2 1 2 2 1 0
+Jacob D #27 0 0 0 0 1 0 J Murdo… #24 (2B) 1 0 0 0 1 0
+Kade K #67 2 0 1 2 0 0 R Denny #50 (LF) 3 1 2 3 0 1
+Julian G #33 1 0 0 0 1 0 O Lee #32 (RF) 3 0 1 0 0 1
+Brandon S #13 1 0 1 0 1 0 J Hooper #34 (RF) 2 1 1 0 0 0
+Nixon R #30 2 0 0 0 0 2 Totals 25 15 17 10 2 4
+#2 1 0 0 0 0 0
+Totals 16 3 4 3 6 5
+2B: Jett L, TB: Brandon S, Kade K, Jett L 2, Seth A, 2B: R Denny, J Hooper, J Short, 3B: J Short, TB: B Zant
+SAC: Jacob D, LOB: 8 2, O Lee, C Firestone 2, R Denny 3, W Oswald 3, P
+McGinn, J Hooper 3, J Hooper, J Short 6, HBP: P
+McGinn, J Murdock, SB: O Lee, C Firestone, R Denny, J
+Hooper, J Murdock, LOB: 5
+PITCHING
+SCV Knigh… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Fernan… #14 1.1 9 8 8 0 2 0 B Zant #27 3.0 3 2 2 4 4 0
+Seth A #23 1.2 8 7 7 2 2 0 J Hooper #34 1.0 1 1 1 2 1 0
+Totals 3.0 17 15 15 2 4 0 Totals 4.0 4 3 3 6 5 0
+P-S: Fernando L 49-30, Seth A 64-36, WP: Fernando L P-S: B Zant 67-40, J Hooper 25-11, WP: B Zant, J
+3, Seth A 3, HBP: Fernando L, Seth A, BF: Fernando L Hooper, BF: B Zant 16, J Hooper 7
+14, Seth A 15
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar29|Saugus Saint': `Saugus Saints White 13U 1 - 11 Goodland Bruins 13U
+Home Sunday March 29, 2026
+1 2 3 4 R H E
+SGSS 0 1 0 0 1 0 0
+GDLN 4 0 7 X 11 8 1
+BATTING
+Saugus Saints W… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+John J #33 (C) 2 0 0 0 0 0 J Short #2 (C) 2 2 1 1 0 0
+Brandon H #5 (P) 2 0 0 0 0 1 C Firesto… #15 (1B) 1 1 1 1 2 0
+Mateo A #7 2 0 0 0 0 0 W Oswald #9 (SS) 3 1 1 2 0 1
+Jaxon H #18 1 0 0 0 0 0 J Hooper #53 (3B) 3 1 2 2 0 0
+Caleb W #12 1 0 0 0 0 1 R Denny #50 (2B) 1 1 0 0 0 0
+Luke P #27 1 0 0 0 1 0 J Costelo #39 (CF) 1 1 1 2 0 0
+Liam P #77 0 1 0 0 1 0 W Torres #3 (P) 2 1 1 1 0 1
+Bryce S #23 1 0 0 0 0 1 T Wiser #4 (LF) 0 1 0 0 2 0
+Jaxson C #43 (P) 0 0 0 0 2 0 O Lee #32 (RF) 1 1 1 0 1 0
+Ethan L #9 2 0 0 0 0 1 J Hooper #34 (RF) 0 1 0 1 2 0
+Cole W #36 1 0 0 0 0 0 Totals 14 11 8 10 7 2
+Totals 13 1 0 0 4 4
+SB: Luke P 2, Jaxson C, LOB: 4 2B: W Oswald, J Costelo, TB: W Torres, W Oswald 2, C
+Firestone, J Short, J Hooper 2, O Lee, J Costelo 2, CS: J
+Hooper, HBP: R Denny, J Short, J Costelo, SB: W
+Torres, C Firestone 2, J Short, LOB: 4
+PITCHING
+Saugus Sai… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Brandon H #5 2.0 4 4 4 4 2 0 W Torres #3 3.0 0 1 0 2 1 0
+Jaxson C #43 0.1 3 5 5 1 0 0 J Hooper #53 1.0 0 0 0 2 3 0
+Lucas M #17 0.2 1 2 2 2 0 0 Totals 4.0 0 1 0 4 4 0
+Totals 3.0 8 11 11 7 2 0
+P-S: Brandon H 55-26, Lucas M 17-6, Jaxson C 19-13, P-S: W Torres 46-27, J Hooper 27-12, BF: W Torres 12,
+HBP: Brandon H, Lucas M, Jaxson C, BF: Brandon H 13, J Hooper 5, E: W Oswald
+Lucas M 5, Jaxson C 6
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar29|SCV Knights': `SCV Knights 13U 7 - 9 Goodland Bruins 13U
+Home Sunday March 29, 2026
+1 2 3 4 5 6 7 R H E
+SCVK 0 0 0 0 1 5 1 7 4 2
+GDLN 4 0 0 0 2 3 X 9 15 1
+BATTING
+SCV Knights 13U AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Blake #21 2 2 1 1 2 1 J Short #2 (3B) 4 3 3 1 0 1
+Tommy C #31 4 1 1 1 0 2 C Firesto… #15 (1B) 3 1 2 3 1 0
+Fernando L #14 3 1 0 0 1 1 W Oswald #9 (C) 4 1 4 2 0 0
+Seth A #23 3 0 0 0 0 2 J Hooper #53 (SS) 3 0 0 0 0 1
+Liam T #32 (P) 1 1 0 1 2 1 R Denny #50 (CF) 3 1 2 0 0 0
+Kade K #67 1 1 0 1 2 0 J Costelo #39 (P) 3 1 2 2 0 0
+Julian G #33 3 0 1 2 0 1 W Torres #3 (2B) 2 0 1 0 1 1
+Brandon S #13 3 0 0 0 0 2 T Wiser #4 (LF) 3 0 0 0 0 2
+Nixon R #30 3 0 0 0 0 3 O Lee #32 (RF) 3 1 1 0 0 0
+#2 (P) 3 1 1 0 0 1 J Hooper #34 (RF) 1 1 0 0 2 1
+Totals 26 7 4 6 7 14 Totals 29 9 15 8 4 6
+2B: Julian G, #2, HR: Blake, TB: Julian G 2, Tommy C, 2B: J Costelo, C Firestone, W Oswald, J Short, TB: R
+Blake 4, #2 2, SB: Kade K 2, Blake, LOB: 5 Denny 2, J Costelo 3, O Lee, C Firestone 3, W Oswald 5,
+J Short 4, W Torres, CS: J Costelo, W Torres, SB: J
+Hooper, C Firestone, W Oswald, J Short, W Torres, LOB:
+6
+PITCHING
+SCV Knigh… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Liam T #32 4.0 8 4 3 2 5 0 J Coste… #39 3.0 0 0 0 3 9 0
+#2 2.0 7 5 2 2 1 0 R Denny #50 2.0 1 3 3 2 2 0
+Totals 6.0 15 9 5 4 6 0 J Hooper #53 2.0 3 4 3 2 3 1
+Totals 7.0 4 7 6 7 14 1
+P-S: Liam T 76-46, #2 46-27, WP: #2, BF: Liam T 20, P-S: R Denny 38-21, J Costelo 60-33, J Hooper 51-33,
+#2 13 WP: R Denny, J Costelo, BF: R Denny 9, J Costelo 12, J
+Hooper 12, E: W Oswald
+Scorekeeping. Stats. Live Game Updates.`
+};
+
+function getBoxKey(g) {
+  // Match game to box score using date + opponent name fragment
+  var d = g.date;
+  var opp = g.opp.slice(0,12);
+  var key = d + '|' + opp;
+  // Try direct match first
+  if (_BOX[key]) return key;
+  // Try partial match on opponent
+  for (var k in _BOX) {
+    if (k.indexOf(d) === 0) {
+      var boxOpp = k.split('|')[1].toLowerCase();
+      var gameOpp = opp.toLowerCase();
+      // Check if first 5 chars of opponent match
+      if (boxOpp.slice(0,5) === gameOpp.slice(0,5)) return k;
+    }
+  }
+  return null;
+}
+
+function showBoxScore(idx) {
+  var g = TEAM.games[idx];
+  var key = getBoxKey(g);
+  var content = key ? _BOX[key] : 'Box score not available for this game.';
+  var modal = document.getElementById('bs-modal');
+  var title = document.getElementById('bs-title');
+  var body = document.getElementById('bs-body');
+  if (!modal) return;
+  title.textContent = (g.w ? 'W' : 'L') + ' ' + g.us + '-' + g.them + ' vs ' + g.opp + ' (' + g.date + ')';
+  body.textContent = content;
+  modal.style.display = 'flex';
+}
+
+function closeBox() {
+  var modal = document.getElementById('bs-modal');
+  if (modal) modal.style.display = 'none';
+}
+
+var _BOX = {
+  'Oct25|Game Speed': `Goodland Bruins 13U 2 - 3 GameSpeed 13U
+Away Saturday October 25, 2025
+1 2 3 4 5 R H E
+GDLN 0 0 1 1 0 2 6 1
+GMSP 0 0 1 2 X 3 3 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO GameSpeed 13U AB R H RBI BB SO
+J Demmin #17 (1B) 2 0 0 0 0 1 Jackson G #12 (2B) 1 0 1 0 1 0
+J Short #2 (3B) 2 0 1 0 0 0 Austin Y #2 1 0 0 0 1 1
+C Firesto… #15 (SS) 2 1 0 0 0 0 Alex S #32 (1B) 1 1 0 0 1 0
+A Herrera #5 (C) 2 0 0 0 0 0 Micah S #31 2 1 1 1 0 0
+B Gomez #39 (1B) 2 0 2 1 0 0 Liam C #8 (P) 2 0 0 0 0 0
+M Conant #34 (CF) 2 0 1 0 0 1 Danny B #7 2 0 0 0 0 1
+J Murdo… #24 (2B) 2 0 0 0 0 1 Ryan P #13 1 0 0 0 0 1
+R Denny #50 (CF) 2 0 0 0 0 0 Jaime C #10 (3B) 0 1 0 0 1 0
+W Torres #3 (LF) 1 1 1 0 0 0 Ryder D #27 (3B) 1 0 0 0 0 0
+E Swartz #22 (P) 2 0 0 0 0 0 Sebastian G #03 1 0 0 0 0 1
+T Newen… #32 (LF) 1 0 0 0 1 1 Kellan A #23 (C) 1 0 1 1 0 0
+T Wiser #4 (RF) 2 0 1 1 0 0 Caleb H #35 (SS) 1 0 0 0 0 0
+Totals 22 2 6 2 1 4 Totals 14 3 3 2 4 4
+2B: B Gomez, TB: W Torres, B Gomez 3, M Conant, J 2B: Kellan A, Micah S, TB: Kellan A 2, Micah S 2,
+Short, T Wiser, HBP: W Torres, SB: W Torres 2, B Jackson G, CS: Jackson G, SB: Austin Y, Jaime C, LOB:
+Gomez, C Firestone, J Short, LOB: 7 3
+PITCHING
+Goodland… IP H R ER BB SO HR GameSpee… IP H R ER BB SO HR
+E Swartz #22 3.0 1 1 1 3 3 0 Liam C #8 3.0 3 1 0 0 4 0
+M Con… #34 1.0 2 2 1 1 1 0 Jaime C #10 2.0 3 1 0 1 0 0
+Totals 4.0 3 3 2 4 4 0 Totals 5.0 6 2 0 1 4 0
+P-S: M Conant 32-20, E Swartz 56-28, WP: M Conant, P-S: Jaime C 33-23, Liam C 55-32, WP: Liam C, HBP:
+BF: M Conant 6, E Swartz 12, E: W Torres Liam C, BF: Jaime C 11, Liam C 13, E: Caleb H
+Scorekeeping. Stats. Live Game Updates.`,
+  'Oct25|BATRS Camero': `Goodland Bruins 13U 6 - 5 BATRS 13U Cameron
+Away Saturday October 25, 2025
+1 2 3 4 5 R H E
+GDLN 1 1 2 0 2 6 7 0
+BTRS 1 3 0 0 1 5 5 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO BATRS 13U Cam… AB R H RBI BB SO
+J Demmin #17 (P) 2 3 1 0 1 0 Ari S 2 1 1 2 1 0
+J Short #2 (C) 3 1 1 0 0 0 Beckett M 3 1 2 0 0 1
+C Firesto… #15 (3B) 2 1 1 1 0 0 Richard R (P) 1 0 0 0 2 0
+A Herrera #5 (SS) 1 0 0 2 0 0 Fred J 2 0 1 0 1 1
+B Gomez #39 (1B) 3 0 3 2 0 0 Beckett S (P) 3 0 0 0 0 2
+J Murdo… #24 (2B) 3 0 0 0 0 1 Bodhi M 1 1 1 1 2 0
+W Torres #3 (RF) 2 0 0 0 1 1 Brady Z 3 0 0 0 0 1
+R Denny #50 (CF) 2 1 1 0 0 0 Jeferson P 2 0 0 0 0 0
+E Swartz #22 (RF) 1 0 0 0 1 1 Walter M #7 1 1 0 0 1 1
+T Newen… #32 (LF) 1 0 0 0 1 1 Ethan K 1 1 0 0 1 0
+T Wiser #4 (LF) 2 0 0 0 0 1 Totals 19 5 5 3 8 6
+Totals 22 6 7 5 4 5
+TB: C Firestone, R Denny, B Gomez 3, J Demmin, J 2B: Ari S, TB: Bodhi M, Beckett M 2, Ari S 2, Fred J, SB:
+Short, SF: A Herrera 2, HBP: C Firestone, SB: B Gomez Walter M, LOB: 7
+2, J Demmin, J Short 2, LOB: 8
+PITCHING
+Goodland… IP H R ER BB SO HR BATRS 13U… IP H R ER BB SO HR
+J Dem… #17 1.2 1 4 4 5 2 0 Richard R 2.0 2 3 2 2 3 0
+B Gomez #39 1.1 2 0 0 1 3 0 Beckett S 2.0 3 2 1 2 1 0
+C Fires… #15 2.0 2 1 1 2 1 0 Totals 5.0 7 6 4 4 5 0
+Totals 5.0 5 5 5 8 6 0
+P-S: C Firestone 39-22, B Gomez 26-18, J Demmin P-S: Beckett S 54-27, Richard R 39-25, WP: Beckett S,
+51-20, WP: B Gomez, J Demmin 2, BF: C Firestone 10, B Richard R 3, BF: Beckett S 12, Richard R 11
+Gomez 7, J Demmin 10
+Scorekeeping. Stats. Live Game Updates.`,
+  'Oct26|Total Baseba': `Total Baseball Vipers 13U
+3 - 6 Goodland Bruins 13U
+Santhon
+Home Sunday October 26, 2025
+1 2 3 4 5 R H E
+TTLB 1 1 1 0 0 3 3 0
+GDLN 1 0 1 1 3 6 10 4
+BATTING
+Total Baseball Vi… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Jon L #1 2 2 0 0 1 0 J Demmin #17 (1B) 1 2 1 1 0 0
+Nathaniel B #42 3 0 0 0 0 1 J Short #2 (3B) 2 0 1 0 1 0
+Connor W #4 (C) 3 0 1 0 0 0 C Firesto… #15 (SS) 3 0 2 1 0 1
+CJ H #31 2 0 0 0 0 2 A Herrera #5 (C) 1 1 1 2 0 0
+Matt N #5 2 0 0 0 0 0 B Gomez #39 (1B) 2 0 0 0 0 2
+Vem A #14 2 0 0 0 0 0 W Torres #3 (RF) 1 0 1 0 1 0
+Julian O #14 1 0 0 0 1 1 M Conant #34 (LF) 2 0 1 0 0 0
+Jacob S #21 (P) 1 1 1 0 1 0 J Murdo… #24 (2B) 2 0 1 0 0 0
+Peter R #44 2 0 1 0 0 1 R Denny #50 (CF) 2 1 1 0 0 0
+Harrison B #30 1 0 0 0 1 0 E Swartz #22 (P) 2 1 0 0 0 0
+Desi W #32 (P) 2 0 0 0 0 2 T Newen… #32 (LF) 0 1 0 0 2 0
+Totals 21 3 3 0 4 7 T Wiser #4 (LF) 2 0 1 1 0 0
+Totals 20 6 10 5 4 3
+2B: Peter R, TB: Connor W, Peter R 2, Jacob S, SB: 2B: J Short, HR: A Herrera, TB: T Wiser, C Firestone 2,
+Connor W, Nathaniel B, LOB: 7 W Torres, M Conant, J Demmin, J Murdock, A Herrera 4,
+R Denny, J Short 2, SF: J Demmin, A Herrera, HBP: J
+Demmin, SB: J Demmin, LOB: 5
+PITCHING
+Total Base… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Desi W #32 4.0 7 3 3 3 3 1 E Swartz #22 2.1 2 3 1 3 3 0
+Jacob S #21 0.2 3 3 3 1 0 0 J Dem… #17 2.2 1 0 0 1 4 0
+Totals 4.2 10 6 6 4 3 1 Totals 5.0 3 3 1 4 7 0
+P-S: Jacob S 27-14, Desi W 72-40, WP: Jacob S, HBP: P-S: J Demmin 47-29, E Swartz 48-24, WP: J Demmin,
+Desi W, BF: Jacob S 7, Desi W 20 E Swartz, BF: J Demmin 11, E Swartz 14, E: C Firestone,
+W Torres, A Herrera, E Swartz
+Scorekeeping. Stats. Live Game Updates.`,
+  'Oct26|Legacy': `Legacy 13U Select 3 - 9 Goodland Bruins 13U
+Home Sunday October 26, 2025
+1 2 3 4 5 6 R H E
+LGCY 1 1 1 0 0 0 3 5 3
+GDLN 0 0 2 4 3 X 9 12 2
+BATTING
+Legacy 13U Select AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Alexand… #50 (LF) 3 0 1 0 0 1 J Demmin #17 (1B) 3 2 3 1 1 0
+Julian V #13 (SS) 3 2 1 0 0 0 J Short #2 (C) 4 0 1 1 0 0
+Christian F #3 (C) 3 0 0 0 0 3 C Firesto… #15 (3B) 4 0 2 0 0 0
+Jeremy R #10 (P) 1 0 0 0 1 1 A Herrera #5 (SS) 3 0 0 2 0 0
+Parker B #12 (1B) 2 0 1 0 0 1 B Gomez #39 (P) 1 0 1 0 0 0
+Parker S #7 (2B) 2 0 0 0 0 1 E Swartz #22 (P) 2 1 1 0 0 0
+William S (RF) 2 1 1 0 0 0 W Torres #3 (RF) 2 2 1 0 1 0
+Edwin S #24 (CF) 1 0 0 0 1 1 T Newe… #32 (RF) 0 0 0 0 0 0
+Nolan M #14 2 0 0 0 0 1 M Conant #34 (LF) 2 0 0 0 0 0
+Lincoln M #55 (3B) 2 0 0 0 0 0 J Murdo… #24 (2B) 3 2 0 1 0 0
+Cameron A #22 1 0 1 0 1 0 R Denny #50 (CF) 3 2 3 2 0 0
+Kash V #2 1 0 0 0 1 1 Totals 27 9 12 7 2 0
+Totals 23 3 5 0 4 10
+TB: Julian V, Alexander C, Cameron A, William S, Parker 2B: J Short, J Demmin, TB: W Torres, E Swartz, J Short
+B, SB: Julian V 4, William S, LOB: 5 2, B Gomez, C Firestone 2, R Denny 3, J Demmin 4,
+HBP: M Conant, SB: J Murdock 2, J Short, R Denny,
+LOB: 6
+PITCHING
+Legacy 13… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Jeremy R #10 3.0 6 2 2 0 0 0 B Gomez #39 2.1 5 3 3 3 3 0
+Edwin S #24 1.0 4 4 3 0 0 0 E Swartz #22 1.2 0 0 0 0 4 0
+Lincoln… #55 1.0 2 3 3 2 0 0 M Con… #34 2.0 0 0 0 1 3 0
+Totals 5.0 12 9 8 2 0 0 Totals 6.0 5 3 3 4 10 0
+P-S: Jeremy R 37-23, Edwin S 23-14, Lincoln M 33-17, P-S: M Conant 34-19, E Swartz 23-17, B Gomez 55-28,
+WP: Lincoln M 2, HBP: Lincoln M, BF: Jeremy R 14, WP: B Gomez 2, BF: M Conant 7, E Swartz 5, B Gomez
+Edwin S 8, Lincoln M 8, E: Christian F, Parker S 2 15, E: J Murdock, J Short
+Scorekeeping. Stats. Live Game Updates.`,
+  'Nov08|Braves Baseb': `Braves Baseball
+3 - 5 Goodland Bruins 13U
+Academy BBA 13U
+Home Saturday November 08, 2025
+1 2 3 4 R H E
+BRVS 0 1 2 0 3 3 0
+GDLN 3 0 2 X 5 4 1
+BATTING
+Braves Baseball… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Max V #44 1 0 0 0 1 0 R Lopes #13 (P) 1 2 1 0 1 0
+Caleb L #50 1 1 0 0 1 1 J Short #2 (3B) 1 1 0 0 1 1
+Colton S #7 (C) 2 0 1 0 0 1 J Demmin #17 (1B) 1 2 1 2 1 0
+Jayden C #5 (P) 1 0 0 0 1 1 A Herrera #5 (C) 2 0 1 2 0 0
+Anthony C #21 (3B) 1 0 0 1 1 0 C Firesto… #15 (SS) 2 0 0 0 0 2
+Andrew S #10 (C) 2 1 1 0 0 0 W Torres #3 (2B) 1 0 0 0 1 1
+#81 2 0 1 1 0 0 J Murdo… #24 (RF) 1 0 0 0 0 0
+Cash B #99 (1B) 0 0 0 0 2 0 R Denny #50 (CF) 1 0 1 0 0 0
+Matisse M #88 (P) 1 0 0 0 1 1 E Swartz #22 (RF) 1 0 0 0 0 1
+Abe G #1 (2B) 2 0 0 0 0 1 B Zant #27 (LF) 1 0 0 0 0 0
+Leo G #2 (SS) 0 1 0 0 1 0 T Wiser #4 (LF) 1 0 0 0 0 1
+DJ M #24 (RF) 1 0 0 0 0 1 Totals 13 5 4 4 4 6
+Totals 14 3 3 2 8 6
+2B: Andrew S, TB: #81, Colton S, Andrew S 2, SB: Cash 2B: A Herrera, R Lopes, TB: R Denny, A Herrera 2, J
+B, Leo G, Max V, LOB: 7 Demmin, R Lopes 2, SB: J Short, W Torres, J Demmin, R
+Lopes 2, LOB: 3
+PITCHING
+Braves Bas… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Jayden C #5 1.0 1 3 3 3 1 0 R Lopes #13 2.0 2 1 1 3 4 0
+Matiss… #88 2.0 3 2 2 1 5 0 J Dem… #17 1.0 1 2 2 4 1 0
+Totals 3.0 4 5 5 4 6 0 E Swartz #22 1.0 0 0 0 1 1 0
+Totals 4.0 3 3 3 8 6 0
+P-S: Jayden C 34-18, Matisse M 41-29, WP: Jayden C, P-S: E Swartz 19-12, J Demmin 43-22, R Lopes 47-26,
+Matisse M, BF: Jayden C 7, Matisse M 10 WP: J Demmin, R Lopes 2, BF: E Swartz 4, J Demmin 8,
+R Lopes 10, E: J Demmin
+Scorekeeping. Stats. Live Game Updates.`,
+  'Nov08|BC Pirates': `Goodland Bruins 13U 8 - 9 BC Pirates 13U
+Away Saturday November 08, 2025
+1 2 3 4 5 6 R H E
+GDLN 1 0 7 0 0 0 8 9 1
+BCPR 1 0 2 1 2 3 9 10 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO BC Pirates 13U AB R H RBI BB SO
+R Lopes #13 (CF) 3 2 3 3 0 0 Demitri M #2 (SS) 3 2 2 1 1 1
+J Short #2 (3B) 3 1 1 0 0 1 Easton L #22 (3B) 3 1 2 0 0 0
+C Firesto… #15 (SS) 3 1 0 0 0 1 Kai Q #6 (RF) 3 1 1 2 0 1
+J Demmin #17 (1B) 1 1 0 0 1 1 Sam O #8 (P) 2 0 1 2 1 0
+A Herrera #5 (C) 3 0 1 0 0 0 Leo R #15 (C) 3 1 1 1 0 1
+W Torres #3 (2B) 2 1 1 0 0 0 Cruz P #1 (1B) 2 1 1 0 1 0
+J Murdo… #24 (2B) 3 0 1 2 0 0 Trent W #23 (2B) 2 1 1 0 1 0
+R Denny #50 (RF) 2 0 1 0 0 0 Josh R #99 (CF) 2 1 1 1 1 0
+E Swartz #22 (P) 3 0 0 0 0 1 Drew T #11 (2B) 2 0 0 0 1 1
+B Zant #27 (LF) 2 1 0 0 0 0 Wyatt G #44 (1B) 2 0 0 0 1 0
+T Wiser #4 (LF) 1 1 1 0 1 0 Tyson P #42 (2B) 1 1 0 0 1 1
+Totals 26 8 9 5 2 4 Totals 25 9 10 7 8 5
+2B: J Short, HR: R Lopes 2, TB: J Murdock, R Lopes 9, 2B: Cruz P, Demitri M, HR: Kai Q, TB: Easton L 2, Cruz P
+T Wiser, W Torres, R Denny, A Herrera, J Short 2, CS: T 2, Trent W, Kai Q 4, Leo R, Sam O, Josh R, Demitri M 3,
+Wiser, HBP: J Demmin, W Torres, R Denny, B Zant, SB: HBP: Tyson P, SB: Easton L, Demitri M, LOB: 6
+W Torres, LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR BC Pirates… IP H R ER BB SO HR
+E Swartz #22 2.0 2 1 1 2 1 0 Sam O #8 2.0 2 1 1 0 3 1
+R Denny #50 1.0 4 3 3 0 1 1 Leo R #15 0.2 6 7 7 0 0 1
+J Dem… #17 2.0 2 2 2 3 2 0 Drew T #11 3.1 1 0 0 2 1 0
+B Zant #27 0.0 1 2 2 1 0 0 Totals 6.0 9 8 8 2 4 2
+C Firest… #15 0.1 1 1 1 1 1 0
+R Lopes #13 0.0 0 0 0 1 0 0
+Totals 5.1 10 9 9 8 5 1
+Scorekeeping. Stats. Live Game Updates.
+P-S: E Swartz 32-20, C Firestone 21-10, R Lopes 4-0, J
+Demmin 40-21, R Denny 20-12, B Zant 13-7, WP: C
+Firestone, B Zant, HBP: C Firestone, BF: E Swartz 10, C
+Firestone 4, R Lopes, J Demmin 10, R Denny 7, B Zant 2,
+E: J Short
+P-S: Drew T 55-28, Leo R 19-10, Sam O 32-22, WP:
+Drew T, Leo R 2, HBP: Drew T, Leo R 3, BF: Drew T 13,
+Leo R 11, Sam O 8, E: Drew T
+Scorekeeping. Stats. Live Game Updates.`,
+  'Nov09|Renegades': `Renegades National 1 - 5 Goodland Bruins 13U
+Home Sunday November 09, 2025
+1 2 3 4 5 6 R H E
+RNGD 0 0 1 0 0 0 1 3 1
+GDLN 1 3 1 0 0 X 5 5 1
+BATTING
+Renegades Nati… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+#8 (SS) 2 0 0 0 1 0 R Lopes #13 (CF) 3 0 1 0 0 2
+#3 (C) 2 0 1 0 1 0 J Short #2 (3B) 2 1 1 1 1 0
+#23 (3B) 2 0 0 0 1 1 J Demmin #17 (1B) 3 0 0 0 0 1
+#7 (1B) 2 0 0 0 0 2 A Herrera #5 (C) 3 0 0 0 0 0
+#20 (1B) 1 0 1 0 1 0 C Firesto… #15 (SS) 2 2 1 0 0 0
+#10 (P) 2 0 0 0 0 0 B Zant #27 (LF) 0 1 0 0 2 0
+#22 (2B) 2 0 0 0 0 0 J Murdo… #24 (2B) 1 1 0 0 2 0
+#5 (2B) 1 1 0 0 1 0 R Denny #50 (LF) 1 0 0 0 1 1
+#6 (CF) 2 0 1 0 0 1 T Wiser #4 (RF) 2 0 1 2 0 0
+#1 (3B) 2 0 0 0 0 2 E Swartz #22 (P) 2 0 1 0 0 0
+#9 2 0 0 0 0 0 Totals 19 5 5 3 6 4
+Totals 20 1 3 0 5 6
+TB: #3, #20, #6, LOB: 6 2B: T Wiser, HR: J Short, TB: J Short 4, T Wiser 2, E
+Swartz, R Lopes, C Firestone, CS: A Herrera, HBP: B
+Zant, C Firestone, SB: J Murdock, B Zant, C Firestone 2,
+LOB: 6
+PITCHING
+Renegades… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+#10 2.0 4 4 4 3 3 1 E Swartz #22 4.0 3 1 1 4 3 0
+#7 0.1 0 1 1 1 0 0 J Dem… #17 2.0 0 0 0 1 3 0
+#20 2.2 1 0 0 2 1 0 Totals 6.0 3 1 1 5 6 0
+Totals 5.0 5 5 5 6 4 1
+P-S: #10 54-33, #20 32-19, #7 15-6, WP: #10 2, #7, P-S: J Demmin 21-14, E Swartz 73-44, WP: E Swartz,
+HBP: #7 2, BF: #10 13, #20 10, #7 4, E: #8 BF: J Demmin 7, E Swartz 18, E: J Murdock
+Scorekeeping. Stats. Live Game Updates.`,
+  'Nov09|BC Pirates': `BC Pirates 13U 4 - 1 Goodland Bruins 13U
+Home Sunday November 09, 2025
+1 2 3 4 5 6 7 R H E
+BCPR 0 0 0 1 2 0 1 4 7 1
+GDLN 0 1 0 0 0 0 0 1 6 4
+BATTING
+BC Pirates 13U AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Demitri M #2 (P) 2 1 1 0 1 0 R Lopes #13 (P) 4 0 1 0 0 2
+Easton L #22 (3B) 3 0 1 0 0 0 J Short #2 (3B) 3 0 0 0 1 0
+Kai Q #6 (RF) 3 0 1 1 0 1 J Demmin #17 (1B) 2 0 0 0 1 1
+Sam O #8 (CF) 3 0 0 0 0 0 A Herrera #5 (C) 3 0 3 0 0 0
+Tyson P #42 2 0 0 0 1 1 C Firesto… #15 (SS) 3 1 1 0 0 0
+Leo R #15 (C) 3 1 0 0 0 2 J Murdo… #24 (2B) 3 0 0 0 0 0
+Cruz P #1 (1B) 3 1 2 0 0 0 R Denny #50 (CF) 3 0 0 1 0 0
+Trent W #23 (2B) 2 1 1 0 1 0 T Wiser #4 (LF) 2 0 1 0 1 1
+Josh R #99 (SS) 2 0 1 1 0 0 B Zant #27 (RF) 2 0 0 0 0 2
+Drew T #11 (LF) 3 0 0 0 0 0 W Torres #3 (RF) 1 0 0 0 0 0
+Wyatt G #44 (1B) 2 0 0 0 0 1 E Swartz #22 (P) 0 0 0 0 0 0
+Totals 28 4 7 2 3 5 Totals 26 1 6 1 3 6
+3B: Cruz P, TB: Kai Q, Trent W, Josh R, Demitri M, Cruz 2B: A Herrera, TB: A Herrera 4, R Lopes, C Firestone, T
+P 4, Easton L, SF: Josh R, SB: Kai Q, Demitri M, Cruz P, Wiser, SB: C Firestone, LOB: 7
+Leo R, LOB: 7
+PITCHING
+BC Pirates… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Demitri M #2 4.0 3 1 1 3 4 0 R Lopes #13 5.0 5 3 2 2 4 0
+Cruz P #1 3.0 3 0 0 0 2 0 E Swartz #22 1.0 1 0 0 0 1 0
+Totals 7.0 6 1 1 3 6 0 B Zant #27 1.0 1 1 0 1 0 0
+Totals 7.0 7 4 2 3 5 0
+P-S: Demitri M 69-36, Cruz P 37-25, WP: Demitri M, P-S: B Zant 20-10, R Lopes 71-50, E Swartz 9-6, BF: B
+BF: Demitri M 18, Cruz P 11, E: Kai Q Zant 5, R Lopes 23, E Swartz 4, E: W Torres, J Demmin,
+R Lopes, C Firestone
+Scorekeeping. Stats. Live Game Updates.`,
+  'Dec13|Clubhouse 80': `Clubhouse 805 Black
+3 - 5 Goodland Bruins 13U
+13U
+Home Saturday December 13, 2025
+1 2 3 4 5 R H E
+CLBH 0 1 0 2 0 3 4 4
+GDLN 2 0 3 0 X 5 5 2
+BATTING
+Clubhouse 805… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Ty G 3 0 0 0 0 2 R Lopes #13 (CF) 1 2 1 1 1 0
+Baron Y (P) 2 0 2 0 1 0 J Demmin #17 (1B) 2 1 1 0 0 0
+Charlie S 3 0 0 0 0 1 A Herrera #5 (C) 2 0 1 2 0 0
+Greyson K 3 0 1 0 0 0 B Gomez #39 (3B) 2 1 1 1 0 0
+Franco A 2 1 0 0 0 1 B Zant #27 (RF) 1 0 0 0 1 0
+Kase P 2 1 1 0 0 0 J Murdo… #24 (2B) 2 0 0 0 0 0
+AJ C (P) 1 1 0 0 1 0 R Denny #50 (LF) 1 0 0 0 1 0
+Mike M 1 0 0 0 1 1 E Swartz #22 (P) 2 0 0 0 0 0
+Liebs #21 1 0 0 1 1 0 W Torres #3 (SS) 2 0 1 0 0 0
+Max P #0 1 0 0 0 1 0 O Lee #32 (RF) 1 0 0 0 1 0
+Cash H #42 1 0 0 0 1 1 B Caldwell #34 (LF) 2 1 0 0 0 0
+Totals 20 3 4 1 6 6 Totals 18 5 5 4 4 0
+TB: Baron Y 2, Kase P, Greyson K, HBP: Franco A, SB: 2B: B Gomez, TB: A Herrera, W Torres, R Lopes, B
+Franco A 2, Mike M, AJ C, Max P, LOB: 9 Gomez 2, J Demmin, CS: B Zant, SB: W Torres, LOB: 5
+PITCHING
+Clubhouse… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Baron Y 3.0 4 5 2 2 0 0 E Swartz #22 2.0 3 1 0 1 5 0
+AJ C 1.0 1 0 0 2 0 0 J Dem… #17 1.0 0 0 0 1 1 0
+Totals 4.0 5 5 2 4 0 0 B Gomez #39 0.1 0 2 2 2 0 0
+R Denny #50 1.2 1 0 0 2 0 0
+Totals 5.0 4 3 2 6 6 0
+P-S: Baron Y 53-29, AJ C 19-8, WP: Baron Y 4, BF: P-S: R Denny 24-13, E Swartz 42-25, B Gomez 20-6, J
+Baron Y 17, AJ C 5, E: Baron Y Demmin 18-9, WP: E Swartz, B Gomez, HBP: B Gomez,
+BF: R Denny 8, E Swartz 11, B Gomez 4, J Demmin 4, E:
+R Denny, O Lee
+Scorekeeping. Stats. Live Game Updates.`,
+  'Dec13|BATRS Fleish': `Goodland Bruins 13U 8 - 1 Batrs 13U Fleisher
+Away Saturday December 13, 2025
+1 2 3 4 5 6 R H E
+GDLN 1 0 2 2 0 3 8 5 0
+BTRS 0 0 1 0 0 0 1 3 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO Batrs 13U Fleisher AB R H RBI BB SO
+R Lopes #13 (CF) 3 2 3 1 0 0 Walter M #7 3 0 0 0 0 2
+J Demmin #17 (1B) 3 1 1 2 0 0 Bohdi M #13 3 0 0 0 0 3
+A Herrera #5 (C) 3 1 0 0 0 0 Sawyer A #30 (P) 1 0 1 0 2 0
+B Gomez #39 (P) 3 1 1 1 0 0 Sawyer S #21 1 0 0 0 2 1
+B Zant #27 (RF) 2 1 0 0 1 0 Joshua L #21 3 0 1 0 0 2
+J Murdo… #24 (2B) 2 0 0 1 1 0 D’Angelo C #24 1 0 0 0 1 1
+R Denny #50 (LF) 2 0 0 0 0 0 Zachary R #31 2 0 0 0 0 2
+E Swartz #22 (LF) 2 0 0 0 0 0 Charlie R #7 2 0 0 0 0 2
+W Torres #3 (SS) 1 1 0 0 0 0 Charlie #1 2 1 1 0 0 1
+O Lee #32 (RF) 0 1 0 0 2 0 Brady Z #17 (P) 2 0 0 1 0 1
+B Caldw… #34 (RF) 1 0 0 0 1 0 Totals 20 1 3 1 5 15
+Totals 22 8 5 5 5 0
+2B: R Lopes 2, B Gomez, TB: R Lopes 5, J Demmin, B TB: Charlie, Sawyer A, Joshua L, CS: Sawyer A, SB:
+Gomez 2, HBP: W Torres, SB: O Lee, R Lopes 2, J Charlie, Sawyer A, Sawyer S, D’Angelo C 2, LOB: 6
+Murdock, B Zant, J Demmin, W Torres 2, LOB: 2
+PITCHING
+Goodland… IP H R ER BB SO HR Batrs 13U… IP H R ER BB SO HR
+B Gomez #39 2.0 0 0 0 2 6 0 Brady Z #17 3.0 2 3 3 3 0 0
+B Zant #27 1.0 1 1 1 0 1 0 Sawyer A #30 3.0 3 5 3 2 0 0
+R Lopes #13 2.0 1 0 0 2 6 0 Totals 6.0 5 8 6 5 0 0
+J Murd… #24 1.0 1 0 0 1 2 0
+Totals 6.0 3 1 1 5 15 0
+P-S: R Lopes 41-23, J Murdock 20-10, B Zant 16-9, B P-S: Brady Z 41-15, Sawyer A 48-29, WP: Brady Z,
+Gomez 38-24, WP: J Murdock, B Zant, BF: R Lopes 9, J Sawyer A 3, HBP: Brady Z, BF: Brady Z 13, Sawyer A 15
+Murdock 4, B Zant 4, B Gomez 8
+Scorekeeping. Stats. Live Game Updates.`,
+  'Dec14|Clubhouse 80': `Clubhouse 805 Blue 13U 0 - 8 Goodland Bruins 13U
+Home Sunday December 14, 2025
+1 2 3 4 5 6 7 R H E
+CLBH 0 0 0 0 0 0 0 0 3 1
+GDLN 4 0 1 0 3 0 X 8 12 2
+BATTING
+Clubhouse 805… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+#11 (3B) 3 0 1 0 0 1 R Lopes #13 (CF) 4 0 0 0 0 0
+#5 (2B) 3 0 0 0 0 2 J Demmin #17 (1B) 4 2 2 0 0 1
+#9 (SS) 3 0 0 0 0 0 A Herrera #5 (C) 3 1 2 0 0 0
+Mikey T #3 (C) 3 0 1 0 0 0 B Gomez #39 (1B) 2 1 2 1 1 0
+#8 (P) 2 0 1 0 1 0 W Oswald #9 (3B) 2 2 2 3 0 0
+#12 (1B) 3 0 0 0 0 0 J Murdo… #24 (2B) 2 1 0 0 1 0
+#7 (C) 2 0 0 0 0 1 W Torres #3 (SS) 3 1 2 1 0 0
+#17 (RF) 2 0 0 0 0 1 R Denny #50 (RF) 3 0 2 2 0 0
+#2 1 0 0 0 1 1 E Swartz #22 (P) 1 0 0 0 0 0
+#36 (LF) 1 0 0 0 1 1 O Lee #32 0 0 0 0 1 0
+#55 (1B) 2 0 0 0 0 1 B Zant #27 (LF) 2 0 0 0 0 2
+Totals 25 0 3 0 3 8 B Cald… #34 (LF) 1 0 0 0 0 0
+Totals 27 8 12 7 3 3
+TB: #11, #8, Mikey T, LOB: 7 2B: R Denny, B Gomez, W Torres 2, W Oswald, TB: R
+Denny 3, J Demmin 2, B Gomez 3, W Torres 4, W
+Oswald 3, A Herrera 2, SAC: E Swartz, HBP: W Oswald,
+SB: J Demmin, LOB: 6
+PITCHING
+Clubhouse… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+#8 3.0 7 5 5 2 1 0 E Swartz #22 4.0 2 0 0 1 4 0
+#11 3.0 5 3 3 1 2 0 J Dem… #17 2.0 1 0 0 1 4 0
+Totals 6.0 12 8 8 3 3 0 J Murd… #24 1.0 0 0 0 1 0 0
+Totals 7.0 3 0 0 3 8 0
+P-S: #11 48-27, #8 57-30, WP: #8 3, HBP: #8, BF: #11 P-S: E Swartz 50-32, J Demmin 26-15, J Murdock 13-6,
+14, #8 18 WP: E Swartz, J Demmin, BF: E Swartz 16, J Demmin 8,
+J Murdock 4, E: J Demmin, W Torres
+Scorekeeping. Stats. Live Game Updates.`,
+  'Dec14|Swag Basebal': `Swag Baseball Club 13U 9 - 1 Goodland Bruins 13U
+Home Sunday December 14, 2025
+1 2 3 4 5 6 7 R H E
+SWGB 0 0 0 2 2 2 3 9 10 0
+GDLN 0 0 0 1 0 0 0 1 6 2
+BATTING
+Swag Baseball C… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Michael P #24 4 1 2 1 0 0 R Lopes #13 (CF) 3 0 0 0 0 0
+demitri m #0 (SS) 4 2 3 3 0 0 J Demmin #17 (1B) 2 1 1 0 1 0
+Josiah L #10 4 1 1 2 0 3 A Herrera #5 (C) 3 0 1 0 0 1
+Jayden A #15 (P) 4 0 1 0 0 1 B Gomez #39 (1B) 3 0 1 0 0 1
+Jacob R #66 1 1 1 0 2 0 B Cald… #34 (LF) 0 0 0 0 0 0
+Isaiah B #9 (C) 4 0 0 0 0 3 W Oswald #9 (3B) 3 0 1 1 0 1
+trevor a #00 3 1 1 2 0 0 J Murdo… #24 (2B) 2 0 1 0 1 1
+Aylen #0 3 1 0 0 0 2 W Torres #3 (SS) 2 0 1 0 0 0
+kayden h #18 3 1 1 0 0 2 R Denny #50 (RF) 1 0 0 0 1 0
+Anthony M #3 2 0 0 0 0 2 O Lee #32 (RF) 0 0 0 0 0 0
+Austin H #12 0 1 0 0 1 0 E Swartz #22 (P) 2 0 0 0 0 0
+Totals 32 9 10 8 3 13 B Zant #27 (LF) 2 0 0 0 0 1
+Totals 23 1 6 1 3 5
+2B: demitri m, HR: Josiah L, trevor a, TB: Josiah L 4, 2B: A Herrera, TB: W Torres, A Herrera 2, J Demmin, W
+Jacob R, Michael P 2, demitri m 4, Jayden A, kayden h, Oswald, J Murdock, B Gomez, CS: W Torres, LOB: 4
+trevor a 4, HBP: Jacob R, SB: Michael P, demitri m 2,
+Austin H, LOB: 6
+PITCHING
+Swag Base… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Jayden A #15 7.0 6 1 1 3 5 0 E Swartz #22 2.0 2 0 0 0 1 0
+Totals 7.0 6 1 1 3 5 0 J Dem… #17 2.0 3 2 2 1 4 1
+R Lopes #13 3.0 5 7 5 2 8 1
+Totals 7.0 10 9 7 3 13 2
+P-S: Jayden A 94-59, WP: Jayden A, BF: Jayden A 26 P-S: E Swartz 21-14, J Demmin 40-25, R Lopes 78-49,
+WP: R Lopes, HBP: R Lopes, BF: E Swartz 7, J Demmin
+10, R Lopes 19, E: W Torres, J Murdock
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan17|Prime All': `Goodland Bruins 13U 2 - 3 Prime 13u X
+Away Saturday January 17, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 0 0 0 0 2 2 5 2
+PRM1 0 0 2 0 0 1 3 4 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO Prime 13u X AB R H RBI BB SO
+R Lopes #13 (P) 3 0 0 1 0 0 R S #28 3 1 2 2 0 1
+J Short #2 (1B) 3 0 0 0 0 0 J R #2 3 0 0 0 0 0
+W Oswald #9 (SS) 2 0 1 0 0 0 C R #9 2 0 0 0 0 1
+J Demmin #17 (RF) 2 0 1 0 0 1 L P #88 2 0 1 0 0 0
+A Herrera #5 (C) 2 0 0 0 0 0 C M #11 2 0 1 0 0 0
+D Del Gi… #53 (3B) 2 0 0 0 0 0 JT H #5 2 0 0 0 0 2
+C Firesto… #15 (3B) 2 0 0 0 0 0 M R #25 2 0 0 0 0 1
+J Murdo… #24 (2B) 2 0 0 0 0 1 L B #35 (P) 1 0 0 0 1 1
+R Denny #50 (LF) 2 1 1 0 0 0 Henry #16 1 1 0 0 1 1
+E Swartz #22 (LF) 1 0 0 0 1 1 Arnav #23 (P) 2 1 0 0 0 0
+B Zant #27 (CF) 2 1 1 0 0 0 Totals 20 3 4 2 2 7
+W Torres #3 (RF) 2 0 1 1 0 0
+Totals 25 2 5 2 1 3
+TB: W Oswald, J Demmin, W Torres, B Zant, R Denny, 2B: R S 2, TB: R S 4, C M, L P, SB: C M 2, LOB: 3
+LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR Prime 13u X IP H R ER BB SO HR
+R Lopes #13 1.0 0 0 0 0 2 0 L B #35 3.0 3 0 0 1 0 0
+R Denny #50 2.0 3 2 0 1 2 0 Arnav #23 3.0 2 2 2 0 3 0
+C Fires… #15 2.0 1 1 0 1 3 0 Totals 6.0 5 2 2 1 3 0
+Totals 5.0 4 3 0 2 7 0
+P-S: C Firestone 33-19, R Denny 35-21, R Lopes 14-9, P-S: Arnav 36-25, L B 44-28, BF: Arnav 13, L B 13
+WP: C Firestone, BF: C Firestone 9, R Denny 10, R
+Lopes 3, E: C Firestone, D Del Giorgio
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan17|Top Level': `Goodland Bruins 13U 8 - 3 Top Level Blue 13U
+Away Saturday January 17, 2026
+1 2 3 4 R H E
+GDLN 4 0 0 4 8 9 4
+TPLV 3 0 0 0 3 1 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO Top Level Blue 1… AB R H RBI BB SO
+R Lopes #13 (CF) 3 1 1 0 0 2 William H #17 1 0 0 0 1 0
+J Short #2 (1B) 2 1 1 0 1 0 Maxwell Y #88 0 0 0 0 2 0
+W Oswald #9 (SS) 2 2 1 1 1 0 Levi S #32 (P) 1 1 0 0 1 0
+A Herrera #5 (C) 3 2 3 4 0 0 Jin M #27 1 1 1 1 1 0
+D Del Gi… #53 (3B) 3 0 1 0 0 2 Perrish M #44 (P) 0 1 0 0 1 0
+C Firesto… #15 (3B) 2 0 1 1 0 0 Remy M #35 2 0 0 0 0 1
+J Murdo… #24 (2B) 2 0 0 0 0 0 Oliver C #8 1 0 0 0 1 0
+R Denny #50 (LF) 1 0 0 0 0 1 Jax #28 1 0 0 0 1 0
+B Zant #27 (CF) 1 0 0 0 0 0 H Wyman #6 2 0 0 0 0 2
+W Torres #3 (RF) 0 1 0 0 2 0 River W #50 1 0 0 0 0 0
+E Swartz #22 (P) 0 0 0 0 0 0 Blake T #13 1 0 0 0 0 1
+J Demm… #17 (LF) 1 1 1 0 0 0 Totals 11 3 1 1 8 4
+Totals 20 8 9 6 4 5
+2B: A Herrera, 3B: A Herrera, TB: D Del Giorgio, J TB: Jin M, CS: Maxwell Y, Jin M, William H, SB: Perrish
+Demmin, W Oswald, J Short, R Lopes, A Herrera 6, C M, Oliver C, Maxwell Y 2, Remy M, William H, Levi S 2,
+Firestone, SAC: E Swartz, CS: A Herrera, SB: J LOB: 5
+Murdock, J Short, LOB: 5
+PITCHING
+Goodland… IP H R ER BB SO HR Top Level… IP H R ER BB SO HR
+E Swartz #22 2.0 1 3 0 2 1 0 Perrish… #44 3.0 7 4 4 2 3 0
+R Lopes #13 2.0 0 0 0 6 3 0 Levi S #32 1.0 2 4 3 2 2 0
+Totals 4.0 1 3 0 8 4 0 Totals 4.0 9 8 7 4 5 0
+P-S: R Lopes 53-21, E Swartz 36-20, WP: R Lopes, BF: P-S: Perrish M 72-45, Levi S 27-12, WP: Levi S 2, BF:
+R Lopes 10, E Swartz 10, E: W Oswald, E Swartz, A Perrish M 18, Levi S 7
+Herrera, C Firestone
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan18|Camarillo El': `Goodland Bruins 13U 3 - 6 Camarillo Elite 13U
+Away Sunday January 18, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 0 1 0 0 2 3 9 2
+CMRL 1 0 0 2 3 0 6 6 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO Camarillo Elite 1… AB R H RBI BB SO
+R Lopes #13 (CF) 1 1 0 0 2 0 Julius G #66 (SS) 3 1 1 1 0 1
+J Short #2 (1B) 3 0 1 1 0 0 Ryan S #24 2 1 2 2 1 0
+W Oswald #9 (2B) 3 0 1 0 0 0 Jack C #27 (C) 3 1 0 0 0 0
+A Herrera #5 (C) 3 0 3 2 0 0 Levi S #13 (3B) 2 1 1 1 1 0
+J Demmin #17 1 0 0 0 0 1 Joseph H #50 (1B) 3 0 0 0 0 1
+D Del G… #53 (1B) 2 0 1 0 0 1 Mason C #35 (LF) 2 0 0 0 1 0
+C Firesto… #15 (3B) 3 0 1 0 0 1 Brendan… #33 (2B) 2 0 0 0 1 1
+J Murdo… #24 (SS) 2 0 0 0 0 1 Beckett J #2 (CF) 3 0 0 0 0 1
+R Denny #50 (LF) 1 0 0 0 0 0 Easton #55 (P) 2 1 1 0 0 0
+E Swartz #22 (RF) 1 0 0 0 0 0 Matt #4 (RF) 2 0 0 0 0 0
+W Torres #3 (RF) 1 1 0 0 1 0 Sam #99 (3B) 1 1 1 0 0 0
+B Zant #27 (P) 2 1 2 0 0 0 Totals 25 6 6 4 4 4
+Totals 23 3 9 3 3 4
+2B: A Herrera, TB: D Del Giorgio, C Firestone, J Short, B 2B: Easton, Levi S, TB: Easton 2, Levi S 2, Sam, Julius
+Zant 2, A Herrera 4, W Oswald, CS: C Firestone, R G, Ryan S 2, HBP: Sam, SB: Julius G, Jack C, LOB: 6
+Lopes, LOB: 5
+PITCHING
+Goodland… IP H R ER BB SO HR Camarillo… IP H R ER BB SO HR
+B Zant #27 3.0 2 1 1 1 4 0 Easton #55 3.0 4 1 1 2 2 0
+D Del G… #53 2.0 4 5 3 2 0 0 Sam #99 3.0 5 2 2 1 2 0
+J Mur… #24 0.2 0 0 0 1 0 0 Totals 6.0 9 3 3 3 4 0
+Totals 5.2 6 6 4 4 4 0
+P-S: D Del Giorgio 53-31, J Murdock 14-8, B Zant P-S: Easton 37-23, Sam 33-22, WP: Sam, BF: Easton
+41-26, WP: D Del Giorgio 2, B Zant, HBP: D Del Giorgio, 12, Sam 14, E: Easton
+BF: D Del Giorgio 15, J Murdock 3, B Zant 12, E: J
+Murdock, W Oswald
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan19|Top Level': `Top Level Blue 13U 4 - 5 Goodland Bruins 13U
+Home Monday January 19, 2026
+1 2 3 4 5 6 R H E
+TPLV 4 0 0 0 0 0 4 4 0
+GDLN 1 0 1 0 3 X 5 5 0
+BATTING
+Top Level Blue 1… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+William H #17 (2B) 2 1 1 0 1 1 R Lopes #13 (CF) 2 3 2 3 1 0
+Maxwell Y #88 (SS) 3 1 1 0 0 1 J Short #2 (C) 3 0 2 2 0 0
+Levi S #32 (DH) 2 1 0 0 0 0 W Oswald #9 3 0 0 0 0 1
+Jin M #27 (LF) 2 1 0 1 1 0 A Herrera #5 (LF) 2 0 0 0 0 0
+Perrish M #44 (1B) 3 0 1 1 0 0 D Del Gi… #53 (1B) 2 0 1 0 0 0
+Remy M #35 (C) 2 0 1 1 0 0 C Firesto… #15 (SS) 1 0 0 0 1 1
+Jackson M #1 (P) 2 0 0 0 1 1 B Zant #27 (3B) 2 0 0 0 0 1
+H Wyman #6 (P) 2 0 0 0 1 2 W Torres #3 (RF) 1 1 0 0 0 1
+Oliver C #8 (RF) 1 0 0 1 1 1 R Denny #50 (CF) 1 1 0 0 0 0
+River W #50 (CF) 2 0 0 0 0 1 J Murdo… #24 (2B) 2 0 0 0 0 1
+Totals 21 4 4 4 5 7 Totals 19 5 5 5 2 5
+TB: Remy M, Maxwell Y, William H, Perrish M, CS: Remy 2B: J Short, 3B: R Lopes, HR: R Lopes, TB: J Short 3, R
+M, HBP: Remy M, Levi S, SB: Remy M, William H, LOB: Lopes 7, D Del Giorgio, SAC: R Denny, CS: J Short,
+6 HBP: W Torres, SB: J Short, LOB: 3
+PITCHING
+Top Level… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Jackson M #1 4.1 4 4 4 2 5 0 E Swartz #22 0.0 1 4 4 2 0 0
+H Wyman #6 0.2 1 1 1 0 0 1 R Lopes #13 5.0 3 0 0 3 6 0
+Totals 5.0 5 5 5 2 5 1 B Zant #27 1.0 0 0 0 0 1 0
+Totals 6.0 4 4 4 5 7 0
+P-S: H Wyman 5-4, Jackson M 77-45, WP: Jackson M P-S: E Swartz 13-3, B Zant 12-7, R Lopes 79-51, HBP: E
+2, HBP: Jackson M, BF: H Wyman 3, Jackson M 20 Swartz, B Zant, BF: E Swartz 4, B Zant 3, R Lopes 22
+Scorekeeping. Stats. Live Game Updates.`,
+  'Jan19|Five Tools': `Goodland Bruins 13U 11 - 1 TBD- 01/19/26, 5:00 PM
+Away Monday January 19, 2026
+1 2 3 4 R H E
+GDLN 7 3 1 0 11 8 1
+TBD 0 1 0 0 1 0 4
+BATTING
+Goodland Bruins… AB R H RBI BB SO TBD- 01/19/26,… AB R H RBI BB SO
+R Lopes #13 (CF) 2 1 1 0 1 1 J Choy #18 2 0 0 0 0 0
+J Short #2 (3B) 3 1 1 1 0 0 C Gayden #0 2 0 0 0 0 0
+J Demmin #17 (P) 2 2 0 1 1 1 D Cooper #12 1 0 0 0 0 0
+A Herrera #5 (LF) 1 2 1 0 0 0 #19 1 0 0 0 0 0
+W Oswald #9 1 0 0 0 0 0 A Morales #1 1 0 0 0 0 0
+D Del Gi… #53 (1B) 3 2 1 0 0 0 B Pillar #24 0 1 0 0 1 0
+C Firesto… #15 (SS) 2 2 1 2 1 0 J Brendel #7 1 0 0 0 0 1
+B Zant #27 (RF) 2 0 0 1 0 1 A Hubberman #33 1 0 0 1 0 1
+R Denny #50 (RF) 0 0 0 0 1 0 A Tran #22 0 0 0 0 1 0
+W Torres #3 (2B) 2 0 1 1 1 1 Romero #48 (P) 0 0 0 0 1 0
+E Swartz #22 (P) 3 1 1 2 0 0 F Ruiz #21 1 0 0 0 0 0
+J Murdock #24 (C) 2 0 1 2 0 1 Totals 10 1 0 1 3 2
+Totals 23 11 8 10 5 5
+2B: E Swartz, J Murdock, TB: J Short, A Herrera, D Del CS: A Tran, A Hubberman, SB: A Hubberman, B Pillar
+Giorgio, R Lopes, C Firestone, E Swartz 2, J Murdock 2,
+W Torres, CS: W Oswald, HBP: A Herrera, SB: W
+Oswald, R Lopes, LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR TBD- 01/19… IP H R ER BB SO HR
+E Swartz #22 3.0 0 1 0 3 2 0 #13 0.2 5 7 2 1 2 0
+J Dem… #17 1.0 0 0 0 0 0 0 Romero #48 3.1 3 4 1 4 3 0
+Totals 4.0 0 1 0 3 2 0 Totals 4.0 8 11 3 5 5 0
+P-S: J Demmin 10-7, E Swartz 58-28, WP: E Swartz, P-S: #13 43-24, Romero 80-38, WP: #13 3, Romero 5,
+BF: J Demmin 3, E Swartz 10, E: E Swartz HBP: #13, BF: #13 11, Romero 18
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb21|Swing City': `Swing City Black 13U 3 - 7 Goodland Bruins 13U
+Home Saturday February 21, 2026
+1 2 3 4 5 R H E
+SWNG 1 0 0 2 0 3 3 1
+GDLN 5 2 0 0 X 7 11 3
+BATTING
+Swing City Black… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Nicolas A #00 1 2 0 0 1 0 R Lopes #13 (CF) 1 1 1 1 2 0
+Esteban W #17 2 0 0 1 0 0 J Short #2 (1B) 3 1 1 0 0 0
+Kaden R #14 (P) 2 0 0 0 0 2 J Demmin #17 (LF) 2 1 0 0 1 1
+Landon L #13 1 1 1 0 0 0 W Oswald #9 (SS) 1 1 1 1 2 0
+Wyatt B #26 2 0 1 1 0 1 A Herrera #5 (C) 3 1 2 3 0 0
+Riley H #42 2 0 0 0 0 2 C Firesto… #15 (3B) 2 0 1 1 0 1
+Dean B #31 2 0 0 0 0 2 J Murdo… #24 (2B) 1 1 0 0 1 0
+Cole H #44 (P) 2 0 0 0 0 0 T Wiser #4 (LF) 1 0 1 0 1 0
+Anthony R #34 (P) 2 0 1 0 0 1 R Denny #50 (RF) 2 0 2 1 0 0
+#23 1 0 0 0 0 1 E Swartz #22 (P) 2 0 1 0 0 0
+Benjamin N #88 1 0 0 0 0 0 W Torres #3 (RF) 1 1 1 0 1 0
+Totals 18 3 3 2 1 9 Totals 19 7 11 7 8 2
+TB: Anthony R, Landon L, Wyatt B, HBP: Landon L, SB: 2B: W Oswald, W Torres, 3B: A Herrera, HR: R Lopes,
+Landon L, LOB: 2 TB: W Oswald 2, T Wiser, J Short, E Swartz, R Lopes 4,
+A Herrera 4, C Firestone, W Torres 2, R Denny 2, CS: C
+Firestone, SB: T Wiser, J Short 2, J Demmin, LOB: 8
+PITCHING
+Swing City… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Kaden R #14 1.2 7 7 7 4 1 1 E Swartz #22 1.0 0 1 0 0 2 0
+Anthon… #34 1.1 3 0 0 2 1 0 J Dem… #17 1.0 0 0 0 0 2 0
+Cole H #44 1.0 1 0 0 2 0 0 R Denny #50 2.0 2 2 2 1 4 0
+Totals 4.0 11 7 7 8 2 1 W Torres #3 1.0 1 0 0 0 1 0
+Totals 5.0 3 3 2 1 9 0
+P-S: Anthony R 26-12, Kaden R 47-29, Cole H 20-9, P-S: E Swartz 20-13, J Demmin 17-10, W Torres 9-5, R
+BF: Anthony R 7, Kaden R 14, Cole H 6 Denny 37-22, WP: R Denny, HBP: E Swartz, BF: E
+Swartz 5, J Demmin 3, W Torres 3, R Denny 9, E: W
+Oswald, J Short, J Demmin
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb21|LOS CRUSHERS': `Goodland Bruins 13U 4 - 5 Los Crushers 13u
+Away Saturday February 21, 2026
+1 2 3 4 5 R H E
+GDLN 2 0 2 0 0 4 8 1
+LSCR 0 0 2 0 3 5 5 0
+BATTING
+Goodland Bruins… AB R H RBI BB SO Los Crushers 13u AB R H RBI BB SO
+R Lopes #13 (P) 3 1 2 0 0 1 Rafael M #42 2 2 1 0 1 1
+J Short #2 (1B) 3 1 1 0 0 0 #6 1 1 0 1 2 0
+J Demmin #17 (LF) 2 1 1 1 1 0 Jayden M #9 (P) 2 0 1 2 1 1
+W Oswald #9 (SS) 2 1 1 1 0 0 Lucas M #50 (C) 1 0 1 0 2 0
+A Herrera #5 (C) 2 0 1 1 0 1 Eduardo A #35 2 0 0 0 1 2
+C Firesto… #15 (3B) 0 0 0 0 2 0 Ricky H #22 3 0 0 0 0 2
+J Murdo… #24 (2B) 2 0 1 1 0 1 Patrick Z #21 2 0 0 0 0 1
+T Wiser #4 (RF) 2 0 0 0 0 0 Helmet 13 #13 (P) 2 0 1 0 0 0
+R Denny #50 (CF) 2 0 0 0 0 1 Brayan E #3 1 1 0 0 1 1
+E Swartz #22 (LF) 2 0 0 0 0 0 #37 2 1 1 0 0 1
+W Torres #3 (RF) 2 0 1 0 0 0 Totals 18 5 5 3 8 9
+Totals 22 4 8 4 3 4
+2B: A Herrera, R Lopes, W Oswald, TB: J Short, A TB: Lucas M, Rafael M, Helmet 13, Jayden M, #37, CS:
+Herrera 2, J Murdock, J Demmin, R Lopes 3, W Torres, Helmet 13, SB: #6, Lucas M 2, Rafael M, Helmet 13,
+W Oswald 2, SB: J Short 2, A Herrera, LOB: 6 LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR Los Crushe… IP H R ER BB SO HR
+R Lopes #13 2.0 1 0 0 3 5 0 Jayden M #9 3.0 6 4 4 3 3 0
+J Dem… #17 1.0 1 2 0 2 3 0 Helmet… #13 2.0 2 0 0 0 1 0
+C Fires… #15 2.0 3 3 3 3 1 0 Totals 5.0 8 4 4 3 4 0
+Totals 5.0 5 5 3 8 9 0
+P-S: C Firestone 33-15, J Demmin 28-14, R Lopes P-S: Helmet 13 22-13, Jayden M 63-35, WP: Helmet 13,
+43-24, WP: J Demmin 2, BF: C Firestone 11, J Demmin BF: Helmet 13 7, Jayden M 18
+6, R Lopes 9, E: J Demmin
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb22|SoCal PJX': `Goodland Bruins 13U 6 - 4 PJX SoCal 13U
+Away Sunday February 22, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 0 0 0 0 6 6 7 2
+PJXS 2 0 0 2 0 0 4 11 3
+BATTING
+Goodland Bruins… AB R H RBI BB SO PJX SoCal 13U AB R H RBI BB SO
+R Lopes #13 (CF) 3 1 0 0 0 2 A A #2 (2B) 3 1 1 0 0 0
+J Short #2 (3B) 2 1 1 0 1 0 E F #3 (SS) 3 0 3 0 0 0
+J Demmin #17 (1B) 3 1 1 0 0 1 B H #27 3 0 0 0 0 2
+P McGinn #39 (1B) 3 1 1 2 0 0 R L #31 2 1 0 0 1 0
+A Herrera #5 (C) 1 1 0 0 2 1 H M #52 3 0 2 2 0 0
+C Firesto… #15 (SS) 2 1 1 1 1 1 J A #13 3 1 2 0 0 0
+J Murdo… #24 (2B) 1 0 0 0 1 0 K A #9 (1B) 3 1 1 1 0 0
+W Torres #3 (LF) 2 0 1 2 1 1 E B #5 1 0 1 1 1 0
+E Swartz #22 (P) 3 0 0 0 0 2 M P #21 (P) 2 0 1 0 0 0
+T Wiser #4 (LF) 3 0 1 0 0 1 Z C #10 2 0 0 0 0 0
+R Denny #50 (RF) 1 0 1 0 1 0 J C #24 2 0 0 0 0 0
+Totals 24 6 7 5 7 9 Totals 27 4 11 4 2 2
+TB: C Firestone, P McGinn, R Denny, T Wiser, W Torres, 2B: H M, K A, TB: M P, A A, H M 3, E F 3, E B, K A 2, J A
+J Demmin, J Short, SAC: J Murdock, CS: T Wiser, SB: R 2, SB: R L, LOB: 6
+Lopes, J Short 2, LOB: 8
+PITCHING
+Goodland… IP H R ER BB SO HR PJX SoCal… IP H R ER BB SO HR
+E Swartz #22 4.0 9 4 2 2 1 0 B H #7 5.0 3 0 0 4 8 0
+P McGi… #39 2.0 2 0 0 0 1 0 M P #21 0.1 2 5 4 2 0 0
+Totals 6.0 11 4 2 2 2 0 E F #3 0.2 2 1 1 1 1 0
+Totals 6.0 7 6 5 7 9 0
+P-S: P McGinn 32-23, E Swartz 61-34, BF: P McGinn 8, P-S: M P 21-8, E F 18-11, B H 87-51, WP: E F, B H, BF:
+E Swartz 21, E: C Firestone, J Demmin M P 6, E F 5, B H 21, E: E F, B H
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb22|West Coast': `West Coast Shockers
+Goodland Bruins 13U 5 - 0
+13U
+Away Sunday February 22, 2026
+1 2 3 4 5 6 7 R H E
+GDLN 0 0 1 0 1 1 2 5 11 2
+WSTC 0 0 0 0 0 0 0 0 3 0
+BATTING
+Goodland Bruins… AB R H RBI BB SO West Coast Sho… AB R H RBI BB SO
+J Short #2 (C) 4 2 2 0 0 1 #35 0 0 0 0 0 0
+R Lopes #13 (CF) 3 1 2 1 1 0 Gavin P #35 4 0 1 0 0 1
+J Demmin #17 (P) 4 1 2 1 0 1 #88 3 0 0 0 0 2
+P McGinn #39 (3B) 4 0 1 1 0 0 #3 (P) 3 0 1 0 0 2
+A Herrera #5 (SS) 3 1 1 0 1 0 #77 1 0 0 0 2 0
+C Firesto… #15 (1B) 3 0 1 1 1 0 Jake L #16 3 0 0 0 0 1
+J Murdo… #24 (2B) 2 0 1 0 0 0 #24 3 0 0 0 0 1
+R Denny #50 (RF) 3 0 1 1 0 0 Parker H #7 3 0 0 0 0 0
+W Torres #3 (LF) 3 0 0 0 0 0 #11 3 0 0 0 0 1
+Totals 29 5 11 5 3 2 #12 (P) 3 0 1 0 0 1
+Totals 26 0 3 0 2 9
+2B: J Short, J Demmin, TB: J Murdock, R Lopes 2, J TB: #12, Gavin P, #3, SB: #3, LOB: 7
+Short 3, J Demmin 3, R Denny, P McGinn, A Herrera, C
+Firestone, SAC: J Murdock, SB: J Short, J Demmin, P
+McGinn, LOB: 7
+PITCHING
+Goodland… IP H R ER BB SO HR West Coas… IP H R ER BB SO HR
+J Dem… #17 5.0 2 0 0 2 8 0 #12 4.0 5 1 1 1 2 0
+P McGi… #39 2.0 1 0 0 0 1 0 #3 3.0 6 4 4 2 0 0
+Totals 7.0 3 0 0 2 9 0 Totals 7.0 11 5 5 3 2 0
+P-S: J Demmin 82-53, P McGinn 26-19, WP: J Demmin P-S: #12 44-25, #3 41-26, BF: #12 17, #3 16
+3, BF: J Demmin 20, P McGinn 8, E: A Herrera 2
+Scorekeeping. Stats. Live Game Updates.`,
+  'Feb22|LOS CRUSHERS': `Goodland Bruins 13U 6 - 5 Los Crushers 13u
+Away Sunday February 22, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 2 0 0 2 2 6 13 2
+LSCR 0 0 3 1 1 0 5 9 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO Los Crushers 13u AB R H RBI BB SO
+J Short #2 (C) 3 1 0 0 1 0 Helmet 13 #13 3 1 1 0 0 0
+R Lopes #13 (P) 3 1 2 0 1 0 #6 3 1 0 1 0 1
+J Demmin #17 (RF) 4 0 2 2 0 0 Crhis (P) 2 0 2 1 1 0
+P McGinn #39 (1B) 3 1 2 0 1 0 Lucas M #50 (P) 3 0 1 1 0 2
+A Herrera #5 (SS) 4 2 3 0 0 1 Eduardo A #35 3 0 0 0 0 1
+C Firesto… #15 (3B) 3 1 1 2 1 1 Emilio J #7 (P) 3 0 1 0 0 0
+J Murdo… #24 (2B) 1 0 1 1 0 0 Lalo 3 0 0 0 0 0
+T Wiser #4 (2B) 1 0 0 0 0 0 Patrick Z #21 3 1 1 0 0 1
+R Denny #50 (CF) 3 0 1 1 0 0 Brayan E #3 2 1 2 1 0 0
+W Torres #3 (LF) 2 0 1 0 0 1 #37 2 1 1 0 0 1
+Totals 27 6 13 6 4 3 Totals 27 5 9 4 1 6
+2B: A Herrera, TB: C Firestone, J Murdock, J Demmin 2, 2B: Brayan E, Emilio J, 3B: Brayan E, TB: Brayan E 5,
+P McGinn 2, R Denny, W Torres, R Lopes 2, A Herrera 4, Emilio J 2, Helmet 13, #37, Patrick Z, Lucas M, Crhis 2,
+SAC: W Torres, CS: R Lopes, HBP: J Murdock, SB: J SB: Helmet 13, Crhis, LOB: 5
+Murdock, W Torres, LOB: 9
+PITCHING
+Goodland… IP H R ER BB SO HR Los Crushe… IP H R ER BB SO HR
+E Swartz #22 1.0 0 0 0 1 1 0 Emilio J #7 2.0 3 2 2 2 0 0
+R Lopes #13 3.0 7 4 3 0 3 0 Lucas M #50 3.0 9 4 4 2 3 0
+P McGi… #39 2.0 2 1 1 0 2 0 Crhis 1.0 1 0 0 0 0 0
+Totals 6.0 9 5 4 1 6 0 Totals 6.0 13 6 6 4 3 0
+P-S: P McGinn 24-15, R Lopes 59-39, E Swartz 14-8, P-S: Emilio J 43-27, Lucas M 61-34, Crhis 6-4, HBP:
+BF: P McGinn 8, R Lopes 16, E Swartz 4, E: C Firestone, Lucas M, BF: Emilio J 11, Lucas M 19, Crhis 3
+R Denny
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar14|G1 Cruz': `Goodland Bruins 13U 7 - 5 G1 Cruz 13u
+Away Saturday March 14, 2026
+1 2 3 4 R H E
+GDLN 4 1 1 1 7 7 4
+G1CR 3 0 1 1 5 5 3
+BATTING
+Goodland Bruins… AB R H RBI BB SO G1 Cruz 13u AB R H RBI BB SO
+J Demmin #17 (1B) 1 2 0 0 2 0 Izaiah C #44 (CF) 3 2 2 0 0 0
+R Lopes #13 (CF) 2 1 2 2 1 0 Jaxon A #40 (RF) 0 1 0 0 1 0
+J Short #2 (3B) 3 0 0 0 0 0 Jayden L #40 (RF) 0 0 0 0 1 0
+A Herrera #5 (C) 2 0 0 1 0 1 Max M #6 (P) 2 0 0 0 0 0
+W Oswald #9 (SS) 2 1 1 1 0 0 Gio G #18 (3B) 2 1 0 0 0 0
+R Denny #50 (RF) 1 1 0 0 1 1 Ethan G #4 1 0 0 1 1 0
+C Firesto… #15 (1B) 2 1 2 2 0 0 Daniel G #21 (1B) 2 0 1 0 0 0
+J Murdo… #24 (2B) 2 0 1 1 0 0 Wyatt Z #10 (2B) 2 0 0 0 0 0
+T Wiser #4 (RF) 2 0 0 0 0 1 Kyle W #52 (C) 2 1 1 1 0 0
+E Swartz #22 (P) 2 1 1 0 0 0 Maxwell G #14 (LF) 1 0 0 0 1 0
+B Zant #27 (LF) 2 0 0 0 0 0 Carter C #7 1 0 1 0 1 0
+Totals 21 7 7 7 4 3 Noah M #2 (SS) 2 0 0 0 0 0
+Totals 18 5 5 2 5 0
+2B: R Lopes, TB: C Firestone 2, E Swartz, J Murdock, R 2B: Izaiah C, HR: Kyle W, TB: Carter C, Kyle W 4, Daniel
+Lopes 3, W Oswald, SB: J Demmin, LOB: 6 G, Izaiah C 3, CS: Maxwell G, SB: Carter C, Jaxon A,
+Izaiah C, LOB: 6
+PITCHING
+Goodland… IP H R ER BB SO HR G1 Cruz 13u IP H R ER BB SO HR
+E Swartz #22 1.0 2 3 0 1 0 0 Max M #6 0.2 2 4 4 3 0 0
+B Zant #27 3.0 3 2 1 4 0 1 Noah M #2 3.1 5 3 2 1 3 0
+Totals 4.0 5 5 1 5 0 1 Totals 4.0 7 7 6 4 3 0
+W: B Zant, P-S: E Swartz 21-11, B Zant 55-32, WP: B L: Noah M, P-S: Noah M 59-37, Max M 35-15, WP:
+Zant, BF: E Swartz 7, B Zant 16, E: C Firestone, T Wiser, Noah M, Max M 2, BF: Noah M 18, Max M 7, E: Ken S,
+A Herrera, J Short Max M 2
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar14|GBG South Ba': `GBG South Bay Blue 13U 3 - 15 Goodland Bruins 13U
+Home Saturday March 14, 2026
+1 2 3 4 R H E
+GBGS 0 0 0 3 3 2 5
+GDLN 3 4 1 7 15 14 1
+BATTING
+GBG South Bay… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Caden K #28 (CF) 1 1 0 0 1 1 J Demmin #17 (1B) 3 3 3 1 0 0
+River N #4 (P) 1 1 0 0 1 1 R Lopes #13 (CF) 3 3 3 2 0 0
+Mac C (RF) 1 1 1 1 0 0 J Short #2 (3B) 3 1 1 2 0 0
+Dylan F #5 (1B) 2 0 0 0 0 1 A Herrera #5 (SS) 3 1 2 2 0 0
+Wylie N #8 (RF) 2 0 1 1 0 0 W Oswald #9 (C) 3 1 2 0 0 0
+Rylan C #11 (C) 2 0 0 0 0 0 R Denny #50 (P) 3 1 2 1 0 0
+Kellen O #17 (3B) 1 0 0 0 0 0 C Firesto… #15 (1B) 1 2 1 1 1 0
+Chase S #23 (SS) 1 0 0 0 0 0 J Murdo… #24 (2B) 3 0 0 1 0 0
+Neil S #0 (LF) 1 0 0 0 0 0 T Wiser #4 (RF) 1 1 0 0 1 0
+Mazin F #42 (LF) 1 0 0 0 0 1 E Swartz #22 (RF) 1 0 0 0 0 1
+Kaden M #9 (2B) 1 0 0 0 0 0 B Zant #27 (LF) 0 2 0 0 1 0
+Totals 14 3 2 2 2 4 Totals 24 15 14 10 3 1
+TB: Wylie N, Mac C, LOB: 1 2B: J Demmin, C Firestone, R Lopes, J Short, TB: J
+Demmin 4, C Firestone 2, R Lopes 4, J Short 2, R Denny
+2, A Herrera 2, W Oswald 2, SAC: E Swartz, HBP: C
+Firestone, B Zant, SB: C Firestone, R Lopes 2, J Short, R
+Denny, B Zant, A Herrera, W Oswald 2, LOB: 4
+PITCHING
+GBG South… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+River N #4 1.0 4 3 3 0 0 0 R Denny #50 3.0 0 0 0 0 3 0
+Kellen O #17 1.0 3 4 4 2 0 0 J Murd… #24 1.0 2 3 3 2 1 0
+Rylan C #11 1.0 0 1 0 1 1 0 Totals 4.0 2 3 3 2 4 0
+Mazin F #42 0.2 7 7 6 0 0 0
+Totals 3.2 14 15 13 3 1 0
+P-S: River N 35-18, Kellen O 27-14, Rylan C 17-9, Mazin P-S: R Denny 33-23, J Murdock 28-15, WP: J Murdock
+F 25-15, HBP: River N, Mazin F, BF: River N 8, Kellen O 2, BF: R Denny 9, J Murdock 7, E: A Herrera
+8, Rylan C 5, Mazin F 9, E: Kellen O, Mac C, Rylan C,
+Chase S
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar15|G1 Cruz': `G1 Cruz 13u 4 - 5 Goodland Bruins 13U
+Home Sunday March 15, 2026
+1 2 3 4 5 6 R H E
+G1CR 3 0 0 0 0 1 4 8 0
+GDLN 0 0 1 4 0 X 5 8 2
+BATTING
+G1 Cruz 13u AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Izaiah C #44 (CF) 3 1 1 0 0 2 J Demmin #17 (1B) 3 0 1 0 0 0
+Jayden L #40 (RF) 3 0 0 1 0 1 R Lopes #13 (CF) 2 1 1 1 1 1
+Max M #6 (SS) 3 2 2 2 0 0 J Short #2 (3B) 3 1 1 0 0 0
+Gio G #18 (3B) 3 1 1 0 0 2 A Herrera #5 (C) 2 1 1 1 0 0
+Ethan G #4 (P) 3 0 2 1 0 0 W Oswald #9 (SS) 1 0 1 0 1 0
+Kyle W #52 2 0 0 0 1 2 R Denny #50 (RF) 2 1 0 1 0 0
+Daniel G #21 (1B) 3 0 2 0 0 1 C Firesto… #15 (1B) 2 0 0 0 0 1
+Wyatt Z #10 (2B) 0 0 0 0 1 0 J Murdo… #24 (2B) 1 1 1 1 1 0
+Noah M #2 (LF) 2 0 0 0 0 1 T Wiser #4 (RF) 2 0 1 0 0 1
+Maxwell G #14 (C) 2 0 0 0 0 1 E Swartz #22 (P) 2 0 0 1 0 1
+Carter C #7 (LF) 1 0 0 0 1 1 B Zant #27 (LF) 2 0 1 0 0 1
+Totals 25 4 8 4 3 11 Totals 22 5 8 5 3 5
+2B: Ethan G, 3B: Izaiah C, HR: Max M 2, TB: Max M 8, 3B: A Herrera, HR: R Lopes, TB: J Short, W Oswald, J
+Izaiah C 3, Daniel G 2, Gio G, Ethan G 3, CS: Maxwell G, Murdock, A Herrera 3, R Lopes 4, T Wiser, B Zant, J
+SB: Kyle W, Gio G, Ethan G, LOB: 7 Demmin, SB: J Murdock 2, T Wiser, R Denny, LOB: 5
+PITCHING
+G1 Cruz 13u IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Ethan G #4 3.0 5 3 3 1 2 1 E Swartz #22 0.1 4 3 3 0 0 1
+Jayden L #40 2.0 3 2 2 2 3 0 J Dem… #17 5.0 2 1 1 3 10 1
+Totals 5.0 8 5 5 3 5 1 R Lopes #13 0.2 2 0 0 0 1 0
+Totals 6.0 8 4 4 3 11 2
+L: Jayden L, P-S: Jayden L 39-24, Ethan G 50-31, BF: W: J Demmin, P-S: E Swartz 13-9, R Lopes 10-6, J
+Jayden L 11, Ethan G 14 Demmin 96-58, WP: R Lopes, BF: E Swartz 5, R Lopes
+3, J Demmin 21, E: W Oswald, A Herrera
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar15|Temecula': `Temecula Icon Baseball
+Goodland Bruins 13U 7 - 6
+13U
+Away Sunday March 15, 2026
+1 2 3 4 5 6 7 R H E
+GDLN 2 0 5 0 0 0 0 7 12 2
+TMCL 0 2 2 2 0 0 0 6 8 1
+BATTING
+Goodland Bruins… AB R H RBI BB SO Temecula Icon B… AB R H RBI BB SO
+J Demmin #17 (RF) 4 1 2 0 0 1 Jonathan H #88 (C) 3 0 1 0 0 0
+R Lopes #13 (CF) 3 2 2 1 1 0 Oliver L #99 (2B) 3 1 1 0 0 2
+J Short #2 (1B) 3 2 1 2 1 1 Blake T #23 (CF) 3 1 1 1 0 2
+A Herrera #5 (SS) 4 0 2 0 0 2 Iker Y #34 3 0 0 0 0 2
+W Oswald #9 (C) 4 1 2 2 0 1 Hunter G #33 2 1 1 1 0 1
+C Firesto… #15 (3B) 3 1 1 1 0 1 Jacob S #42 (1B) 3 0 2 0 0 0
+J Murdo… #24 (2B) 3 0 2 1 0 0 Jack B #7 (SS) 3 1 1 0 0 1
+E Swartz #22 (P) 2 0 0 0 0 1 Clint N #9 (LF) 2 1 0 0 1 1
+R Denny #50 (P) 1 0 0 0 0 0 John G #17 (3B) 2 0 0 0 1 0
+B Zant #27 (LF) 2 0 0 0 0 1 Grady M #21 (P) 2 1 1 1 0 1
+T Wiser #4 1 0 0 0 0 1 #17 1 0 0 0 0 0
+Totals 30 7 12 7 2 9 Michael M #50 2 0 0 1 1 1
+Totals 29 6 8 4 3 11
+2B: C Firestone, HR: R Lopes, TB: C Firestone 2, R TB: Blake T, Jonathan H, Oliver L, Jack B, Jacob S 2,
+Lopes 5, J Short, J Demmin 2, W Oswald 2, J Murdock Hunter G, Grady M, SF: Hunter G, SB: Jonathan H 3,
+2, A Herrera 2, CS: R Lopes, E Swartz, J Murdock, SB: C Oliver L, Clint N, Hunter G, LOB: 6
+Firestone, J Short, LOB: 4
+PITCHING
+Goodland… IP H R ER BB SO HR Temecula I… IP H R ER BB SO HR
+E Swartz #22 2.1 5 4 2 2 3 0 Grady M #21 2.1 9 7 6 1 2 1
+R Denny #50 1.2 2 2 1 1 1 0 Gio A #23 4.2 3 0 0 1 7 0
+R Lopes #13 3.0 1 0 0 0 7 0 Totals 7.0 12 7 6 2 9 1
+Totals 7.0 8 6 3 3 11 0
+W: E Swartz, P-S: R Denny 32-24, R Lopes 32-28, E L: Grady M, P-S: Gio A 55-42, Grady M 50-32, BF: Gio
+Swartz 57-34, BF: R Denny 9, R Lopes 9, E Swartz 15, A 16, Grady M 16, E: Jonathan H
+E: C Firestone, W Oswald
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar22|Swag Basebal': `Goodland Bruins 13U 3 - 7 Swag Baseball Club 13U
+Away Sunday March 22, 2026
+1 2 3 4 5 6 R H E
+GDLN 1 0 2 0 0 0 3 6 4
+SWGB 4 2 1 0 0 X 7 7 0
+BATTING
+Goodland Bruins… AB R H RBI BB SO Swag Baseball C… AB R H RBI BB SO
+J Demmin #17 (1B) 3 2 2 0 0 1 Austin H #12 2 1 1 0 1 0
+J Short #2 (3B) 3 1 2 2 0 0 Michael P #24 (P) 3 1 1 2 0 0
+R Lopes #13 (CF) 3 0 1 0 0 0 Josiah L #10 1 1 0 0 2 0
+A Herrera #5 (C) 1 0 0 0 2 0 Jayden A #15 (P) 3 1 1 0 0 0
+C Firesto… #15 (SS) 1 0 0 0 2 0 Tony #3 2 1 1 1 1 0
+J Murdo… #24 (2B) 2 0 0 0 0 0 Isaiah B #9 3 0 0 1 0 0
+O Lee #32 (2B) 2 0 0 0 0 2 Jacob R #66 3 0 0 0 0 2
+R Denny #50 (LF) 2 0 1 0 0 0 kayden h #18 3 1 1 0 0 1
+N Diaz #44 (RF) 2 0 0 0 0 2 Andre 3 1 2 0 0 1
+E Swartz #22 (P) 2 0 0 0 0 1 Totals 23 7 7 4 4 4
+J Matis #34 (LF) 2 0 0 0 0 2
+T Wiser #4 (RF) 2 0 0 0 0 0
+Totals 25 3 6 2 4 8
+2B: J Demmin, 3B: J Demmin, TB: R Denny, J Demmin TB: Austin H, kayden h, Jayden A, Andre 2, Michael P,
+5, R Lopes, J Short 2, CS: J Short, HBP: J Murdock, SB: Tony, SB: Austin H, Andre, Michael P, Isaiah B 2, Tony,
+R Denny, C Firestone, A Herrera, LOB: 9 LOB: 5
+PITCHING
+Goodland… IP H R ER BB SO HR Swag Base… IP H R ER BB SO HR
+E Swartz #22 2.0 4 6 3 4 2 0 Michae… #24 3.0 4 3 3 4 4 0
+R Denny #50 3.0 3 1 1 0 2 0 Jayden A #15 3.0 2 0 0 0 4 0
+Totals 5.0 7 7 4 4 4 0 Totals 6.0 6 3 3 4 8 0
+P-S: R Denny 39-28, E Swartz 52-26, WP: E Swartz 4, P-S: Jayden A 36-28, Michael P 61-30, WP: Michael P
+BF: R Denny 12, E Swartz 15, E: J Demmin, O Lee, J 2, HBP: Michael P, BF: Jayden A 12, Michael P 18
+Short 2
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar22|Clubhouse 80': `Goodland Bruins 13U 7 - 0 Clubhouse 805 Blue 13U
+Away Sunday March 22, 2026
+1 2 3 4 5 6 R H E
+GDLN 0 0 2 1 0 4 7 11 0
+CLBH 0 0 0 0 0 0 0 1 0
+BATTING
+Goodland Bruins… AB R H RBI BB SO Clubhouse 805… AB R H RBI BB SO
+J Demmin #17 (P) 3 1 1 2 1 0 #8 3 0 1 0 0 2
+J Short #2 (3B) 4 0 3 1 0 0 Mikey T #3 1 0 0 0 1 1
+R Lopes #13 (CF) 3 0 0 0 0 1 #12 (P) 1 0 0 0 1 0
+A Herrera #5 (C) 3 0 0 0 0 1 Austyn L #6 (SS) 2 0 0 0 0 2
+C Firesto… #15 (1B) 2 2 2 0 1 0 #5 (2B) 2 0 0 0 0 1
+J Murdo… #24 (SS) 2 0 0 0 0 0 #36 (CF) 1 0 0 0 1 1
+R Denny #50 (LF) 3 1 2 1 0 0 #15 2 0 0 0 0 2
+E Swartz #22 (RF) 2 2 2 2 0 0 #52 (P) 1 0 0 0 1 1
+J Matis #34 0 0 0 0 0 0 #17 1 0 0 0 1 1
+N Diaz #44 (RF) 1 0 0 0 0 0 #55 (1B) 2 0 0 0 0 2
+T Wiser #4 (2B) 2 1 1 1 0 0 #7 (LF) 1 0 0 0 1 1
+O Lee #32 (LF) 1 0 0 0 0 0 #66 (2B) 2 0 0 0 0 2
+Totals 26 7 11 7 2 2 Totals 19 0 1 0 6 16
+2B: R Denny, T Wiser, HR: J Demmin, TB: R Denny 3, J TB: #8, SB: #36, LOB: 7
+Demmin 4, C Firestone 2, T Wiser 2, E Swartz 2, J Short
+3, CS: C Firestone, R Lopes, HBP: J Murdock, SB: J
+Short, LOB: 4
+PITCHING
+Goodland… IP H R ER BB SO HR Clubhouse… IP H R ER BB SO HR
+J Dem… #17 4.0 1 0 0 4 10 0 #12 4.0 5 3 3 1 2 1
+R Lopes #13 2.0 0 0 0 2 6 0 #52 2.0 6 4 4 1 0 0
+Totals 6.0 1 0 0 6 16 0 Totals 6.0 11 7 7 2 2 1
+P-S: J Demmin 79-48, R Lopes 40-21, BF: J Demmin 17, P-S: #52 30-16, #12 73-42, WP: #52, HBP: #12, BF:
+R Lopes 8 #52 12, #12 17
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar28|Swag Basebal': `Goodland Bruins 13U 6 - 3 Swag Baseball Club 13U
+Away Saturday March 28, 2026
+1 2 3 4 5 6 7 R H E
+GDLN 0 1 0 0 2 0 3 6 6 1
+SWGB 2 0 1 0 0 0 0 3 9 2
+BATTING
+Goodland Bruins… AB R H RBI BB SO Swag Baseball C… AB R H RBI BB SO
+J Short #2 (3B) 3 0 0 0 0 0 Stats #0 3 0 0 0 0 2
+B Zant #27 (CF) 3 0 0 0 0 0 Michael P #24 (P) 3 1 2 0 0 0
+W Oswald #9 (C) 3 0 1 0 0 0 Josiah L #10 2 2 2 0 0 0
+P McGinn #39 (1B) 3 1 1 0 0 2 Jayden A #15 (P) 3 0 2 0 0 0
+O Lee #32 (RF) 2 1 1 0 0 0 Tony #5 (P) 3 0 2 2 0 0
+J Hooper #53 (SS) 2 2 1 1 1 0 Isaac #16 3 0 0 1 0 0
+C Firesto… #15 (SS) 3 2 1 2 0 1 Jacob R #66 3 0 0 0 0 1
+J Murdo… #24 (2B) 1 0 0 1 1 1 Jaden #1 3 0 0 0 0 1
+R Denny #50 (P) 3 0 1 2 0 0 kayden h #18 3 0 0 0 0 1
+J Hooper #34 (LF) 3 0 0 0 0 1 Andrew #00 3 0 1 0 0 0
+Totals 26 6 6 6 2 5 Totals 29 3 9 3 0 5
+2B: J Hooper, TB: P McGinn, O Lee, J Hooper 2, R 2B: Andrew, TB: Jayden A 2, Tony 2, Michael P 2,
+Denny, W Oswald, C Firestone, SAC: J Murdock, CS: W Josiah L 2, Andrew 2, HBP: Josiah L, SB: Isaac, Jaden,
+Oswald, HBP: O Lee, SB: J Hooper, W Oswald, C LOB: 6
+Firestone, LOB: 3
+PITCHING
+Goodland… IP H R ER BB SO HR Swag Base… IP H R ER BB SO HR
+R Denny #50 3.0 6 3 3 0 2 0 Tony #5 3.0 2 1 1 0 1 0
+B Zant #27 4.0 3 0 0 0 3 0 Michae… #24 3.2 1 3 2 1 4 0
+Totals 7.0 9 3 3 0 5 0 Jayden A #15 0.1 3 2 2 1 0 0
+Totals 7.0 6 6 5 2 5 0
+P-S: B Zant 45-28, R Denny 50-32, WP: R Denny, HBP: P-S: Jayden A 15-7, Tony 33-22, Michael P 55-29, WP:
+R Denny, BF: B Zant 13, R Denny 17, E: O Lee Tony, Michael P, HBP: Michael P, BF: Jayden A 5, Tony
+11, Michael P 14, E: Michael P
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar28|SCV Knights': `SCV Knights 13U 3 - 15 Goodland Bruins 13U
+Home Saturday March 28, 2026
+1 2 3 4 R H E
+SCVK 1 1 0 1 3 4 2
+GDLN 3 8 4 X 15 17 0
+BATTING
+SCV Knights 13U AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Blake #21 2 0 0 0 0 2 J Short #2 (C) 3 3 3 0 0 0
+Tommy C #31 1 0 0 0 1 1 B Zant #27 (P) 3 2 2 2 0 1
+Fernando L #14 (P) 1 1 0 0 1 0 W Oswald #9 (SS) 3 3 3 0 0 0
+Seth A #23 (P) 2 0 1 1 0 0 P McGinn #39 (3B) 2 2 1 0 0 0
+Jett L #10 2 1 1 0 0 0 J Hooper #53 (CF) 3 2 2 3 0 1
+Liam T #32 1 1 0 0 1 0 C Firesto… #15 (1B) 2 1 2 2 1 0
+Jacob D #27 0 0 0 0 1 0 J Murdo… #24 (2B) 1 0 0 0 1 0
+Kade K #67 2 0 1 2 0 0 R Denny #50 (LF) 3 1 2 3 0 1
+Julian G #33 1 0 0 0 1 0 O Lee #32 (RF) 3 0 1 0 0 1
+Brandon S #13 1 0 1 0 1 0 J Hooper #34 (RF) 2 1 1 0 0 0
+Nixon R #30 2 0 0 0 0 2 Totals 25 15 17 10 2 4
+#2 1 0 0 0 0 0
+Totals 16 3 4 3 6 5
+2B: Jett L, TB: Brandon S, Kade K, Jett L 2, Seth A, 2B: R Denny, J Hooper, J Short, 3B: J Short, TB: B Zant
+SAC: Jacob D, LOB: 8 2, O Lee, C Firestone 2, R Denny 3, W Oswald 3, P
+McGinn, J Hooper 3, J Hooper, J Short 6, HBP: P
+McGinn, J Murdock, SB: O Lee, C Firestone, R Denny, J
+Hooper, J Murdock, LOB: 5
+PITCHING
+SCV Knigh… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Fernan… #14 1.1 9 8 8 0 2 0 B Zant #27 3.0 3 2 2 4 4 0
+Seth A #23 1.2 8 7 7 2 2 0 J Hooper #34 1.0 1 1 1 2 1 0
+Totals 3.0 17 15 15 2 4 0 Totals 4.0 4 3 3 6 5 0
+P-S: Fernando L 49-30, Seth A 64-36, WP: Fernando L P-S: B Zant 67-40, J Hooper 25-11, WP: B Zant, J
+3, Seth A 3, HBP: Fernando L, Seth A, BF: Fernando L Hooper, BF: B Zant 16, J Hooper 7
+14, Seth A 15
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar29|Saugus Saint': `Saugus Saints White 13U 1 - 11 Goodland Bruins 13U
+Home Sunday March 29, 2026
+1 2 3 4 R H E
+SGSS 0 1 0 0 1 0 0
+GDLN 4 0 7 X 11 8 1
+BATTING
+Saugus Saints W… AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+John J #33 (C) 2 0 0 0 0 0 J Short #2 (C) 2 2 1 1 0 0
+Brandon H #5 (P) 2 0 0 0 0 1 C Firesto… #15 (1B) 1 1 1 1 2 0
+Mateo A #7 2 0 0 0 0 0 W Oswald #9 (SS) 3 1 1 2 0 1
+Jaxon H #18 1 0 0 0 0 0 J Hooper #53 (3B) 3 1 2 2 0 0
+Caleb W #12 1 0 0 0 0 1 R Denny #50 (2B) 1 1 0 0 0 0
+Luke P #27 1 0 0 0 1 0 J Costelo #39 (CF) 1 1 1 2 0 0
+Liam P #77 0 1 0 0 1 0 W Torres #3 (P) 2 1 1 1 0 1
+Bryce S #23 1 0 0 0 0 1 T Wiser #4 (LF) 0 1 0 0 2 0
+Jaxson C #43 (P) 0 0 0 0 2 0 O Lee #32 (RF) 1 1 1 0 1 0
+Ethan L #9 2 0 0 0 0 1 J Hooper #34 (RF) 0 1 0 1 2 0
+Cole W #36 1 0 0 0 0 0 Totals 14 11 8 10 7 2
+Totals 13 1 0 0 4 4
+SB: Luke P 2, Jaxson C, LOB: 4 2B: W Oswald, J Costelo, TB: W Torres, W Oswald 2, C
+Firestone, J Short, J Hooper 2, O Lee, J Costelo 2, CS: J
+Hooper, HBP: R Denny, J Short, J Costelo, SB: W
+Torres, C Firestone 2, J Short, LOB: 4
+PITCHING
+Saugus Sai… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Brandon H #5 2.0 4 4 4 4 2 0 W Torres #3 3.0 0 1 0 2 1 0
+Jaxson C #43 0.1 3 5 5 1 0 0 J Hooper #53 1.0 0 0 0 2 3 0
+Lucas M #17 0.2 1 2 2 2 0 0 Totals 4.0 0 1 0 4 4 0
+Totals 3.0 8 11 11 7 2 0
+P-S: Brandon H 55-26, Lucas M 17-6, Jaxson C 19-13, P-S: W Torres 46-27, J Hooper 27-12, BF: W Torres 12,
+HBP: Brandon H, Lucas M, Jaxson C, BF: Brandon H 13, J Hooper 5, E: W Oswald
+Lucas M 5, Jaxson C 6
+Scorekeeping. Stats. Live Game Updates.`,
+  'Mar29|SCV Knights': `SCV Knights 13U 7 - 9 Goodland Bruins 13U
+Home Sunday March 29, 2026
+1 2 3 4 5 6 7 R H E
+SCVK 0 0 0 0 1 5 1 7 4 2
+GDLN 4 0 0 0 2 3 X 9 15 1
+BATTING
+SCV Knights 13U AB R H RBI BB SO Goodland Bruins… AB R H RBI BB SO
+Blake #21 2 2 1 1 2 1 J Short #2 (3B) 4 3 3 1 0 1
+Tommy C #31 4 1 1 1 0 2 C Firesto… #15 (1B) 3 1 2 3 1 0
+Fernando L #14 3 1 0 0 1 1 W Oswald #9 (C) 4 1 4 2 0 0
+Seth A #23 3 0 0 0 0 2 J Hooper #53 (SS) 3 0 0 0 0 1
+Liam T #32 (P) 1 1 0 1 2 1 R Denny #50 (CF) 3 1 2 0 0 0
+Kade K #67 1 1 0 1 2 0 J Costelo #39 (P) 3 1 2 2 0 0
+Julian G #33 3 0 1 2 0 1 W Torres #3 (2B) 2 0 1 0 1 1
+Brandon S #13 3 0 0 0 0 2 T Wiser #4 (LF) 3 0 0 0 0 2
+Nixon R #30 3 0 0 0 0 3 O Lee #32 (RF) 3 1 1 0 0 0
+#2 (P) 3 1 1 0 0 1 J Hooper #34 (RF) 1 1 0 0 2 1
+Totals 26 7 4 6 7 14 Totals 29 9 15 8 4 6
+2B: Julian G, #2, HR: Blake, TB: Julian G 2, Tommy C, 2B: J Costelo, C Firestone, W Oswald, J Short, TB: R
+Blake 4, #2 2, SB: Kade K 2, Blake, LOB: 5 Denny 2, J Costelo 3, O Lee, C Firestone 3, W Oswald 5,
+J Short 4, W Torres, CS: J Costelo, W Torres, SB: J
+Hooper, C Firestone, W Oswald, J Short, W Torres, LOB:
+6
+PITCHING
+SCV Knigh… IP H R ER BB SO HR Goodland… IP H R ER BB SO HR
+Liam T #32 4.0 8 4 3 2 5 0 J Coste… #39 3.0 0 0 0 3 9 0
+#2 2.0 7 5 2 2 1 0 R Denny #50 2.0 1 3 3 2 2 0
+Totals 6.0 15 9 5 4 6 0 J Hooper #53 2.0 3 4 3 2 3 1
+Totals 7.0 4 7 6 7 14 1
+P-S: Liam T 76-46, #2 46-27, WP: #2, BF: Liam T 20, P-S: R Denny 38-21, J Costelo 60-33, J Hooper 51-33,
+#2 13 WP: R Denny, J Costelo, BF: R Denny 9, J Costelo 12, J
+Hooper 12, E: W Oswald
+Scorekeeping. Stats. Live Game Updates.`
+};
+
+function getBoxKey(g) {
+  // Match game to box score using date + opponent name fragment
+  var d = g.date;
+  var opp = g.opp.slice(0,12);
+  var key = d + '|' + opp;
+  // Try direct match first
+  if (_BOX[key]) return key;
+  // Try partial match on opponent
+  for (var k in _BOX) {
+    if (k.indexOf(d) === 0) {
+      var boxOpp = k.split('|')[1].toLowerCase();
+      var gameOpp = opp.toLowerCase();
+      // Check if first 5 chars of opponent match
+      if (boxOpp.slice(0,5) === gameOpp.slice(0,5)) return k;
+    }
+  }
+  return null;
+}
+
+function showBoxScore(idx) {
+  var g = TEAM.games[idx];
+  var key = getBoxKey(g);
+  var content = key ? _BOX[key] : 'Box score not available for this game.';
+  var modal = document.getElementById('bs-modal');
+  var title = document.getElementById('bs-title');
+  var body = document.getElementById('bs-body');
+  if (!modal) return;
+  title.textContent = (g.w ? 'W' : 'L') + ' ' + g.us + '-' + g.them + ' vs ' + g.opp + ' (' + g.date + ')';
+  body.textContent = content;
+  modal.style.display = 'flex';
+}
+
+function closeBox() {
+  var modal = document.getElementById('bs-modal');
+  if (modal) modal.style.display = 'none';
+}
+
 var ENTRY = '';
 var PIN = '1327';
 
@@ -481,14 +2712,21 @@ function filterGames(f,idx){
   var G=TEAM.games;
   var filtered=f==='all'?G:f==='w'?G.filter(function(g){return g.w;}):f==='l'?G.filter(function(g){return !g.w;}):G.filter(function(g){return g.cls===f;});
   document.getElementById('gl').innerHTML=filtered.map(function(g){
-    var diff=g.us-g.them;var pr=g.pr?'PR '+g.pr:'PG tourn';
-    return'<div class="card" style="margin-bottom:8px;padding:11px 13px;border-left:3px solid '+(g.w?'#2774AE':'#c62828')+'">'
+    var diff=g.us-g.them;
+    var pr=g.pr?'PR '+g.pr:'PG tourn';
+    var gi=TEAM.games.indexOf(g);
+    return '<div onclick="showBoxScore('+gi+')" style="background:#fff;border-radius:14px;border:1px solid #DAEBFE;border-left:3px solid '+(g.w?'#2774AE':'#c62828')+';margin-bottom:8px;padding:11px 13px;cursor:pointer">'
       +'<div style="display:flex;align-items:center;gap:8px">'
-      +'<div style="flex:1"><div style="font-size:13px;font-weight:700;color:#003B5C">'+g.opp+'</div>'
-      +'<div style="font-size:11px;color:#8BB8E8">'+g.date+' &middot; '+g.cls+' &middot; '+pr+'</div></div>'
-      +'<div style="text-align:right;flex-shrink:0"><div style="font-size:16px;font-weight:700;color:'+(g.w?'#2774AE':'#c62828')+'">'+g.us+'&ndash;'+g.them+'</div>'
-      +'<div style="font-size:11px;color:#8BB8E8">'+(diff>0?'+':'')+diff+'</div></div>'
-      +'</div></div>';
+        +'<div style="flex:1">'
+          +'<div style="font-size:13px;font-weight:700;color:#003B5C">'+g.opp+'</div>'
+          +'<div style="font-size:11px;color:#8BB8E8;margin-top:2px">'+g.date+' &middot; '+g.cls+' &middot; '+pr+'</div>'
+        +'</div>'
+        +'<div style="text-align:right;flex-shrink:0">'
+          +'<div style="font-size:16px;font-weight:700;color:'+(g.w?'#2774AE':'#c62828')+'">'+g.us+'&ndash;'+g.them+'</div>'
+          +'<div style="font-size:10px;color:#2774AE;margin-top:2px">Box score &rsaquo;</div>'
+        +'</div>'
+      +'</div>'
+    +'</div>';
   }).join('');
 }
 
