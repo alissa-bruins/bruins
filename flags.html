@@ -119,8 +119,6 @@ canvas { width: 100% !important; }
 <div class="note b">Review before each tournament. Red = action required. Amber = monitor. Green = build on.</div>
 <div class="sl">Active flags</div>
 <div id="fl"></div>
-<div class="sl">14U transition priorities</div>
-<div id="pl"></div>
 <div class="sl" style="margin-top:18px">Development gaps — positional underuse</div>
 <div class="note b">Identified from GC innings data. These are not failures — they are opportunities. Each gap below represents a player who, with targeted reps in 14U, becomes meaningfully more deployable.</div>
 <div id="dev-gaps"></div></div>
@@ -505,15 +503,6 @@ if(devEl){
     return '<div class="fc"><div class="fb2 '+d.type+'"></div><div class="fbody"><div class="ftitle">'+d.title+'</div><div class="fplayer">'+d.player+'</div><div class="ftext">'+d.text+'</div></div></div>';
   }).join('');
 }
-var pris=[
-  {n:1,title:'Get in the gym — every player',type:'g',text:'Team-wide. Physical development at 12-13 translates directly to bat speed, arm velocity, range, and injury durability.'},
-  {n:2,title:'Swartz return protocol',type:'r',text:'Medical clearance required before pitching. 60P max, no game-2 same day, 5-day rest min. RF/LF in field. Mono recovery is not linear.'},
-  {n:3,title:'2B depth — develop backup',type:'a',text:'Murdock is strong (115 inn, 5 DP). Torres is the only backup. Short or Firestone beginning 2B reps gives a third option.'},
-  {n:4,title:'Murdock toward SS long-term',type:'a',text:'Coach vision for Murdock ceiling is SS. Begin SS reps alongside Valencia hitting work.'},
-  {n:5,title:'Demmin workload management',type:'a',text:'Best arm right now AND primary 1B. Managing the dual role is the key pitching consideration heading into 14U.'},
-  {n:6,title:'Firestone — protect the arc',type:'a',text:'Age 12, posting elite AVG in 13U. Add positions deliberately. The ceiling here is significant.'},
-  {n:7,title:'April 13 — High School Ready meeting',type:'b',text:'Introduce 14U Gold concept to players and families. Gym, classroom, community — all part of the program.'},
-];
 document.getElementById('pl').innerHTML=pris.map(function(p){
   return '<div class="fc"><div class="fb2 '+p.type+'"></div><div class="fbody"><div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px"><div style="font-size:12px;font-weight:700;color:#8BB8E8;width:18px;flex-shrink:0">'+p.n+'</div><div class="ftitle">'+p.title+'</div></div><div class="ftext">'+p.text+'</div></div></div>';
 }).join('');
