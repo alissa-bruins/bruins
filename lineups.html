@@ -4,27 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Lineups - Bruins 13U Gold</title>
-<style>import os
-import json
-
-shared_data = open('/home/claude/shared_data.js').read()
-
-# ── SHARED CSS ────────────────────────────────────────────────────────────────
-SHARED_CSS = """
+<style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f7;color:#1d1d1f;font-size:15px;}
+#auth{position:fixed;inset:0;background:#f5f5f7;display:flex;align-items:center;justify-content:center;padding:20px;z-index:999;}
+.ac{background:#fff;border-radius:20px;padding:28px 22px;width:100%;max-width:320px;text-align:center;border:1px solid #e5e5e5;}
+.dots{display:flex;gap:12px;justify-content:center;margin:16px 0;}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid #ccc;transition:.15s;}
+.dot.f{background:#1d1d1f;border-color:#1d1d1f;}
+.dot.e{background:#c62828;border-color:#c62828;}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.nb{background:#f5f5f7;border:none;border-radius:12px;padding:15px;font-size:20px;cursor:pointer;color:#1d1d1f;}
+.nb:active{background:#ddd;} .nb.w{grid-column:span 2;}
+.err{color:#c62828;font-size:12px;min-height:16px;margin-top:8px;}
 .topbar{background:#1d1d1f;padding:14px 16px 12px;position:sticky;top:0;z-index:100;}
 .team-name{font-size:17px;font-weight:600;color:#fff;}
 .team-meta{font-size:11px;color:#aaa;margin-top:2px;}
-.record-pill{display:inline-flex;align-items:center;background:#2e7d32;color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;margin-top:6px;}
-.bottom-nav{position:sticky;bottom:0;background:#fff;border-top:1px solid #e5e5e5;display:grid;z-index:100;}
-.nav-item{display:flex;flex-direction:column;align-items:center;padding:7px 4px 9px;cursor:pointer;gap:2px;border:none;background:transparent;}
-.nav-icon{font-size:18px;}
-.nav-label{font-size:10px;color:#888;font-weight:500;}
-.nav-item.active .nav-label{color:#1d1d1f;font-weight:700;}
-.content{padding:14px;padding-bottom:4px;}
-.panel{display:none;}
-.panel.active{display:block;}
+.rec-pill{display:inline-flex;align-items:center;background:#2e7d32;color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;margin-top:6px;}
+.page-nav{display:flex;gap:5px;padding:9px 14px;background:#fff;border-bottom:1px solid #e5e5e5;overflow-x:auto;}
+.pn{font-size:12px;font-weight:500;padding:5px 11px;border-radius:20px;border:1px solid #e5e5e5;color:#555;text-decoration:none;white-space:nowrap;}
+.pn.active{background:#1d1d1f;color:#fff;border-color:#1d1d1f;}
+.content{padding:14px;padding-bottom:20px;}
 .sl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#888;margin:14px 0 7px;}
 .sl:first-child{margin-top:0;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
@@ -32,23 +32,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mc{background:#fff;border-radius:12px;padding:12px 14px;border:1px solid #e5e5e5;}
 .mc-l{font-size:11px;color:#888;margin-bottom:3px;}
 .mc-v{font-size:22px;font-weight:700;color:#1d1d1f;line-height:1.1;}
-.mc-v.g{color:#2e7d32;} .mc-v.r{color:#c62828;} .mc-v.a{color:#bf6f00;}
+.mc-v.g{color:#2e7d32;} .mc-v.r{color:#c62828;}
 .mc-s{font-size:11px;color:#aaa;margin-top:2px;}
 .card{background:#fff;border-radius:14px;border:1px solid #e5e5e5;padding:14px;margin-bottom:10px;}
 .table-wrap{background:#fff;border-radius:12px;border:1px solid #e5e5e5;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:12px;}
-th{font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#888;text-align:right;padding:8px 8px 8px 6px;background:#fafafa;border-bottom:1px solid #e5e5e5;white-space:nowrap;}
+th{font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#888;text-align:right;padding:7px 8px 7px 6px;background:#fafafa;border-bottom:1px solid #e5e5e5;white-space:nowrap;}
 th.l{text-align:left;padding-left:12px;}
-td{padding:8px 8px 8px 6px;border-bottom:1px solid #f0f0f0;text-align:right;color:#555;font-variant-numeric:tabular-nums;white-space:nowrap;}
+td{padding:7px 8px 7px 6px;border-bottom:1px solid #f0f0f0;text-align:right;color:#555;white-space:nowrap;}
 td.l{text-align:left;padding-left:12px;color:#1d1d1f;font-weight:500;}
 td.g{color:#2e7d32;font-weight:700;} td.r{color:#c62828;font-weight:700;} td.a{color:#bf6f00;font-weight:700;} td.d{color:#aaa;font-style:italic;}
-tr:last-child td{border-bottom:none;}
-tr:nth-child(even) td{background:#fafafa;}
+tr:last-child td{border-bottom:none;} tr:nth-child(even) td{background:#fafafa;}
 .badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;}
-.badge.g{background:#e8f5e9;color:#1b5e20;} .badge.r{background:#ffebee;color:#b71c1c;} .badge.a{background:#fff8e1;color:#e65100;} .badge.b{background:#e3f2fd;color:#0d47a1;} .badge.p{background:#f3e5f5;color:#4a148c;}
+.badge.g{background:#e8f5e9;color:#1b5e20;} .badge.r{background:#ffebee;color:#b71c1c;} .badge.a{background:#fff8e1;color:#e65100;} .badge.b{background:#e3f2fd;color:#0d47a1;}
 .note{border-radius:0 10px 10px 0;padding:11px 13px;margin-bottom:10px;font-size:13px;line-height:1.55;border-left:4px solid;}
-.note.g{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20;} .note.r{background:#ffebee;border-color:#c62828;color:#b71c1c;} .note.a{background:#fff8e1;border-color:#bf6f00;color:#e65100;} .note.b{background:#e3f2fd;border-color:#1565a3;color:#0d47a1;}
-.note strong{font-weight:700;}
+.note.g{background:#e8f5e9;border-color:#2e7d32;} .note.r{background:#ffebee;border-color:#c62828;} .note.a{background:#fff8e1;border-color:#bf6f00;} .note.b{background:#e3f2fd;border-color:#1565a3;}
 .chart-card{background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:14px;margin-bottom:14px;}
 .chart-title{font-size:13px;font-weight:600;color:#1d1d1f;margin-bottom:10px;}
 canvas{width:100%!important;}
@@ -59,763 +57,26 @@ canvas{width:100%!important;}
 .stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:8px;}
 .sb{background:#f5f5f7;border-radius:8px;padding:6px;text-align:center;}
 .sb-v{font-size:13px;font-weight:700;color:#1d1d1f;} .sb-v.g{color:#2e7d32;} .sb-v.r{color:#c62828;}
-.sb-l{font-size:9px;color:#aaa;margin-top:1px;text-transform:uppercase;letter-spacing:.03em;}
+.sb-l{font-size:9px;color:#aaa;margin-top:1px;text-transform:uppercase;}
 .spark{display:flex;gap:2px;align-items:flex-end;height:26px;margin-bottom:7px;}
 .sp-b{flex:1;border-radius:2px;}
 .sp-hi{background:#2e7d32;} .sp-lo{background:#c62828;} .sp-md{background:#1565a3;} .sp-null{background:#e5e5e5;}
 .pc-note{font-size:12px;color:#555;line-height:1.5;}
 .flag-card{background:#fff;border-radius:12px;border:1px solid #e5e5e5;margin-bottom:10px;overflow:hidden;}
-.flag-bar{height:4px;}
-.flag-bar.r{background:#c62828;} .flag-bar.g{background:#2e7d32;} .flag-bar.a{background:#bf6f00;}
+.flag-bar{height:4px;} .flag-bar.r{background:#c62828;} .flag-bar.g{background:#2e7d32;} .flag-bar.a{background:#bf6f00;} .flag-bar.b{background:#1565a3;}
 .flag-body{padding:12px 14px;}
 .flag-title{font-size:14px;font-weight:700;color:#1d1d1f;margin-bottom:2px;}
 .flag-player{font-size:11px;color:#888;margin-bottom:5px;}
 .flag-text{font-size:12px;color:#555;line-height:1.5;}
-.lu-row{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid #f0f0f0;}
-.lu-row:last-child{border-bottom:none;}
-.lu-spot{font-size:12px;font-weight:700;width:18px;flex-shrink:0;color:#aaa;}
-.lu-name{font-size:14px;font-weight:600;color:#1d1d1f;flex:1;}
-.lu-pos{font-size:11px;color:#888;min-width:36px;}
-.lu-reason{font-size:11px;color:#555;flex:2;}
 .pos-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
 .pos-card{background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:10px 12px;}
-.pos-card.gap{border-color:#ffcdd2;background:#fff9f9;}
-.pos-card.thin{border-color:#ffe0b2;background:#fffdf5;}
-.pos-card .pos-name{font-size:16px;font-weight:700;color:#1d1d1f;}
-.pos-card .pos-depth{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;}
-.pos-card .pos-players{font-size:11px;color:#555;line-height:1.4;}
+.pos-card.gap{border-color:#ffcdd2;background:#fff9f9;} .pos-card.thin{border-color:#ffe0b2;background:#fffdf5;}
+.pos-depth{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;}
+.pos-players{font-size:11px;color:#555;line-height:1.4;}
 .updated{font-size:11px;color:#aaa;padding:6px 0;}
-/* auth */
-#auth{position:fixed;inset:0;background:#f5f5f7;display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;}
-.auth-card{background:#fff;border-radius:20px;padding:28px 22px;width:100%;max-width:320px;text-align:center;border:1px solid #e5e5e5;}
-.auth-org{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin-bottom:5px;}
-.auth-title{font-size:22px;font-weight:700;margin-bottom:3px;}
-.auth-sub{font-size:13px;color:#888;margin-bottom:20px;}
-.dots{display:flex;gap:12px;justify-content:center;margin-bottom:20px;}
-.dot{width:13px;height:13px;border-radius:50%;border:2px solid #d1d1d6;transition:.15s;}
-.dot.f{background:#1d1d1f;border-color:#1d1d1f;}
-.dot.e{background:#c62828;border-color:#c62828;}
-.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.nb{background:#f5f5f7;border:none;border-radius:12px;padding:15px;font-size:20px;cursor:pointer;color:#1d1d1f;transition:background .1s;}
-.nb:active{background:#e5e5ea;}
-.nb.w{grid-column:span 2;}
-.auth-err{font-size:12px;color:#c62828;height:16px;margin-top:6px;}
-/* hot cold */
-.hc-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f0f0f0;}
-.hc-row:last-child{border-bottom:none;}
-.hc-name{font-size:13px;font-weight:600;color:#1d1d1f;width:80px;flex-shrink:0;}
-.hc-bar-wrap{flex:1;height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden;}
-.hc-bar{height:100%;border-radius:4px;}
-.hc-stat{font-size:12px;font-weight:600;min-width:50px;text-align:right;}
-.hc-trend{font-size:11px;min-width:60px;text-align:right;}
-/* page nav links */
-.page-nav{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;background:#fff;border-bottom:1px solid #e5e5e5;overflow-x:auto;}
-.pn{font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;color:#555;text-decoration:none;white-space:nowrap;}
-.pn.active{background:#1d1d1f;color:#fff;border-color:#1d1d1f;}
-"""
-
-# ── AUTH JS (shared) ──────────────────────────────────────────────────────────
-AUTH_JS = """
-const PIN='1327';let pe='';
-function pp(d){if(pe.length>=4)return;pe+=d;ud();if(pe.length===4){if(pe===PIN){unlock();}else{document.querySelectorAll('.dot').forEach(e=>e.classList.add('e'));document.getElementById('aerr').textContent='Incorrect PIN';setTimeout(()=>{pe='';document.querySelectorAll('.dot').forEach(e=>{e.classList.remove('f','e');});document.getElementById('aerr').textContent='';},800);}}
-}
-function pd(){if(!pe.length)return;pe=pe.slice(0,-1);ud();}
-function ud(){for(let i=0;i<4;i++)document.getElementById('d'+i).classList.toggle('f',i<pe.length);}
-function unlock(){document.getElementById('auth').style.display='none';document.getElementById('app').style.display='flex';onUnlock();}
-"""
-
-AUTH_HTML = """
-<div id="auth">
-<div class="auth-card">
-  <div class="auth-org">Goodland Bruins Baseball</div>
-  <div class="auth-title">13U Gold</div>
-  <div class="auth-sub">Coach Jesse Landeros</div>
-  <div class="dots"><div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div></div>
-  <div class="numpad">
-    <button class="nb" onclick="pp('1')">1</button><button class="nb" onclick="pp('2')">2</button><button class="nb" onclick="pp('3')">3</button>
-    <button class="nb" onclick="pp('4')">4</button><button class="nb" onclick="pp('5')">5</button><button class="nb" onclick="pp('6')">6</button>
-    <button class="nb" onclick="pp('7')">7</button><button class="nb" onclick="pp('8')">8</button><button class="nb" onclick="pp('9')">9</button>
-    <button class="nb w" onclick="pp('0')">0</button><button class="nb" onclick="pd()">&#9003;</button>
-  </div>
-  <div class="auth-err" id="aerr"></div>
-</div>
-</div>
-"""
-
-def topbar_html(page=''):
-    return f"""
-<div class="topbar">
-  <div class="team-name">Goodland Bruins 13U Gold</div>
-  <div class="team-meta">Coach Jesse Landeros &middot; Santa Barbara / Goleta, CA</div>
-  <div><span class="record-pill" id="rec-pill">24&ndash;7 &middot; +92 run diff</span></div>
-</div>
-<div class="page-nav" id="page-nav">
-  <a class="pn {'active' if page=='index' else ''}" href="index.html">Team</a>
-  <a class="pn {'active' if page=='batting' else ''}" href="batting.html">Batting</a>
-  <a class="pn {'active' if page=='pitching' else ''}" href="pitching.html">Pitching</a>
-  <a class="pn {'active' if page=='fielding' else ''}" href="fielding.html">Fielding</a>
-  <a class="pn {'active' if page=='trends' else ''}" href="trends.html">Trends</a>
-  <a class="pn {'active' if page=='lineups' else ''}" href="lineups.html">Lineups</a>
-  <a class="pn {'active' if page=='scouting' else ''}" href="scouting.html">Games</a>
-  <a class="pn {'active' if page=='players' else ''}" href="players.html">Players</a>
-  <a class="pn {'active' if page=='flags' else ''}" href="flags.html">Flags</a>
-</div>"""
-
-def page_shell(title, page, body_content, extra_js='', charts_cdn=True):
-    cdn = '<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>' if charts_cdn else ''
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>{title} — Bruins 13U Gold</title>
-<style>{SHARED_CSS}</style>
-</head>
-<body>
-{AUTH_HTML}
-<div id="app" style="display:none;flex-direction:column;min-height:100vh;">
-{topbar_html(page)}
-<div class="content" style="flex:1;padding-bottom:20px;">
-{body_content}
-</div>
-</div>
-{cdn}
-<script>
-{shared_data}
-{AUTH_JS}
-function onUnlock(){{ {extra_js} }}
-</script>
-</body>
-</html>"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 1 — TEAM (index.html)
-# ══════════════════════════════════════════════════════════════════════════════
-index_body = """
-<div class="g4">
-  <div class="mc"><div class="mc-l">Record</div><div class="mc-v g" id="i-rec">24-7</div></div>
-  <div class="mc"><div class="mc-l">Run diff</div><div class="mc-v g">+92</div></div>
-  <div class="mc"><div class="mc-l">RS/G</div><div class="mc-v">6.5</div></div>
-  <div class="mc"><div class="mc-l">Titles</div><div class="mc-v g">2</div></div>
-</div>
-<div class="chart-card">
-  <div class="chart-title">Runs scored vs allowed — per game by tournament</div>
-  <div style="position:relative;height:160px"><canvas id="run-c"></canvas></div>
-</div>
-<div class="sl">Tournament log</div>
-<div id="t-list"></div>
-<div class="sl">By opponent class (USSSA)</div>
-<div class="card" id="class-breakdown"></div>
-<div class="note g"><strong>Best result:</strong> Won The Chiller OC (Feb, Irvine) — 13AAA BB State Qualifier. Beat LOS CRUSHERS (PR 984), SoCal PJX (PR 909), West Coast Shockers (PR 865). Won it with Swartz managing migraines.</div>
-<div class="note a"><strong>Competition note:</strong> SB Spring Break (T8 — 10.2 RS/G, 4-0) came against a lighter field. SCV Knights went 12-23 on the season (PR 599). Numbers are real but contextual.</div>
-<div class="updated" id="upd-text">Updated: Apr 5, 2026</div>
-"""
-
-index_js = """
-  document.getElementById('upd-text').textContent = 'Updated: '+TEAM.lastUpdated;
-  // Tourney list
-  const tl=document.getElementById('t-list');
-  tl.innerHTML=TEAM.tournaments.map(t=>{
-    const diff=t.rs-t.ra;
-    const dc=t.w>t.l?'#2e7d32':t.w<t.l?'#c62828':'#bf6f00';
-    const champ=t.champ?'<span class="badge g" style="margin-left:4px">Champion</span>':'';
-    const pl=t.place!=='—'?`<span class="badge b" style="margin-left:4px">${t.place}</span>`:'';
-    return `<div class="card" style="margin-bottom:8px;padding:12px 14px">
-      <div style="display:flex;align-items:flex-start;gap:10px">
-        <div style="width:10px;height:10px;border-radius:50%;background:${dc};margin-top:4px;flex-shrink:0"></div>
-        <div style="flex:1">
-          <div style="font-size:14px;font-weight:700">${t.name}${champ}${pl}</div>
-          <div style="font-size:11px;color:#888;margin-top:2px">${t.date} &middot; ${t.cls} &middot; ${t.note}</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0">
-          <div style="font-size:14px;font-weight:700">${t.w}&ndash;${t.l}</div>
-          <div style="font-size:12px;color:${diff>0?'#2e7d32':diff<0?'#c62828':'#888'}">${diff>0?'+':''}${diff} runs</div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-  // Class breakdown
-  const classes=[
-    {cls:'vs 13AA',  w:6, l:0,rs:7.83,ra:2.67,pct:100},
-    {cls:'vs 13AAA', w:10,l:4,rs:6.07,ra:4.00,pct:71},
-    {cls:'vs 13Major',w:3,l:3,rs:4.67,ra:3.33,pct:50},
-  ];
-  document.getElementById('class-breakdown').innerHTML=classes.map(c=>`
-    <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0f0;">
-      <div style="font-size:13px;font-weight:600;width:80px;flex-shrink:0">${c.cls}</div>
-      <div style="flex:1;height:7px;background:#f0f0f0;border-radius:4px;overflow:hidden"><div style="width:${c.pct}%;height:100%;background:#1565a3;border-radius:4px"></div></div>
-      <div style="font-size:12px;font-weight:700;color:${c.w>c.l?'#2e7d32':c.w<c.l?'#c62828':'#555'};min-width:36px;text-align:right">${c.w}&ndash;${c.l}</div>
-      <div style="font-size:11px;color:#888;min-width:50px;text-align:right">${c.rs.toFixed(1)} RS</div>
-    </div>`).join('');
-  // Run chart
-  new Chart(document.getElementById('run-c'),{type:'line',data:{
-    labels:TEAM.tournaments.map(t=>t.name.split(' ')[0]),
-    datasets:[
-      {label:'RS/G',data:TEAM.tournaments.map(t=>+(t.rs/(t.w+t.l)).toFixed(1)),borderColor:'#1565a3',tension:.3,pointRadius:4,pointBackgroundColor:'#1565a3',fill:false,borderWidth:2},
-      {label:'RA/G',data:TEAM.tournaments.map(t=>+(t.ra/(t.w+t.l)).toFixed(1)),borderColor:'#c62828',borderDash:[4,3],tension:.3,pointRadius:4,pointBackgroundColor:'#c62828',fill:false,borderWidth:2}
-    ]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{font:{size:9},maxRotation:30},grid:{display:false}},y:{min:0,max:13,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 2 — BATTING (batting.html)
-# ══════════════════════════════════════════════════════════════════════════════
-batting_body = """
-<div class="chart-card">
-  <div class="chart-title">OPS by lineup spot — season</div>
-  <div style="position:relative;height:140px"><canvas id="ops-c"></canvas></div>
-</div>
-<div class="sl">Player cards — AVG / OBP / OPS</div>
-<div id="bat-cards"></div>
-"""
-
-batting_js = """
-  new Chart(document.getElementById('ops-c'),{type:'bar',data:{
-    labels:TEAM.batting.map(p=>p.lineup+'.'+p.name.slice(0,4)),
-    datasets:[{data:TEAM.batting.map(p=>p.ops),backgroundColor:TEAM.batting.map(p=>p.ops>=1.1?'#2e7d3299':p.ops<.6?'#c6282899':'#1565a399'),borderRadius:4,borderSkipped:false}]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{font:{size:8}},grid:{display:false}},y:{min:.1,max:1.7,ticks:{font:{size:9},callback:v=>v.toFixed(1)},grid:{color:'rgba(0,0,0,.05)'}}}}});
-
-  const bc=document.getElementById('bat-cards');
-  bc.innerHTML=TEAM.batting.map(p=>{
-    const oc=p.ops>=1.1?'g':p.ops<.6?'r':'';
-    const obc=p.obp>=.52?'g':p.obp<.28?'r':'';
-    const t=p.trend||[];
-    const bars=t.map(v=>{
-      if(v===null)return'<div class="sp-b sp-null" style="height:5px;flex:1"></div>';
-      const h=Math.min(Math.round(v*50)+5,30);
-      const c=v>=.4?'sp-hi':v<.22?'sp-lo':'sp-md';
-      return`<div class="sp-b ${c}" style="height:${h}px;flex:1"></div>`;
-    }).join('');
-    const htag=p.name==='Swartz'?'<span class="badge r" style="margin-left:5px;vertical-align:middle;font-size:9px">Out Apr21</span>':
-               p.name==='Zant'?'<span class="badge a" style="margin-left:5px;vertical-align:middle;font-size:9px">Cleared</span>':'';
-    return`<div class="card">
-      <div class="pc-head">
-        <div class="av" style="background:${p.color};color:${p.tc}">${p.name.slice(0,2)}</div>
-        <div><div class="pc-name">${p.lineup}. ${p.name}${htag}</div><div class="pc-pos">${p.pos} &middot; Age ${p.age}</div></div>
-      </div>
-      <div class="stat-row">
-        <div class="sb"><div class="sb-v">${p.avg.toFixed(3)}</div><div class="sb-l">AVG</div></div>
-        <div class="sb"><div class="sb-v ${obc}">${p.obp.toFixed(3)}</div><div class="sb-l">OBP</div></div>
-        <div class="sb"><div class="sb-v ${oc}">${p.ops.toFixed(3)}</div><div class="sb-l">OPS</div></div>
-        <div class="sb"><div class="sb-v">${p.rbi}</div><div class="sb-l">RBI</div></div>
-        <div class="sb"><div class="sb-v">${p.sb}</div><div class="sb-l">SB</div></div>
-      </div>
-      <div style="font-size:10px;color:#aaa;margin-bottom:4px">AVG trend T1&rarr;T8 (green=.400+, red=below .220)</div>
-      <div class="spark">${bars}</div>
-      <div style="font-size:11px;color:#555;margin-bottom:5px"><strong>QAB%:</strong> ${p.qab.toFixed(1)}% &nbsp;&middot;&nbsp; <strong>Coaching:</strong> ${p.coaching}</div>
-      <div class="pc-note">${p.note}</div>
-    </div>`;
-  }).join('');
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 3 — PITCHING (pitching.html)
-# ══════════════════════════════════════════════════════════════════════════════
-pitching_body = """
-<div class="note b"><strong>ERA note:</strong> 7-inning basis (13U standard). Swartz: full ERA / healthy ERA (illness outings removed). Healthy ERA removes all Feb-Mar outings when migraines and mono were active.</div>
-<div class="sl">Staff summary</div>
-<div class="table-wrap" id="pitch-tbl"></div>
-<div class="chart-card">
-  <div class="chart-title">ERA comparison — full season vs healthy</div>
-  <div style="position:relative;height:160px"><canvas id="era-c"></canvas></div>
-</div>
-<div class="note r"><strong>Swartz protocol (return Apr 21 min):</strong> 60P max per outing. Never pitches game 2 on any day he pitches game 1. 5-day rest minimum. RF/LF in field — no arm stress while recovering.</div>
-<div class="note g"><strong>Demmin right now:</strong> 0.47 ERA last 4 outings. 10K in each of last 2 starts. Best arm available. Manage his dual 1B + pitching workload.</div>
-<div class="note b"><strong>Lopes:</strong> Temecula Mar15 — 3 IP, 7K, 0BB, 32P at 87.5% strikes. Most efficient outing of the season by any Bruin. Best K/BB on staff (2.29).</div>
-<div class="sl">Pitch counts — all outings</div>
-<div class="chart-card">
-  <div class="chart-title">Swartz pitch count per outing (red = illness period)</div>
-  <div style="position:relative;height:140px"><canvas id="swp-c"></canvas></div>
-</div>
-<div class="chart-card">
-  <div class="chart-title">Demmin pitch count per outing</div>
-  <div style="position:relative;height:120px"><canvas id="dep-c"></canvas></div>
-</div>
-<div class="chart-card">
-  <div class="chart-title">Lopes pitch count per outing</div>
-  <div style="position:relative;height:120px"><canvas id="lop-c"></canvas></div>
-</div>
-"""
-
-pitching_js = """
-  const P=TEAM.pitching;
-  document.getElementById('pitch-tbl').innerHTML=`<table><thead><tr>
-    <th class="l">Pitcher</th><th class="l">Role</th><th>IP</th><th>ERA</th><th>ERA&#x2020;</th><th>WHIP</th><th>K</th><th>BB</th><th>K/9</th><th>BB/9</th><th>S%</th><th>#P</th><th class="l">Status</th>
-  </tr></thead><tbody>${P.map((p,i)=>{
-    const ec=p.era<=3?'g':p.era>=5?'r':'';
-    const pc=p.p>=700?'r':p.p>=500?'a':'';
-    const st=p.status==='out'?'<span class="badge r">Out</span>':'<span class="badge g">Active</span>';
-    return`<tr><td class="l">${p.name}</td><td class="l d">${p.role}</td><td>${p.ip}</td>
-      <td class="${ec}">${p.era.toFixed(2)}</td><td class="g">${p.eraH.toFixed(2)}</td>
-      <td>${p.whip.toFixed(2)}</td><td>${p.k}</td><td>${p.bb}</td>
-      <td class="${p.k9>=14?'g':''}">${p.k9.toFixed(1)}</td>
-      <td class="${p.bb9>=9?'r':''}">${p.bb9.toFixed(1)}</td>
-      <td>${p.sp.toFixed(1)}%</td><td class="${pc}">${p.p}</td><td class="l">${st}</td></tr>`;
-  }).join('')}</tbody></table>`;
-
-  new Chart(document.getElementById('era-c'),{type:'bar',data:{
-    labels:P.map(p=>p.name),
-    datasets:[
-      {label:'Full ERA',data:P.map(p=>Math.min(p.era,12)),backgroundColor:'rgba(21,101,163,0.5)',borderRadius:4},
-      {label:'Healthy ERA',data:P.map(p=>Math.min(p.eraH,12)),backgroundColor:'rgba(46,125,50,0.7)',borderRadius:4}
-    ]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:12}}},
-    scales:{x:{ticks:{font:{size:10}},grid:{display:false}},y:{min:0,max:8,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
-
-  const sw=P[0];
-  new Chart(document.getElementById('swp-c'),{type:'bar',data:{
-    labels:sw.gameDates,
-    datasets:[{data:sw.gamePitches,backgroundColor:sw.gameSick.map(s=>s?'rgba(198,40,40,0.7)':'rgba(21,101,163,0.6)'),borderRadius:3}]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{font:{size:7},maxRotation:45},grid:{display:false}},y:{min:0,max:80,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
-
-  const dm=P[1];
-  new Chart(document.getElementById('dep-c'),{type:'bar',data:{
-    labels:dm.gameDates,
-    datasets:[{data:dm.gamePitches,backgroundColor:dm.gamePitches.map(p=>p>=75?'rgba(198,40,40,0.7)':p>=60?'rgba(191,111,0,0.7)':'rgba(46,125,50,0.6)'),borderRadius:3}]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{font:{size:8},maxRotation:45},grid:{display:false}},y:{min:0,max:110,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
-
-  const lo=P[2];
-  new Chart(document.getElementById('lop-c'),{type:'bar',data:{
-    labels:lo.gameDates,
-    datasets:[{data:lo.gamePitches,backgroundColor:lo.gamePitches.map(p=>p>=75?'rgba(198,40,40,0.7)':p>=60?'rgba(191,111,0,0.7)':'rgba(46,125,50,0.6)'),borderRadius:3}]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{font:{size:8},maxRotation:45},grid:{display:false}},y:{min:0,max:90,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 4 — FIELDING (fielding.html)
-# ══════════════════════════════════════════════════════════════════════════════
-fielding_body = """
-<div class="g2">
-  <div class="mc"><div class="mc-l">Team FPCT</div><div class="mc-v">.926</div></div>
-  <div class="mc"><div class="mc-l">Total DPs</div><div class="mc-v g">11</div></div>
-</div>
-<div class="sl">Position depth</div>
-<div class="pos-grid" id="pos-grid"></div>
-<div class="sl">Fielding by player</div>
-<div class="table-wrap" id="field-tbl"></div>
-<div class="sl">Innings by position heatmap</div>
-<div class="chart-card">
-  <div class="chart-title">Infield innings — who plays where</div>
-  <div style="position:relative;height:200px"><canvas id="inf-c"></canvas></div>
-</div>
-<div class="chart-card">
-  <div class="chart-title">Outfield innings</div>
-  <div style="position:relative;height:160px"><canvas id="out-c"></canvas></div>
-</div>
-<div class="note r"><strong>3B — urgent gap:</strong> Short only (71 inn). No backup with confident FPCT. Oswald and Firestone need 3B reps before 14U Gold.</div>
-<div class="note a"><strong>2B — thin:</strong> Murdock (.943 FPCT, 5 DP) is strong. Torres only backup (.839). Begin Short or Firestone at 2B in practice.</div>
-<div class="note g"><strong>Well covered:</strong> C (Herrera/Short/Murdock), 1B (7 players with 10+ inn), SS (3 options), all 3 OF spots have depth.</div>
-"""
-
-fielding_js = """
-  const positions=[
-    {pos:'C',   depth:'Strong',   cls:'',     players:'Herrera (76) · Short (62) · Murdock (13)'},
-    {pos:'1B',  depth:'Excellent',cls:'',     players:'Demmin (172) · 7 players with 10+ inn'},
-    {pos:'2B',  depth:'Thin',     cls:'thin', players:'Murdock (71) · Torres only (36)'},
-    {pos:'3B',  depth:'Critical', cls:'gap',  players:'Short only (71) — no backup'},
-    {pos:'SS',  depth:'Good',     cls:'',     players:'Herrera (59) · Firestone (49) · Oswald (38)'},
-    {pos:'LF',  depth:'Strong',   cls:'',     players:'Zant (33) · Denny (28) · Torres (20)'},
-    {pos:'CF',  depth:'Strong',   cls:'',     players:'Lopes (100) · Denny (39) · Zant (11)'},
-    {pos:'RF',  depth:'Strong',   cls:'',     players:'Denny (46) · Demmin (17) · Zant (10)'},
-  ];
-  document.getElementById('pos-grid').innerHTML=positions.map(p=>`
-    <div class="pos-card ${p.cls}">
-      <div class="pos-depth" style="color:${p.cls==='gap'?'#c62828':p.cls==='thin'?'#bf6f00':'#2e7d32'}">${p.pos} &middot; ${p.depth}</div>
-      <div class="pos-players">${p.players}</div>
-    </div>`).join('');
-
-  const F=TEAM.fielding;
-  document.getElementById('field-tbl').innerHTML=`<table><thead><tr>
-    <th class="l">Player</th><th>FPCT</th><th>E</th><th>DP</th><th>TC</th><th class="l">Confidence</th>
-  </tr></thead><tbody>${F.map(f=>{
-    const fc=f.fpct>=.95?'g':f.fpct<.85?'r':'';
-    const cb=f.conf?'<span class="badge g">Confident</span>':'<span class="badge a">Developing</span>';
-    return`<tr><td class="l">${f.name}</td><td class="${fc}">${f.fpct.toFixed(3)}</td>
-      <td class="${f.e>=7?'r':f.e>=5?'a':''}">${f.e}</td>
-      <td class="${f.dp>=4?'g':''}">${f.dp}</td><td>${f.tc}</td><td class="l">${cb}</td></tr>`;
-  }).join('')}</tbody></table>`;
-
-  const names=F.map(f=>f.name);
-  new Chart(document.getElementById('inf-c'),{type:'bar',data:{
-    labels:names,
-    datasets:[
-      {label:'C',  data:F.map(f=>f.C),  backgroundColor:'rgba(21,101,163,0.7)',borderRadius:2},
-      {label:'1B', data:F.map(f=>f.B1), backgroundColor:'rgba(46,125,50,0.7)', borderRadius:2},
-      {label:'2B', data:F.map(f=>f.B2), backgroundColor:'rgba(191,111,0,0.7)', borderRadius:2},
-      {label:'3B', data:F.map(f=>f.B3), backgroundColor:'rgba(198,40,40,0.7)', borderRadius:2},
-      {label:'SS', data:F.map(f=>f.SS), backgroundColor:'rgba(106,27,154,0.7)',borderRadius:2},
-    ]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}}},
-    scales:{x:{ticks:{font:{size:9}},grid:{display:false},stacked:true},y:{ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'},stacked:true}}}});
-
-  new Chart(document.getElementById('out-c'),{type:'bar',data:{
-    labels:names,
-    datasets:[
-      {label:'LF',data:F.map(f=>f.LF),backgroundColor:'rgba(21,101,163,0.7)',borderRadius:2},
-      {label:'CF',data:F.map(f=>f.CF),backgroundColor:'rgba(46,125,50,0.7)', borderRadius:2},
-      {label:'RF',data:F.map(f=>f.RF),backgroundColor:'rgba(191,111,0,0.7)', borderRadius:2},
-    ]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}}},
-    scales:{x:{ticks:{font:{size:9}},grid:{display:false},stacked:true},y:{ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'},stacked:true}}}});
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 5 — TRENDS (trends.html)
-# ══════════════════════════════════════════════════════════════════════════════
-trends_body = """
-<div class="note b">Tournament trend lines — AVG by tournament T1 through T8. Green bars = .400+, red bars = below .220, blue = in between. Illness periods annotated. Use this to identify who is hot, who is building, who needs attention.</div>
-<div class="sl">Hot / cold tracker — last 2 tournaments vs season average</div>
-<div class="card" id="hotcold"></div>
-<div class="sl">Individual trend charts</div>
-<div id="trend-charts"></div>
-"""
-
-trends_js = """
-  const T8=['T1','T2','T3','T4','T5','T6','T7','T8'];
-  const COLORS=['#1565a3','#2e7d32','#c62828','#bf6f00','#6a1b9a','#00695c','#4e342e','#1565a3','#37474f','#558b2f','#ad1457'];
-
-  // Hot/cold
-  const hc=document.getElementById('hotcold');
-  const rows=TEAM.batting.map(p=>{
-    const t=p.trend.filter(v=>v!==null);
-    const last2=p.trend.slice(-3).filter(v=>v!==null);
-    const recent=last2.length?last2[last2.length-1]:null;
-    const prev=last2.length>1?last2[last2.length-2]:null;
-    const avg=p.avg;
-    const diff=recent!==null?recent-avg:null;
-    const pct=recent!==null?Math.min(Math.max((recent/1.0)*100,5),100):50;
-    const clr=diff===null?'#aaa':diff>=.050?'#2e7d32':diff<=-0.100?'#c62828':'#1565a3';
-    const arrow=diff===null?'—':diff>=.050?'&#8593; Hot':diff<=-0.100?'&#8595; Cold':'&#8594; Neutral';
-    return`<div class="hc-row">
-      <div class="hc-name">${p.name}</div>
-      <div class="hc-bar-wrap"><div class="hc-bar" style="width:${pct}%;background:${clr}"></div></div>
-      <div class="hc-stat" style="color:${clr}">${recent!==null?recent.toFixed(3):'—'}</div>
-      <div class="hc-trend" style="color:${clr};font-size:11px">${arrow}</div>
-    </div>`;
-  }).join('');
-  hc.innerHTML=rows;
-
-  // Individual trend charts
-  const tc=document.getElementById('trend-charts');
-  TEAM.batting.forEach((p,i)=>{
-    const id='tc'+i;
-    const d=document.createElement('div');
-    d.className='chart-card';
-    const t=p.trend;
-    const valid=t.map((v,i)=>v!==null);
-    d.innerHTML=`<div class="chart-title">${p.name} — AVG trend (season avg: ${p.avg.toFixed(3)})</div><div style="position:relative;height:130px"><canvas id="${id}"></canvas></div>`;
-    tc.appendChild(d);
-    setTimeout(()=>{
-      new Chart(document.getElementById(id),{type:'bar',data:{
-        labels:T8,
-        datasets:[
-          {label:'Tournament AVG',data:t.map(v=>v),backgroundColor:t.map(v=>v===null?'transparent':v>=.4?'rgba(46,125,50,0.7)':v<.22?'rgba(198,40,40,0.7)':'rgba(21,101,163,0.6)'),borderRadius:3},
-          {label:'Season avg',data:T8.map(()=>p.avg),type:'line',borderColor:'rgba(0,0,0,0.25)',borderDash:[3,3],pointRadius:0,fill:false,borderWidth:1.5}
-        ]
-      },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-        scales:{x:{ticks:{font:{size:9}},grid:{display:false}},y:{min:0,max:.9,ticks:{font:{size:9},callback:v=>v.toFixed(2)},grid:{color:'rgba(0,0,0,.04)'}}}}});
-    },50*i);
-  });
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 6 — LINEUPS (lineups.html)
-# ══════════════════════════════════════════════════════════════════════════════
-lineups_body = """
-<div class="note b"><strong>Sabermetric approach:</strong> OBP first — not fastest player, not best AVG. The leadoff spot goes to whoever gets on base most. Lineup order shifts based on who is hot and what class we're facing. These are recommendations, not mandates.</div>
-<div id="lineup-tabs" style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px">
-  <button class="nb active" id="lb0" onclick="showLU(0,this)" style="font-size:12px;padding:7px 14px;border-radius:20px;border:1px solid #e5e5e5;white-space:nowrap">vs 13AA</button>
-  <button class="nb" id="lb1" onclick="showLU(1,this)" style="font-size:12px;padding:7px 14px;border-radius:20px;border:1px solid #e5e5e5;white-space:nowrap">vs 13AAA</button>
-  <button class="nb" id="lb2" onclick="showLU(2,this)" style="font-size:12px;padding:7px 14px;border-radius:20px;border:1px solid #e5e5e5;white-space:nowrap">vs 13Major</button>
-</div>
-<div id="lu-content"></div>
-"""
-
-lineups_js = """
-  const LU_DATA=[
-    {cls:'vs 13AA (6-0 — dominant)',
-     note:'6-0, 7.83 RS/G. Priority: give everyone meaningful innings, manage workload, develop positions. Rest Swartz completely. Rotate pitching broadly.',
-     type:'g',
-     lineup:[
-       {s:1,n:'Torres',   pos:'SS',  r:'OBP-first regardless of level'},
-       {s:2,n:'Firestone',pos:'SS',  r:'Plate discipline — 55.7% QAB'},
-       {s:3,n:'Lopes',    pos:'CF',  r:'Best bat — immovable'},
-       {s:4,n:'Oswald',   pos:'3B',  r:'3B reps — address critical gap'},
-       {s:5,n:'Herrera',  pos:'C',   r:'Steady — RBI production'},
-       {s:6,n:'Demmin',   pos:'1B',  r:'Reliable everyday bat'},
-       {s:7,n:'Short',    pos:'C',   r:'Surging — earned the spot'},
-       {s:8,n:'Murdock',  pos:'2B',  r:'Valencia work — reps matter'},
-       {s:9,n:'Denny',    pos:'RF',  r:'Consistent — bridge role'},
-       {s:10,n:'Zant',    pos:'LF',  r:'Build back — lower pressure'},
-       {s:11,n:'Swartz',  pos:'RF',  r:'Bat development — no pitching'},
-     ],
-     rotation:'Game 1: Denny (3 IP) → Zant (2 IP) → Torres (2 IP). Game 2: Firestone (2 IP) → Murdock (2 IP) → Lopes (3 IP). Rest Swartz + Demmin completely.'},
-    {cls:'vs 13AAA (10-4 — competitive)',
-     note:'Won the Chiller OC at this level. Stack the lineup analytically — OBP first, protect the best bats. This is our primary competitive level.',
-     type:'b',
-     lineup:[
-       {s:1,n:'Torres',   pos:'2B',  r:'.558 OBP — best leadoff on roster'},
-       {s:2,n:'Firestone',pos:'SS',  r:'55.7% QAB — deepens counts'},
-       {s:3,n:'Lopes',    pos:'CF',  r:'1.477 OPS — best bat'},
-       {s:4,n:'Herrera',  pos:'C',   r:'24 RBI — cleanup production'},
-       {s:5,n:'Oswald',   pos:'SS',  r:'.591 OBP protects Herrera'},
-       {s:6,n:'Demmin',   pos:'1B',  r:'1.110 OPS — second cleanup tier'},
-       {s:7,n:'Short',    pos:'3B',  r:'Surging + 19 SB — pressure'},
-       {s:8,n:'Denny',    pos:'RF',  r:'.463 OBP — non-throwaway 8-hole'},
-       {s:9,n:'Murdock',  pos:'2B',  r:'52% QAB — working counts'},
-       {s:10,n:'Zant',    pos:'LF',  r:'Returning — lower lineup'},
-       {s:11,n:'Swartz',  pos:'RF',  r:'In lineup — Valencia work continues'},
-     ],
-     rotation:'Game 1: Demmin starter (4-5 IP) → Lopes bridge (2 IP) → Zant closer (1 IP). Game 2: Lopes starter (3-4 IP) → Denny bridge (2 IP) → Zant closer. Swartz: Game 1 only if cleared, 60P max.'},
-    {cls:'vs 13Major (3-3 — competitive)',
-     note:'Even record. BC Pirates (PR 1010) beat us twice. Every plate appearance and every out matters. Tightest lineup, best two arms.',
-     type:'a',
-     lineup:[
-       {s:1,n:'Torres',   pos:'2B',  r:'.558 OBP — must get on base'},
-       {s:2,n:'Lopes',    pos:'CF',  r:'Move up — more PA at top of order'},
-       {s:3,n:'Herrera',  pos:'C',   r:'Elite contact — 3-hole vs tough arms'},
-       {s:4,n:'Oswald',   pos:'SS',  r:'.550 AVG — can\'t be pitched around'},
-       {s:5,n:'Demmin',   pos:'1B',  r:'1.110 OPS — protection in lineup'},
-       {s:6,n:'Firestone',pos:'SS',  r:'Discipline — works counts'},
-       {s:7,n:'Short',    pos:'3B',  r:'SB threat disrupts pitchers'},
-       {s:8,n:'Denny',    pos:'RF',  r:'Never below .250 — reliable'},
-       {s:9,n:'Murdock',  pos:'2B',  r:'52% QAB — even at this level'},
-       {s:10,n:'Zant',    pos:'LF',  r:'Depth'},
-       {s:11,n:'Swartz',  pos:'RF',  r:'Bat development — per clearance'},
-     ],
-     rotation:'Game 1: Demmin full game (5-6 IP) → Lopes bridge (1-2 IP). Game 2: Lopes starter (4 IP) → Demmin (1 IP bridge if needed) → Zant closer. Swartz if cleared: Game 1 max 60P then field only.'},
-  ];
-  let activeLU=0;
-  function showLU(i,btn){
-    activeLU=i;
-    document.querySelectorAll('#lineup-tabs button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    renderLU();
-  }
-  function renderLU(){
-    const lu=LU_DATA[activeLU];
-    const avatars={Torres:'#F4C0D1',Firestone:'#FAC775',Lopes:'#9FE1CB',Herrera:'#CECBF6',Oswald:'#C0DD97',
-      Demmin:'#F5C4B3',Short:'#B5D4F4',Denny:'#D3D1C7',Murdock:'#B4B2A9',Zant:'#D3D1C7',Swartz:'#CECBF6'};
-    const atxt={Torres:'#4B1528',Firestone:'#412402',Lopes:'#085041',Herrera:'#26215C',Oswald:'#173404',
-      Demmin:'#4A1B0C',Short:'#042C53',Denny:'#2C2C2A',Murdock:'#2C2C2A',Zant:'#2C2C2A',Swartz:'#26215C'};
-    document.getElementById('lu-content').innerHTML=`
-      <div class="note ${lu.type}" style="margin-bottom:12px"><strong>${lu.cls}</strong><br>${lu.note}</div>
-      <div class="card">
-        ${lu.lineup.map(p=>`<div class="lu-row">
-          <div class="lu-spot">${p.s}</div>
-          <div class="av" style="background:${avatars[p.n]};color:${atxt[p.n]};width:28px;height:28px;font-size:10px">${p.n.slice(0,2)}</div>
-          <div class="lu-name">${p.n}</div>
-          <span class="badge b" style="flex-shrink:0">${p.pos}</span>
-          <div class="lu-reason">${p.r}</div>
-        </div>`).join('')}
-      </div>
-      <div class="sl">Pitching rotation</div>
-      <div class="note b">${lu.rotation}</div>`;
-  }
-  renderLU();
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 7 — GAME LOG / SCOUTING (scouting.html)
-# ══════════════════════════════════════════════════════════════════════════════
-scouting_body = """
-<div class="sl">Game-by-game results — all 34 games</div>
-<div style="display:flex;gap:6px;margin-bottom:10px;overflow-x:auto;padding-bottom:4px">
-  <button class="nb active" id="sf-all" onclick="filterGames('all',this)" style="font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;white-space:nowrap">All</button>
-  <button class="nb" id="sf-w" onclick="filterGames('w',this)" style="font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;white-space:nowrap">Wins</button>
-  <button class="nb" id="sf-l" onclick="filterGames('l',this)" style="font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;white-space:nowrap">Losses</button>
-  <button class="nb" id="sf-aaa" onclick="filterGames('13AAA',this)" style="font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;white-space:nowrap">vs 13AAA</button>
-  <button class="nb" id="sf-maj" onclick="filterGames('13Major',this)" style="font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid #e5e5e5;white-space:nowrap">vs 13Major</button>
-</div>
-<div id="game-list"></div>
-<div class="sl">Wins and losses by power rating</div>
-<div class="chart-card">
-  <div class="chart-title">Opponent power rating — wins vs losses</div>
-  <div style="position:relative;height:160px"><canvas id="pr-c"></canvas></div>
-</div>
-<div class="note g"><strong>Best wins vs rated opponents:</strong> Legacy 13u Select (PR 1164) W9-3 · Total Baseball Vipers (PR 1145) W6-3 · LOS CRUSHERS (PR 984) W6-5 · Five Tools LA (PR 996) W11-1</div>
-<div class="note a"><strong>Losses in context:</strong> BC Pirates (PR 1010, went 10-2) beat us twice. Camarillo Elite (PR 1290 — highest rated opponent all season) beat us once. Swag (PR 1037) beat us twice. These are good losses.</div>
-"""
-
-scouting_js = """
-  function filterGames(f,btn){
-    document.querySelectorAll('[id^="sf-"]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const G=TEAM.games;
-    let filtered=G;
-    if(f==='w') filtered=G.filter(g=>g.w);
-    else if(f==='l') filtered=G.filter(g=>!g.w);
-    else if(f!=='all') filtered=G.filter(g=>g.cls===f);
-    renderGames(filtered);
-  }
-  function renderGames(games){
-    document.getElementById('game-list').innerHTML=games.map(g=>{
-      const diff=g.us-g.them;
-      const pr=g.pr?`PR ${g.pr}`:'PG tourn';
-      return`<div class="card" style="margin-bottom:8px;padding:11px 13px">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:8px;height:8px;border-radius:50%;background:${g.w?'#2e7d32':'#c62828'};flex-shrink:0"></div>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:600">${g.opp}</div>
-            <div style="font-size:11px;color:#888">${g.date} &middot; ${g.cls} &middot; ${pr} &middot; ${g.tourn}</div>
-          </div>
-          <div style="text-align:right;flex-shrink:0">
-            <div style="font-size:15px;font-weight:700;color:${g.w?'#2e7d32':'#c62828'}">${g.us}&ndash;${g.them}</div>
-            <div style="font-size:11px;color:#888">${diff>0?'+':''}${diff}</div>
-          </div>
-        </div>
-      </div>`;
-    }).join('');
-  }
-  filterGames('all',document.getElementById('sf-all'));
-
-  const wins=TEAM.games.filter(g=>g.w&&g.pr).map(g=>g.pr).sort((a,b)=>a-b);
-  const losses=TEAM.games.filter(g=>!g.w&&g.pr).map(g=>g.pr).sort((a,b)=>a-b);
-  new Chart(document.getElementById('pr-c'),{type:'bar',data:{
-    labels:['<600','600-800','800-900','900-1000','1000+'],
-    datasets:[
-      {label:'Wins',data:[
-        wins.filter(p=>p<600).length,
-        wins.filter(p=>p>=600&&p<800).length,
-        wins.filter(p=>p>=800&&p<900).length,
-        wins.filter(p=>p>=900&&p<1000).length,
-        wins.filter(p=>p>=1000).length,
-      ],backgroundColor:'rgba(46,125,50,0.7)',borderRadius:4},
-      {label:'Losses',data:[
-        losses.filter(p=>p<600).length,
-        losses.filter(p=>p>=600&&p<800).length,
-        losses.filter(p=>p>=800&&p<900).length,
-        losses.filter(p=>p>=900&&p<1000).length,
-        losses.filter(p=>p>=1000).length,
-      ],backgroundColor:'rgba(198,40,40,0.7)',borderRadius:4},
-    ]
-  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}}},
-    scales:{x:{ticks:{font:{size:9}},grid:{display:false}},y:{min:0,ticks:{font:{size:9},stepSize:1},grid:{color:'rgba(0,0,0,.05)'}}}}});
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 8 — PLAYER DEVELOPMENT CARDS (players.html)
-# ══════════════════════════════════════════════════════════════════════════════
-players_body = """
-<div class="note b">Full development profile for each player — stats, coaching investments, highlights, and coaching priority for 14U Gold. Tap any card to expand.</div>
-<div id="player-dev-cards"></div>
-"""
-
-players_js = """
-  const pc=document.getElementById('player-dev-cards');
-  pc.innerHTML=TEAM.batting.map((p,i)=>{
-    const oc=p.ops>=1.1?'g':p.ops<.6?'r':'';
-    const hl=p.highlights.map(h=>`<div style="display:flex;gap:6px;margin-bottom:4px"><div style="width:5px;height:5px;border-radius:50%;background:#1565a3;flex-shrink:0;margin-top:6px"></div><div style="font-size:12px;color:#555">${h}</div></div>`).join('');
-    const statusTag=p.name==='Swartz'?'<span class="badge r" style="vertical-align:middle;margin-left:6px">Out until Apr 21</span>':
-                    p.name==='Zant'?'<span class="badge a" style="vertical-align:middle;margin-left:6px">Cleared</span>':'';
-    return`<div class="card" style="margin-bottom:12px">
-      <div class="pc-head">
-        <div class="av" style="background:${p.color};color:${p.tc};width:40px;height:40px;font-size:13px">${p.name.slice(0,2)}</div>
-        <div style="flex:1">
-          <div class="pc-name">${p.lineup}. ${p.name}${statusTag}</div>
-          <div class="pc-pos">${p.pos} &middot; Age ${p.age}</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:18px;font-weight:700;color:${p.ops>=1.1?'#2e7d32':p.ops<.6?'#c62828':'#1d1d1f'}">${p.ops.toFixed(3)}</div>
-          <div style="font-size:10px;color:#aaa">OPS</div>
-        </div>
-      </div>
-      <div class="stat-row">
-        <div class="sb"><div class="sb-v">${p.avg.toFixed(3)}</div><div class="sb-l">AVG</div></div>
-        <div class="sb"><div class="sb-v">${p.obp.toFixed(3)}</div><div class="sb-l">OBP</div></div>
-        <div class="sb"><div class="sb-v">${p.rbi}</div><div class="sb-l">RBI</div></div>
-        <div class="sb"><div class="sb-v">${p.sb}</div><div class="sb-l">SB</div></div>
-        <div class="sb"><div class="sb-v">${p.qab.toFixed(0)}%</div><div class="sb-l">QAB%</div></div>
-      </div>
-      <div style="font-size:11px;color:#888;margin-bottom:6px;padding:7px;background:#f5f5f7;border-radius:8px"><strong>Coaching:</strong> ${p.coaching}</div>
-      <div style="margin-bottom:8px">${hl}</div>
-      <div style="background:#e3f2fd;border-radius:8px;padding:9px 11px;border-left:3px solid #1565a3">
-        <div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#0d47a1;margin-bottom:3px">14U Priority</div>
-        <div style="font-size:12px;color:#1565a3">${p.priority}</div>
-      </div>
-    </div>`;
-  }).join('');
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# PAGE 9 — FLAGS (flags.html)
-# ══════════════════════════════════════════════════════════════════════════════
-flags_body = """
-<div class="note b">Review these before each tournament weekend. Red = action required. Amber = monitor. Green = positive momentum to build on.</div>
-<div class="sl">Active flags</div>
-<div id="flags-list"></div>
-<div class="sl">14U Gold transition priorities</div>
-<div id="priorities-list"></div>
-"""
-
-flags_js = """
-  document.getElementById('flags-list').innerHTML=TEAM.flags.map(f=>`
-    <div class="flag-card">
-      <div class="flag-bar ${f.type}"></div>
-      <div class="flag-body">
-        <div class="flag-title">${f.title}</div>
-        <div class="flag-player">${f.player}</div>
-        <div class="flag-text">${f.text}</div>
-      </div>
-    </div>`).join('');
-
-  const priorities=[
-    {n:'1',title:'Get in the gym — every player',type:'g',text:'Team-wide offseason priority. Physical development at 12-13 translates directly to bat speed, arm velocity, fielding range, and injury durability. This is the foundation everything else builds on.'},
-    {n:'2',title:'Swartz return protocol',type:'r',text:'Medical clearance required before pitching. On return: 60P max, no game-2 same day, 5-day rest min. RF/LF in field. Mono recovery is non-linear — err on the side of caution.'},
-    {n:'3',title:'3B depth — develop Oswald and/or Firestone',type:'r',text:'Most urgent defensive gap entering 14U. Short is the only confident option. Begin regular 3B reps in practice immediately.'},
-    {n:'4',title:'2B depth — develop Short or Firestone',type:'a',text:'Murdock is strong but Torres is the only backup. A third confident option at 2B gives the team real lineup flexibility.'},
-    {n:'5',title:'Murdock → SS (long-term)',type:'a',text:'Coach\'s ceiling vision for Murdock is SS. Begin SS reps now. Valencia hitting work continues — the data supports staying patient.'},
-    {n:'6',title:'Demmin workload management',type:'a',text:'Best arm right now AND the best 1B. Managing his dual role is the primary pitching consideration. Gym work supports arm durability.'},
-    {n:'7',title:'Firestone — protect the arc',type:'a',text:'Age 11 posting .667 AVG in 13U play. Add positions deliberately, don\'t overload any role. The ceiling here is significant.'},
-    {n:'8',title:'April 13 — High School Ready meeting',type:'b',text:'Introduce the 14U Gold "High School Ready" concept to players and families. Baseball is the vehicle. The gym, the classroom, and the community are all part of the same development program.'},
-  ];
-  document.getElementById('priorities-list').innerHTML=priorities.map(p=>`
-    <div class="flag-card">
-      <div class="flag-bar ${p.type}"></div>
-      <div class="flag-body">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
-          <div style="font-size:11px;font-weight:700;color:#aaa">${p.n}</div>
-          <div class="flag-title">${p.title}</div>
-        </div>
-        <div class="flag-text">${p.text}</div>
-      </div>
-    </div>`).join('');
-"""
-
-# ══════════════════════════════════════════════════════════════════════════════
-# GENERATE ALL PAGES
-# ══════════════════════════════════════════════════════════════════════════════
-pages = [
-    ('index.html',   'Team',            'index',    index_body,    index_js),
-    ('batting.html', 'Batting',         'batting',  batting_body,  batting_js),
-    ('pitching.html','Pitching',        'pitching', pitching_body, pitching_js),
-    ('fielding.html','Fielding',        'fielding', fielding_body, fielding_js),
-    ('trends.html',  'Trends',          'trends',   trends_body,   trends_js),
-    ('lineups.html', 'Lineups',         'lineups',  lineups_body,  lineups_js),
-    ('scouting.html','Game Log',        'scouting', scouting_body, scouting_js),
-    ('players.html', 'Player Profiles', 'players',  players_body,  players_js),
-    ('flags.html',   'Flags',           'flags',    flags_body,    flags_js),
-]
-
-os.makedirs('/home/claude/site', exist_ok=True)
-for filename, title, page_id, body, js in pages:
-    html = page_shell(title, page_id, body, js)
-    path = f'/home/claude/site/{filename}'
-    with open(path, 'w') as f:
-        f.write(html)
-    size = os.path.getsize(path)
-    print(f"Generated {filename} — {size:,} bytes")
-
-print(f"\nAll {len(pages)} pages generated in /home/claude/site/")
 </style>
 </head>
 <body>
-
 <div id="auth">
 <div class="ac">
   <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#aaa;margin-bottom:8px">Goodland Bruins Baseball</div>
@@ -834,23 +95,16 @@ print(f"\nAll {len(pages)} pages generated in /home/claude/site/")
   <div class="err" id="aerr"></div>
 </div>
 </div>
-
 <div id="app" style="display:none;flex-direction:column;min-height:100vh;">
-<div class="topbar">
-  <div class="team-name">Goodland Bruins 13U Gold</div>
-  <div class="team-meta">Coach Jesse Landeros &middot; Santa Barbara / Goleta, CA</div>
-  <div><span class="record-pill">24&ndash;7 &middot; +92 run diff</span></div>
-</div>
-<div class="page-nav"><a class="pn " href="index.html">Team</a><a class="pn " href="batting.html">Batting</a><a class="pn " href="pitching.html">Pitching</a><a class="pn " href="fielding.html">Fielding</a><a class="pn " href="trends.html">Trends</a><a class="pn active" href="lineups.html">Lineups</a><a class="pn " href="scouting.html">Games</a><a class="pn " href="players.html">Players</a><a class="pn " href="flags.html">Flags</a></div>
-<div class="content" style="flex:1;padding-bottom:20px;">
-<div class="note b"><strong>Approach:</strong> OBP first. Lineup order shifts by opponent class. These are recommendations based on season data.</div>
+<div class="topbar"><div class="team-name">Goodland Bruins 13U Gold</div><div class="team-meta">Coach Jesse Landeros &middot; Santa Barbara / Goleta, CA</div><div><span class="rec-pill">24&ndash;7 &middot; +92 run diff</span></div></div>
+<div class="page-nav"><a class="pn" href="index.html">Team</a><a class="pn" href="batting.html">Batting</a><a class="pn" href="pitching.html">Pitching</a><a class="pn" href="fielding.html">Fielding</a><a class="pn" href="trends.html">Trends</a><a class="pn active" href="lineups.html">Lineups</a><a class="pn" href="scouting.html">Games</a><a class="pn" href="players.html">Players</a><a class="pn" href="flags.html">Flags</a></div>
+<div class="content" style="flex:1;padding-bottom:20px;"><div class="note b"><strong>Approach:</strong> OBP first. Lineup order shifts by opponent class. These are data-driven recommendations.</div>
 <div id="lu-tabs" style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px">
   <button id="lb0" onclick="showLU(0)" style="font-size:12px;padding:7px 14px;border-radius:20px;border:1px solid #1d1d1f;background:#1d1d1f;color:#fff;cursor:pointer;white-space:nowrap">vs 13AA</button>
   <button id="lb1" onclick="showLU(1)" style="font-size:12px;padding:7px 14px;border-radius:20px;border:1px solid #e5e5e5;background:#fff;color:#555;cursor:pointer;white-space:nowrap">vs 13AAA</button>
   <button id="lb2" onclick="showLU(2)" style="font-size:12px;padding:7px 14px;border-radius:20px;border:1px solid #e5e5e5;background:#fff;color:#555;cursor:pointer;white-space:nowrap">vs 13Major</button>
 </div>
-<div id="lu-content"></div>
-</div>
+<div id="lu-content"></div></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
@@ -1079,7 +333,6 @@ const LINEUPS = {
   },
 };
 
-
 var PIN='1327';
 var pe='';
 function pp(d){
@@ -1088,14 +341,16 @@ function pp(d){
   if(pe.length===4){
     if(pe===PIN){
       document.getElementById('auth').style.display='none';
-      document.getElementById('app').style.display='flex';
-      onUnlock();
+      document.getElementById('app').style.display='block';
+      if(typeof onUnlock==='function')onUnlock();
     }else{
-      document.querySelectorAll('.dot').forEach(function(e){e.classList.add('e');});
+      var dots=document.querySelectorAll('.dot');
+      for(var i=0;i<dots.length;i++)dots[i].classList.add('e');
       document.getElementById('aerr').textContent='Incorrect PIN';
       setTimeout(function(){
         pe='';
-        document.querySelectorAll('.dot').forEach(function(e){e.classList.remove('f','e');});
+        var d2=document.querySelectorAll('.dot');
+        for(var i=0;i<d2.length;i++)d2[i].classList.remove('f','e');
         document.getElementById('aerr').textContent='';
       },800);
     }
@@ -1103,37 +358,27 @@ function pp(d){
 }
 function pd(){if(!pe.length)return;pe=pe.slice(0,-1);ud();}
 function ud(){for(var i=0;i<4;i++){var d=document.getElementById('d'+i);if(i<pe.length)d.classList.add('f');else d.classList.remove('f');}}
-
 function onUnlock(){
-
-  var avs={Torres:'#F4C0D1',Firestone:'#FAC775',Lopes:'#9FE1CB',Herrera:'#CECBF6',Oswald:'#C0DD97',Demmin:'#F5C4B3',Short:'#B5D4F4',Denny:'#D3D1C7',Murdock:'#B4B2A9',Zant:'#D3D1C7',Swartz:'#CECBF6'};
-  var atx={Torres:'#4B1528',Firestone:'#412402',Lopes:'#085041',Herrera:'#26215C',Oswald:'#173404',Demmin:'#4A1B0C',Short:'#042C53',Denny:'#2C2C2A',Murdock:'#2C2C2A',Zant:'#2C2C2A',Swartz:'#26215C'};
-  var LU=[
-    {cls:'vs 13AA (6-0)',note:'Dominant. Priority: give everyone innings, develop positions, manage workload. Rest Swartz.',type:'g',
-     lineup:[{s:1,n:'Torres',pos:'SS',r:'OBP-first'},{s:2,n:'Firestone',pos:'SS',r:'55.7% QAB'},{s:3,n:'Lopes',pos:'CF',r:'Best bat'},{s:4,n:'Oswald',pos:'3B',r:'3B development reps'},{s:5,n:'Herrera',pos:'C',r:'Steady - RBI'},{s:6,n:'Demmin',pos:'1B',r:'Reliable'},{s:7,n:'Short',pos:'C',r:'Surging'},{s:8,n:'Murdock',pos:'2B',r:'Valencia reps'},{s:9,n:'Denny',pos:'RF',r:'Consistent'},{s:10,n:'Zant',pos:'LF',r:'Build back'},{s:11,n:'Swartz',pos:'RF',r:'Bat dev - no pitching'}],
-     rotation:'G1: Denny (3IP) + Zant (2IP) + Torres (2IP). G2: Firestone (2IP) + Murdock (2IP) + Lopes (3IP). Rest Swartz and Demmin.'},
-    {cls:'vs 13AAA (10-4)',note:'Our primary level. Won Chiller OC here. Stack the lineup - OBP first.',type:'b',
-     lineup:[{s:1,n:'Torres',pos:'2B',r:'.558 OBP - best leadoff'},{s:2,n:'Firestone',pos:'SS',r:'Deepens counts'},{s:3,n:'Lopes',pos:'CF',r:'1.477 OPS'},{s:4,n:'Herrera',pos:'C',r:'24 RBI - cleanup'},{s:5,n:'Oswald',pos:'SS',r:'.591 OBP protects Herrera'},{s:6,n:'Demmin',pos:'1B',r:'1.110 OPS'},{s:7,n:'Short',pos:'3B',r:'Surging + 19 SB'},{s:8,n:'Denny',pos:'RF',r:'.463 OBP'},{s:9,n:'Murdock',pos:'2B',r:'52% QAB'},{s:10,n:'Zant',pos:'LF',r:'Returning'},{s:11,n:'Swartz',pos:'RF',r:'Valencia continues'}],
-     rotation:'G1: Demmin starter (4-5IP) + Lopes bridge (2IP) + Zant closer (1IP). G2: Lopes starter (3-4IP) + Denny (2IP) + Zant closer. Swartz: G1 only if cleared, 60P max.'},
-    {cls:'vs 13Major (3-3)',note:'Even record. Every PA counts. Tightest lineup, best two arms.',type:'a',
-     lineup:[{s:1,n:'Torres',pos:'2B',r:'.558 OBP - must get on'},{s:2,n:'Lopes',pos:'CF',r:'More PA at top'},{s:3,n:'Herrera',pos:'C',r:'Elite contact'},{s:4,n:'Oswald',pos:'SS',r:'.550 AVG'},{s:5,n:'Demmin',pos:'1B',r:'1.110 OPS protection'},{s:6,n:'Firestone',pos:'SS',r:'Works counts'},{s:7,n:'Short',pos:'3B',r:'SB threat'},{s:8,n:'Denny',pos:'RF',r:'Never below .250'},{s:9,n:'Murdock',pos:'2B',r:'52% QAB'},{s:10,n:'Zant',pos:'LF',r:'Depth'},{s:11,n:'Swartz',pos:'RF',r:'Bat development'}],
-     rotation:'G1: Demmin full game (5-6IP) + Lopes bridge (1-2IP). G2: Lopes starter (4IP) + Demmin bridge + Zant closer. Swartz if cleared: G1 only, 60P max.'},
-  ];
-  var activeLU=0;
-  function showLU(i){
-    activeLU=i;
-    for(var j=0;j<3;j++){
-      var b=document.getElementById('lb'+j);
-      b.style.background=j===i?'#1d1d1f':'#fff';
-      b.style.color=j===i?'#fff':'#555';
-      b.style.borderColor=j===i?'#1d1d1f':'#e5e5e5';
-    }
-    var lu=LU[i];
-    var rows=lu.lineup.map(function(p){return'<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f0f0f0"><div style="font-size:11px;font-weight:700;width:18px;color:#aaa">'+p.s+'</div><div style="width:26px;height:26px;border-radius:50%;background:'+(avs[p.n]||'#eee')+';color:'+(atx[p.n]||'#333')+';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">'+p.n.slice(0,2)+'</div><div style="font-size:14px;font-weight:600;flex:1">'+p.n+'</div><span style="font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:#e3f2fd;color:#0d47a1;flex-shrink:0">'+p.pos+'</span><div style="font-size:11px;color:#555;flex:2">'+p.r+'</div></div>';}).join('');
-    document.getElementById('lu-content').innerHTML='<div class="note '+lu.type+'" style="margin-bottom:12px"><strong>'+lu.cls+'</strong><br>'+lu.note+'</div><div class="card">'+rows+'</div><div class="sl">Pitching rotation</div><div class="note b">'+lu.rotation+'</div>';
-  }
-  showLU(0);
-
+var avs={Torres:'#F4C0D1',Firestone:'#FAC775',Lopes:'#9FE1CB',Herrera:'#CECBF6',Oswald:'#C0DD97',Demmin:'#F5C4B3',Short:'#B5D4F4',Denny:'#D3D1C7',Murdock:'#B4B2A9',Zant:'#D3D1C7',Swartz:'#CECBF6'};
+var atx={Torres:'#4B1528',Firestone:'#412402',Lopes:'#085041',Herrera:'#26215C',Oswald:'#173404',Demmin:'#4A1B0C',Short:'#042C53',Denny:'#2C2C2A',Murdock:'#2C2C2A',Zant:'#2C2C2A',Swartz:'#26215C'};
+var LU=[
+  {cls:'vs 13AA (6-0 - dominant)',note:'Priority: give everyone innings, develop positions, manage workload. Rest Swartz completely.',type:'g',
+   lineup:[{s:1,n:'Torres',pos:'SS',r:'OBP-first'},{s:2,n:'Firestone',pos:'SS',r:'55.7% QAB'},{s:3,n:'Lopes',pos:'CF',r:'Best bat'},{s:4,n:'Oswald',pos:'3B',r:'3B development reps'},{s:5,n:'Herrera',pos:'C',r:'Steady RBI'},{s:6,n:'Demmin',pos:'1B',r:'Reliable'},{s:7,n:'Short',pos:'C',r:'Surging'},{s:8,n:'Murdock',pos:'2B',r:'Valencia reps'},{s:9,n:'Denny',pos:'RF',r:'Consistent'},{s:10,n:'Zant',pos:'LF',r:'Build back'},{s:11,n:'Swartz',pos:'RF',r:'Bat dev only'}],
+   rotation:'G1: Denny (3IP) + Zant (2IP) + Torres (2IP). G2: Firestone (2IP) + Murdock (2IP) + Lopes (3IP). Rest Swartz and Demmin completely.'},
+  {cls:'vs 13AAA (10-4 - competitive)',note:'Primary level. Won Chiller OC here. Stack the lineup - OBP first, protect the best bats.',type:'b',
+   lineup:[{s:1,n:'Torres',pos:'2B',r:'.558 OBP'},{s:2,n:'Firestone',pos:'SS',r:'QAB discipline'},{s:3,n:'Lopes',pos:'CF',r:'1.477 OPS'},{s:4,n:'Herrera',pos:'C',r:'24 RBI cleanup'},{s:5,n:'Oswald',pos:'SS',r:'.591 OBP protects 4'},{s:6,n:'Demmin',pos:'1B',r:'1.110 OPS'},{s:7,n:'Short',pos:'3B',r:'Surging + 19 SB'},{s:8,n:'Denny',pos:'RF',r:'.463 OBP'},{s:9,n:'Murdock',pos:'2B',r:'52% QAB'},{s:10,n:'Zant',pos:'LF',r:'Returning'},{s:11,n:'Swartz',pos:'RF',r:'Valencia work'}],
+   rotation:'G1: Demmin starter (4-5IP) + Lopes (2IP) + Zant closer (1IP). G2: Lopes starter (3-4IP) + Denny (2IP) + Zant. Swartz: G1 only if cleared, 60P max.'},
+  {cls:'vs 13Major (3-3 - even)',note:'Every plate appearance counts. Tightest lineup, best two arms available.',type:'a',
+   lineup:[{s:1,n:'Torres',pos:'2B',r:'.558 OBP'},{s:2,n:'Lopes',pos:'CF',r:'More PA at top'},{s:3,n:'Herrera',pos:'C',r:'Elite contact'},{s:4,n:'Oswald',pos:'SS',r:'.550 AVG'},{s:5,n:'Demmin',pos:'1B',r:'1.110 OPS'},{s:6,n:'Firestone',pos:'SS',r:'Works counts'},{s:7,n:'Short',pos:'3B',r:'SB threat'},{s:8,n:'Denny',pos:'RF',r:'Never below .250'},{s:9,n:'Murdock',pos:'2B',r:'52% QAB'},{s:10,n:'Zant',pos:'LF',r:'Depth'},{s:11,n:'Swartz',pos:'RF',r:'Bat development'}],
+   rotation:'G1: Demmin full game (5-6IP) + Lopes bridge (1-2IP). G2: Lopes starter (4IP) + Demmin + Zant closer. Swartz if cleared: G1 only, 60P max.'},
+];
+function showLU(i){
+  for(var j=0;j<3;j++){var b=document.getElementById('lb'+j);b.style.background=j===i?'#1d1d1f':'#fff';b.style.color=j===i?'#fff':'#555';b.style.borderColor=j===i?'#1d1d1f':'#e5e5e5';}
+  var lu=LU[i];
+  var rows=lu.lineup.map(function(p){return'<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f0f0f0"><div style="font-size:11px;font-weight:700;width:18px;color:#aaa">'+p.s+'</div><div style="width:26px;height:26px;border-radius:50%;background:'+(avs[p.n]||'#eee')+';color:'+(atx[p.n]||'#333')+';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">'+p.n.slice(0,2)+'</div><div style="font-size:14px;font-weight:600;flex:1">'+p.n+'</div><span style="font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:#e3f2fd;color:#0d47a1;flex-shrink:0">'+p.pos+'</span><div style="font-size:11px;color:#555;flex:2">'+p.r+'</div></div>';}).join('');
+  document.getElementById('lu-content').innerHTML='<div class="note '+lu.type+'" style="margin-bottom:12px"><strong>'+lu.cls+'</strong><br>'+lu.note+'</div><div class="card">'+rows+'</div><div class="sl">Pitching rotation</div><div class="note b">'+lu.rotation+'</div>';
+}
+showLU(0);
 }
 </script>
 </body>
