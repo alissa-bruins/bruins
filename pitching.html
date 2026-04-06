@@ -495,12 +495,16 @@ function renderPitcher(name) {
   }).join('');
 
   // Season totals summary
-  var tot_ip = logs.reduce(function(s,l){return s+l.ip;},0);
-  var tot_er = logs.reduce(function(s,l){return s+l.er;},0);
-  var tot_k  = logs.reduce(function(s,l){return s+l.so;},0);
-  var tot_bb = logs.reduce(function(s,l){return s+l.bb;},0);
-  var tot_p  = logs.reduce(function(s,l){return s+(l.pitches||0);},0);
-  var s_era  = tot_ip>0 ? (tot_er/tot_ip*7).toFixed(2) : '--';
+  // Use TEAM.pitching (CSV) for season totals — authoritative source
+  var pitData = (TEAM.pitching||[]).find(function(x){return x.name===name;});
+  var tot_ip = pitData ? pitData.ip : logs.reduce(function(s,l){return s+l.ip;},0).toFixed(1);
+  var tot_er = null; // not needed — use era from CSV
+  var tot_k  = pitData ? pitData.k  : logs.reduce(function(s,l){return s+l.so;},0);
+  var tot_bb = pitData ? pitData.bb : logs.reduce(function(s,l){return s+l.bb;},0);
+  var tot_p  = pitData ? pitData.p  : logs.reduce(function(s,l){return s+(l.pitches||0);},0);
+  var s_era  = pitData ? pitData.era.toFixed(2) : '--';
+  var s_eraH = pitData ? pitData.eraH.toFixed(2) : null;
+  var s_whip = pitData ? pitData.whip.toFixed(2) : '--';
 
   var lhTag = (name==='Swartz'||name==='Demmin'||name==='Lopes')
     ? '<span style="font-size:10px;font-weight:700;color:#2774AE;background:#DAEBFE;padding:1px 6px;border-radius:4px;margin-left:6px">LHP</span>' : '';
@@ -509,13 +513,15 @@ function renderPitcher(name) {
     '<div class="card" style="margin-bottom:12px">'
       +'<div style="font-size:16px;font-weight:700;color:#003B5C;margin-bottom:10px">'+name+lhTag+'</div>'
       +'<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:14px">'
-        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:#003B5C">'+tot_ip.toFixed(1)+'</div><div style="font-size:9px;color:#8BB8E8">IP</div></div>'
-        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:'+(parseFloat(s_era)<=3?'#2e7d32':parseFloat(s_era)>=5?'#c62828':'#003B5C')+'">'+s_era+'</div><div style="font-size:9px;color:#8BB8E8">ERA</div></div>'
-        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:'+(tot_k/tot_ip*9>=14?'#2e7d32':'#003B5C')+'">'+tot_k+'K</div><div style="font-size:9px;color:#8BB8E8">K</div></div>'
-        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:#003B5C">'+tot_bb+'</div><div style="font-size:9px;color:#8BB8E8">BB</div></div>'
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:#003B5C">'+tot_ip+'</div><div style="font-size:9px;color:#8BB8E8">IP</div></div>'
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:'+(parseFloat(s_era)<=3?'#2e7d32':parseFloat(s_era)>=5?'#c62828':'#003B5C')+'">'+s_era+'</div><div style="font-size:9px;color:#8BB8E8">ERA (season)</div></div>'
+        +(s_eraH&&s_eraH!==s_era?'<div style="text-align:center;background:#e8f5e9;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:#2e7d32">'+s_eraH+'</div><div style="font-size:9px;color:#8BB8E8">ERA healthy</div></div>':'')
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:'+(pitData&&pitData.k9>=14?'#2e7d32':'#003B5C')+'">'+tot_k+'K</div><div style="font-size:9px;color:#8BB8E8">K</div></div>'
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:#003B5C">'+tot_bb+'BB</div><div style="font-size:9px;color:#8BB8E8">BB</div></div>'
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:#003B5C">'+s_whip+'</div><div style="font-size:9px;color:#8BB8E8">WHIP</div></div>'
         +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:7px"><div style="font-size:14px;font-weight:700;color:#003B5C">'+tot_p+'</div><div style="font-size:9px;color:#8BB8E8">#P</div></div>'
-      +'</div>'
-      +'<div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#005587;margin-bottom:5px">ERA by tournament</div>'
+        +'</div>'
++'<div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#005587;margin-bottom:5px">ERA by tournament</div>'
       +'<div style="position:relative;height:100px;margin-bottom:12px"><canvas id="pit_era_c"></canvas></div>'
       +'<div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#005587;margin-bottom:5px">Pitch count by outing</div>'
       +'<div style="position:relative;height:90px;margin-bottom:12px"><canvas id="pit_p_c"></canvas></div>'
