@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Team - Bruins 13U Gold</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f7;color:#1d1d1f;font-size:15px;}
+#auth{position:fixed;inset:0;background:#f5f5f7;display:flex;align-items:center;justify-content:center;padding:20px;z-index:999;}
+.ac{background:#fff;border-radius:20px;padding:28px 22px;width:100%;max-width:320px;text-align:center;border:1px solid #e5e5e5;}
+.dots{display:flex;gap:12px;justify-content:center;margin:16px 0;}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid #ccc;transition:.15s;}
+.dot.f{background:#1d1d1f;border-color:#1d1d1f;}
+.dot.e{background:#c62828;border-color:#c62828;}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.nb{background:#f5f5f7;border:none;border-radius:12px;padding:15px;font-size:20px;cursor:pointer;color:#1d1d1f;}
+.nb:active{background:#ddd;} .nb.w{grid-column:span 2;}
+.err{color:#c62828;font-size:12px;min-height:16px;margin-top:8px;}
+.topbar{background:#1d1d1f;padding:14px 16px 12px;position:sticky;top:0;z-index:100;}
+.team-name{font-size:17px;font-weight:600;color:#fff;}
+.team-meta{font-size:11px;color:#aaa;margin-top:2px;}
+.rec-pill{display:inline-flex;align-items:center;background:#2e7d32;color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;margin-top:6px;}
+.page-nav{display:flex;gap:5px;padding:9px 14px;background:#fff;border-bottom:1px solid #e5e5e5;overflow-x:auto;}
+.pn{font-size:12px;font-weight:500;padding:5px 11px;border-radius:20px;border:1px solid #e5e5e5;color:#555;text-decoration:none;white-space:nowrap;}
+.pn.active{background:#1d1d1f;color:#fff;border-color:#1d1d1f;}
+.content{padding:14px;padding-bottom:20px;}
+.sl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#888;margin:14px 0 7px;}
+.sl:first-child{margin-top:0;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+.mc{background:#fff;border-radius:12px;padding:12px 14px;border:1px solid #e5e5e5;}
+.mc-l{font-size:11px;color:#888;margin-bottom:3px;}
+.mc-v{font-size:22px;font-weight:700;color:#1d1d1f;line-height:1.1;}
+.mc-v.g{color:#2e7d32;} .mc-v.r{color:#c62828;}
+.mc-s{font-size:11px;color:#aaa;margin-top:2px;}
+.card{background:#fff;border-radius:14px;border:1px solid #e5e5e5;padding:14px;margin-bottom:10px;}
+.table-wrap{background:#fff;border-radius:12px;border:1px solid #e5e5e5;overflow:hidden;margin-bottom:14px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#888;text-align:right;padding:7px 8px 7px 6px;background:#fafafa;border-bottom:1px solid #e5e5e5;white-space:nowrap;}
+th.l{text-align:left;padding-left:12px;}
+td{padding:7px 8px 7px 6px;border-bottom:1px solid #f0f0f0;text-align:right;color:#555;white-space:nowrap;}
+td.l{text-align:left;padding-left:12px;color:#1d1d1f;font-weight:500;}
+td.g{color:#2e7d32;font-weight:700;} td.r{color:#c62828;font-weight:700;} td.a{color:#bf6f00;font-weight:700;} td.d{color:#aaa;font-style:italic;}
+tr:last-child td{border-bottom:none;} tr:nth-child(even) td{background:#fafafa;}
+.badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;}
+.badge.g{background:#e8f5e9;color:#1b5e20;} .badge.r{background:#ffebee;color:#b71c1c;} .badge.a{background:#fff8e1;color:#e65100;} .badge.b{background:#e3f2fd;color:#0d47a1;}
+.note{border-radius:0 10px 10px 0;padding:11px 13px;margin-bottom:10px;font-size:13px;line-height:1.55;border-left:4px solid;}
+.note.g{background:#e8f5e9;border-color:#2e7d32;} .note.r{background:#ffebee;border-color:#c62828;} .note.a{background:#fff8e1;border-color:#bf6f00;} .note.b{background:#e3f2fd;border-color:#1565a3;}
+.chart-card{background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:14px;margin-bottom:14px;}
+.chart-title{font-size:13px;font-weight:600;color:#1d1d1f;margin-bottom:10px;}
+canvas{width:100%!important;}
+.av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.pc-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.pc-name{font-size:15px;font-weight:700;color:#1d1d1f;}
+.pc-pos{font-size:11px;color:#888;margin-top:1px;}
+.stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:8px;}
+.sb{background:#f5f5f7;border-radius:8px;padding:6px;text-align:center;}
+.sb-v{font-size:13px;font-weight:700;color:#1d1d1f;} .sb-v.g{color:#2e7d32;} .sb-v.r{color:#c62828;}
+.sb-l{font-size:9px;color:#aaa;margin-top:1px;text-transform:uppercase;}
+.spark{display:flex;gap:2px;align-items:flex-end;height:26px;margin-bottom:7px;}
+.sp-b{flex:1;border-radius:2px;}
+.sp-hi{background:#2e7d32;} .sp-lo{background:#c62828;} .sp-md{background:#1565a3;} .sp-null{background:#e5e5e5;}
+.pc-note{font-size:12px;color:#555;line-height:1.5;}
+.flag-card{background:#fff;border-radius:12px;border:1px solid #e5e5e5;margin-bottom:10px;overflow:hidden;}
+.flag-bar{height:4px;} .flag-bar.r{background:#c62828;} .flag-bar.g{background:#2e7d32;} .flag-bar.a{background:#bf6f00;} .flag-bar.b{background:#1565a3;}
+.flag-body{padding:12px 14px;}
+.flag-title{font-size:14px;font-weight:700;color:#1d1d1f;margin-bottom:2px;}
+.flag-player{font-size:11px;color:#888;margin-bottom:5px;}
+.flag-text{font-size:12px;color:#555;line-height:1.5;}
+.pos-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.pos-card{background:#fff;border-radius:12px;border:1px solid #e5e5e5;padding:10px 12px;}
+.pos-card.gap{border-color:#ffcdd2;background:#fff9f9;} .pos-card.thin{border-color:#ffe0b2;background:#fffdf5;}
+.pos-depth{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;}
+.pos-players{font-size:11px;color:#555;line-height:1.4;}
+.updated{font-size:11px;color:#aaa;padding:6px 0;}
+</style>
+</head>
+<body>
+<div id="auth">
+<div class="ac">
+  <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#aaa;margin-bottom:8px">Goodland Bruins Baseball</div>
+  <div style="font-size:22px;font-weight:700;margin-bottom:4px">13U Gold</div>
+  <div style="font-size:13px;color:#888;margin-bottom:16px">Coach Jesse Landeros</div>
+  <div class="dots">
+    <div class="dot" id="d0"></div><div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div><div class="dot" id="d3"></div>
+  </div>
+  <div class="numpad">
+    <button class="nb" onclick="pp('1')">1</button><button class="nb" onclick="pp('2')">2</button><button class="nb" onclick="pp('3')">3</button>
+    <button class="nb" onclick="pp('4')">4</button><button class="nb" onclick="pp('5')">5</button><button class="nb" onclick="pp('6')">6</button>
+    <button class="nb" onclick="pp('7')">7</button><button class="nb" onclick="pp('8')">8</button><button class="nb" onclick="pp('9')">9</button>
+    <button class="nb w" onclick="pp('0')">0</button><button class="nb" onclick="pd()">&#9003;</button>
+  </div>
+  <div class="err" id="aerr"></div>
+</div>
+</div>
+<div id="app" style="display:none;flex-direction:column;min-height:100vh;">
+<div class="topbar"><div class="team-name">Goodland Bruins 13U Gold</div><div class="team-meta">Coach Jesse Landeros &middot; Santa Barbara / Goleta, CA</div><div><span class="rec-pill">24&ndash;7 &middot; +92 run diff</span></div></div>
+<div class="page-nav"><a class="pn active" href="index.html">Team</a><a class="pn" href="batting.html">Batting</a><a class="pn" href="pitching.html">Pitching</a><a class="pn" href="fielding.html">Fielding</a><a class="pn" href="trends.html">Trends</a><a class="pn" href="lineups.html">Lineups</a><a class="pn" href="scouting.html">Games</a><a class="pn" href="players.html">Players</a><a class="pn" href="flags.html">Flags</a></div>
+<div class="content" style="flex:1;padding-bottom:20px;"><div class="g4">
+  <div class="mc"><div class="mc-l">Record</div><div class="mc-v g">24-7</div></div>
+  <div class="mc"><div class="mc-l">Run diff</div><div class="mc-v g">+92</div></div>
+  <div class="mc"><div class="mc-l">RS/G</div><div class="mc-v">6.5</div></div>
+  <div class="mc"><div class="mc-l">Titles</div><div class="mc-v g">2</div></div>
+</div>
+<div class="chart-card"><div class="chart-title">Runs scored vs allowed per game</div><div style="position:relative;height:155px"><canvas id="run-c"></canvas></div></div>
+<div class="sl">Tournament log</div><div id="t-list"></div>
+<div class="sl">By opponent class</div><div class="card" id="class-bd"></div>
+<div class="note g"><strong>Best result:</strong> Won The Chiller OC (Feb, Irvine) - 13AAA BB State Qualifier. Beat LOS CRUSHERS (PR 984), SoCal PJX (PR 909), West Coast Shockers (PR 865). Won without Swartz at full strength.</div>
+<div class="note a"><strong>Competition note:</strong> SB Spring Break (T8 - 10.2 RS/G, 4-0) was a lighter field. SCV Knights went 12-23 on the season (PR 599).</div>
+<div class="updated" id="upd"></div></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+
+const TEAM = {
+  name: 'Goodland Bruins 13U Gold',
+  coach: 'Coach Jesse Landeros',
+  location: 'Santa Barbara / Goleta, CA',
+  lastUpdated: 'Apr 5, 2026',
+  season: { w:24, l:7, rs:203, ra:111 },
+  tournaments: [
+    {name:'Halloweekend',       date:'Oct 25-26', w:3,l:1,rs:23,ra:14, cls:'13Open', pr:null,  place:'7th',  champ:false, note:'Mixed roster (7-8 players). Season opener.'},
+    {name:"Vet's Day Super NIT",date:'Nov 7-9',   w:2,l:2,rs:19,ra:17, cls:'13Major',pr:null,  place:'8th',  champ:false, note:'Toughest field. BC Pirates PR 1010.'},
+    {name:'Snowball Classic',   date:'Dec 13-14', w:3,l:1,rs:21,ra:13, cls:'13Open', pr:null,  place:'2nd',  champ:false, note:'Oswald joins program.'},
+    {name:'MLK Classic',        date:'Jan 17-19', w:3,l:2,rs:29,ra:17, cls:'13Open', pr:null,  place:'7th',  champ:false, note:'Zant out — pneumonia.'},
+    {name:'Chiller OC',         date:'Feb 21-22', w:4,l:1,rs:27,ra:17, cls:'13AAA',  pr:null,  place:'1st',  champ:true,  note:'CHAMPION — 13AAA BB State Qualifier.'},
+    {name:'PG Tournament',      date:'Mar 14-15', w:4,l:0,rs:34,ra:18, cls:'13AAA',  pr:null,  place:'Swept',champ:false, note:'Perfect Game — all AAA. Swept.'},
+    {name:'Mar 22 Standalone',  date:'Mar 22',    w:1,l:1,rs:10,ra:7,  cls:'Mixed',  pr:null,  place:'—',    champ:false, note:'Mono onset period for Swartz.'},
+    {name:'SB Spring Break',    date:'Mar 28-29', w:4,l:0,rs:41,ra:14, cls:'13Open', pr:null,  place:'1st',  champ:true,  note:'CHAMPION — lighter field noted.'},
+  ],
+  games: [
+    {date:'Oct25',opp:'Game Speed Athletic',    us:2, them:3,cls:'13Major',pr:862,  tourn:'Halloweekend',       w:false},
+    {date:'Oct25',opp:'BATRS Cameron',          us:6, them:5,cls:'13AA',   pr:834,  tourn:'Halloweekend',       w:true},
+    {date:'Oct26',opp:'Total Baseball Vipers',  us:6, them:3,cls:'13AA',   pr:1145, tourn:'Halloweekend',       w:true},
+    {date:'Oct26',opp:'Legacy 13u Select',      us:9, them:3,cls:'13AA',   pr:1164, tourn:'Halloweekend',       w:true},
+    {date:'Nov08',opp:'Braves Baseball Academy',us:5, them:3,cls:'13Major',pr:706,  tourn:"Vet's Day Super NIT",w:true},
+    {date:'Nov08',opp:'BC Pirates',             us:8, them:9,cls:'13Major',pr:1010, tourn:"Vet's Day Super NIT",w:false},
+    {date:'Nov09',opp:'Renegades National',     us:5, them:1,cls:'13Major',pr:903,  tourn:"Vet's Day Super NIT",w:true},
+    {date:'Nov09',opp:'BC Pirates',             us:1, them:4,cls:'13Major',pr:1010, tourn:"Vet's Day Super NIT",w:false},
+    {date:'Dec13',opp:'Clubhouse 805 Black',    us:5, them:3,cls:'13AAA',  pr:841,  tourn:'Snowball Classic',   w:true},
+    {date:'Dec13',opp:'BATRS Fleisher',         us:8, them:1,cls:'13AA',   pr:388,  tourn:'Snowball Classic',   w:true},
+    {date:'Dec14',opp:'Clubhouse 805 Blue',     us:7, them:0,cls:'13Major',pr:504,  tourn:'Snowball Classic',   w:true},
+    {date:'Dec14',opp:'Swag Baseball Club',     us:1, them:9,cls:'13AAA',  pr:1037, tourn:'Snowball Classic',   w:false},
+    {date:'Jan17',opp:'Prime All American 13u X',us:2,them:3,cls:'13AAA', pr:858,  tourn:'MLK Classic',        w:false},
+    {date:'Jan17',opp:'Top Level 13u Pali Blue',us:8, them:3,cls:'13AAA', pr:955,  tourn:'MLK Classic',        w:true},
+    {date:'Jan18',opp:'Camarillo Elite 13U',    us:3, them:6,cls:'13AAA',  pr:1290, tourn:'MLK Classic',        w:false},
+    {date:'Jan19',opp:'Top Level 13u Pali Blue',us:5, them:4,cls:'13AAA', pr:955,  tourn:'MLK Classic',        w:true},
+    {date:'Jan19',opp:'Five Tools LA 13u',      us:11,them:1,cls:'13AAA',  pr:996,  tourn:'MLK Classic',        w:true},
+    {date:'Feb21',opp:'Swing City 13u Black',   us:7, them:3,cls:'13AA',   pr:965,  tourn:'Chiller OC',         w:true},
+    {date:'Feb21',opp:'LOS CRUSHERS',           us:4, them:5,cls:'13AAA',  pr:984,  tourn:'Chiller OC',         w:false},
+    {date:'Feb22',opp:'SoCal PJX',              us:6, them:4,cls:'13AAA',  pr:909,  tourn:'Chiller OC',         w:true},
+    {date:'Feb22',opp:'West Coast Shockers',    us:5, them:0,cls:'13AAA',  pr:865,  tourn:'Chiller OC',         w:true},
+    {date:'Feb22',opp:'LOS CRUSHERS',           us:6, them:5,cls:'13AAA',  pr:984,  tourn:'Chiller OC',         w:true},
+    {date:'Mar14',opp:'G1 Cruz 13u',            us:7, them:5,cls:'13AAA',  pr:null, tourn:'PG Tournament',      w:true},
+    {date:'Mar14',opp:'GBG South Bay Blue',     us:15,them:3,cls:'13AAA',  pr:null, tourn:'PG Tournament',      w:true},
+    {date:'Mar15',opp:'G1 Cruz 13u',            us:5, them:4,cls:'13AAA',  pr:null, tourn:'PG Tournament',      w:true},
+    {date:'Mar15',opp:'Temecula Icon Baseball', us:7, them:6,cls:'13AAA',  pr:null, tourn:'PG Tournament',      w:true},
+    {date:'Mar22',opp:'Swag Baseball Club',     us:3, them:7,cls:'13AAA',  pr:1037, tourn:'Mar 22 Standalone',  w:false},
+    {date:'Mar22',opp:'Clubhouse 805 Blue',     us:7, them:0,cls:'13Major',pr:504,  tourn:'Mar 22 Standalone',  w:true},
+    {date:'Mar28',opp:'Swag Baseball Club',     us:6, them:3,cls:'13AAA',  pr:1037, tourn:'SB Spring Break',    w:true},
+    {date:'Mar28',opp:'SCV Knights',            us:15,them:3,cls:'13AAA',  pr:599,  tourn:'SB Spring Break',    w:true},
+    {date:'Mar29',opp:'Saugus Saints 13U White',us:11,them:1,cls:'13AA',   pr:716,  tourn:'SB Spring Break',    w:true},
+    {date:'Mar29',opp:'SCV Knights',            us:9, them:7,cls:'13AAA',  pr:599,  tourn:'SB Spring Break',    w:true},
+  ],
+  batting: [
+    {lineup:1, name:'Torres',    pos:'IF/P/OF', age:12, avg:.452,obp:.558,ops:1.085,r:13,rbi:7, bb:10,sb:10,qab:50.0,kpct:17.3, color:'#F4C0D1',tc:'#4B1528',
+     trend:[.500,.333,.500,.400,.400,null,.667,.500],
+     coaching:'None — game reps',
+     note:'Leadoff anchor. .558 OBP leads roster. Intentional multi-position development. 10 SB.',
+     highlights:['Leadoff — highest OBP on roster (.558)','10 SB — smart baserunner','Played 7 positions — intentional versatility','0.00 ERA in 4 IP as emergency pitcher'],
+     priority:'SS and 2B as primary anchors. Continue multi-position plan.'},
+    {lineup:2, name:'Firestone', pos:'SS/1B/P', age:11, avg:.431,obp:.548,ops:1.032,r:21,rbi:22,bb:15,sb:12,qab:55.7,kpct:15.9, color:'#FAC775',tc:'#412402',
+     trend:[.455,.200,null,.286,.400,.500,.667,.667],
+     coaching:'Deliberate 13U placement at age 11',
+     note:'Age 11 in 13U. Best QAB% on roster (55.7%). .667 last 2 tournaments. Best development story.',
+     highlights:['Age 11 — deliberately placed in 13U for development','Best plate discipline (55.7% QAB)','4 DP at SS/1B — strong instincts','Surging: .667 AVG in each of last 2 tournaments'],
+     priority:'Add 2B and 3B reps. Protect development arc — do not overload.'},
+    {lineup:3, name:'Lopes',     pos:'CF/P',    age:13, avg:.463,obp:.544,ops:1.477,r:28,rbi:17,bb:12,sb:8, qab:58.7,kpct:18.5, color:'#9FE1CB',tc:'#085041',
+     trend:[.167,.545,.364,.400,.538,.800,.167,null],
+     coaching:'None — game reps',
+     note:'Best bat on roster. 1.477 OPS. .800 AVG in T6 is the single highest tournament AVG posted by any Bruin.',
+     highlights:['1.477 OPS — best on roster','Best QAB% among everyday starters (58.7%)','.800 AVG T6 — highest single tournament by any Bruin','K/9 16.4 as pitcher — two-way talent'],
+     priority:'Manage two-way workload. Physical development (gym) supports both.'},
+    {lineup:4, name:'Herrera',   pos:'C/SS',    age:13, avg:.388,obp:.423,ops:1.116,r:13,rbi:24,bb:4, sb:3, qab:50.7,kpct:11.9, color:'#CECBF6',tc:'#26215C',
+     trend:[.143,.455,.364,.500,.467,.455,.000,null],
+     coaching:'Catching coach — Coach Landeros',
+     note:'RBI leader (24). Most durable player — 152 total chances. Catching coach investment showing.',
+     highlights:['RBI leader — 24 on the season','152 total chances — most durable fielder','C + SS both above .950 FPCT','Walk rate is the one adjustment to explore'],
+     priority:'Continue catching development. Explore 3B reps as 3rd option at thinnest position.'},
+    {lineup:5, name:'Oswald',    pos:'SS/C/IF', age:13, avg:.550,obp:.591,ops:1.262,r:14,rbi:11,bb:4, sb:5, qab:46.8,kpct:8.2,  color:'#C0DD97',tc:'#173404',
+     trend:[null,null,.500,.250,.667,.600,null,.692],
+     coaching:'Joined program Dec 2025 — moved to area',
+     note:'Highest season AVG on roster (.550). Joined December — .692 last tournament. Peak form.',
+     highlights:['Highest season AVG (.550)','Joined program December — instant contributor','.692 AVG in final tournament','Most versatile new addition — SS/C/1B all competent'],
+     priority:'3B reps URGENT — directly addresses team biggest gap. Let defensive home develop.'},
+    {lineup:6, name:'Demmin',    pos:'1B/P',    age:13, avg:.446,obp:.532,ops:1.110,r:30,rbi:14,bb:12,sb:8, qab:46.8,kpct:17.6, color:'#F5C4B3',tc:'#4A1B0C',
+     trend:[.625,.143,.455,.286,.467,.545,.500,null],
+     coaching:'None — game reps',
+     note:'Most consistent everyday player. 1.110 OPS, 30 runs scored. Best arm right now (0.47 ERA last 4).',
+     highlights:['Never below .143 in any tournament — iron man','30 R scored — 2nd on team','0.47 ERA last 4 pitching outings','5 DP at 1B — best footwork'],
+     priority:'Manage dual 1B + pitching workload. Physical development supports arm durability.'},
+    {lineup:7, name:'Short',     pos:'3B/C',    age:13, avg:.390,obp:.447,ops:.999, r:25,rbi:14,bb:8, sb:19,qab:49.4,kpct:8.5,  color:'#B5D4F4',tc:'#042C53',
+     trend:[.364,.222,null,.364,.333,.250,.714,.583],
+     coaching:'Catching coach — Coach Landeros',
+     note:'Late-season surge — .714 T7, .583 T8. Team-high 19 SB and getting faster all season.',
+     highlights:['19 SB — team high','Getting visibly faster as season progressed','.714 T7 + .583 T8 — best back-to-back stretch','Catching coach investment showing'],
+     priority:'Add 2B reps — directly addresses depth gap. Continue catching development.'},
+    {lineup:8, name:'Denny',     pos:'OF/P',    age:13, avg:.410,obp:.463,ops:.937, r:11,rbi:16,bb:6, sb:5, qab:47.1,kpct:7.4,  color:'#D3D1C7',tc:'#2C2C2A',
+     trend:[.556,.286,.286,.250,.455,.250,.600,.500],
+     coaching:'None — game reps only',
+     note:'Never below .250 in any tournament. Quiet, consistent. Best BB/9 on pitching staff (3.4).',
+     highlights:['Never below .250 AVG in any tournament','Best BB/9 on pitching staff (3.4)','Versatile across all 3 OF spots','Never missed a tournament — iron man'],
+     priority:'Add 1B reps for additional versatility. Physical development in gym.'},
+    {lineup:9, name:'Murdock',   pos:'2B/C',    age:12, avg:.211,obp:.338,ops:.554, r:6, rbi:13,bb:11,sb:9, qab:52.0,kpct:22.2, color:'#B4B2A9',tc:'#2C2C2A',
+     trend:[.100,.143,.250,.125,.429,.444,.000,.000],
+     coaching:'Coach Valencia (hitting) since Dec 2025',
+     note:'Valencia coaching working — pre:.164 (T1-T3), post:.333 (T4-T6). T7/T8 small sample. Working hard.',
+     highlights:['Pre-Valencia AVG .164 → post-coaching .333 — measurable improvement','5 DP at 2B — team high, tied with Demmin','52% QAB — strong plate discipline metric','Ceiling position: SS — coach long-term vision'],
+     priority:'Continue Valencia work. Begin SS reps toward long-term position. Trust the process.'},
+    {lineup:10,name:'Zant',      pos:'OF/P',    age:12, avg:.143,obp:.357,ops:.523, r:9, rbi:3, bb:7, sb:3, qab:36.6,kpct:29.0, color:'#D3D1C7',tc:'#2C2C2A',
+     trend:[null,.000,.000,null,null,.167,null,.667],
+     coaching:'None — medically cleared post-pneumonia',
+     note:'Missed Jan (pneumonia). Returned — .667 T8. Medically cleared. OBP (.357) shows plate patience.',
+     highlights:['Returned from pneumonia — .667 AVG T8','1.000 FPCT in LF — zero errors','ERA 2.19 — lowest on staff','OBP .357 exceeds AVG — good count approach'],
+     priority:'Bridge/closer pitching role — not doubleheader starter. Ease return. Medically cleared.'},
+    {lineup:11,name:'Swartz',    pos:'P/OF',    age:13, avg:.154,obp:.195,ops:.386, r:6, rbi:5, bb:2, sb:0, qab:29.2,kpct:25.0, color:'#CECBF6',tc:'#26215C',
+     trend:[.143,.167,.000,.250,.250,.000,.500,null],
+     coaching:'Daniel Norris (pitching) since Feb 2026. Coach Valencia (hitting) since Jan 2026.',
+     note:'Working with Coach Valencia through a tough health year. That commitment matters. Out until Apr 21.',
+     highlights:['Healthy ERA 1.03 on the mound — elite for 13U','K/9 8.9 — misses bats','Working with Coach Valencia — committed to development','Norris coaching relationship — long-term investment'],
+     priority:'Medical clearance before pitching. 60P max, no game-2 same day, 5-day rest. RF/LF on return.'},
+  ],
+  pitching: [
+    {name:'Swartz', role:'Ace LHP',    ip:42.5,era:2.96,eraH:1.03,whip:1.81,k:42,bb:33,k9:8.9, bb9:7.0,kbb:1.27,sp:57.3,p:768,status:'out',
+     gameEras:[2.33,3.33,0,3.50,0,1.75,0,0,0,0,0,null,0,0,3.50,0,0,null,6.67,10.50,0],
+     gameDates:['Oct25','Oct26a','Oct26b','Nov08a','Nov08b','Nov09a','Nov09b','Dec13','Dec14a','Dec14b','Jan17','Jan19a','Jan19b','Feb21','Feb22a','Feb22b','Mar14','Mar15a','Mar15b','Mar22a','Mar22b'],
+     gameSick: [false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true],
+     gamePitches:[56,48,23,32,19,73,9,42,50,21,36,13,58,20,61,14,21,13,57,52,50]},
+    {name:'Demmin', role:'Starter',    ip:30.1,era:2.53,eraH:2.53,whip:1.41,k:54,bb:28,k9:16.0,bb9:8.3,kbb:1.93,sp:57.7,p:598,status:'active',
+     gameEras:[23.33,0,7.00,14.00,0,0,0,7.00,0,0,0,0,0,0,0,1.40,0,null],
+     gameDates:['Oct25','Oct26','Nov08a','Nov08b','Nov09','Dec13','Dec14a','Dec14b','Jan19','Feb21a','Feb21b','Feb22','Mar15','Mar22'],
+     gamePitches:[51,47,40,43,21,18,26,40,10,17,28,82,96,79]},
+    {name:'Lopes',  role:'Co-starter', ip:30.2,era:2.55,eraH:2.55,whip:1.72,k:55,bb:24,k9:16.4,bb9:7.2,kbb:2.29,sp:60.8,p:571,status:'active',
+     gameEras:[null,3.50,2.80,11.67,0,0,0,7.00,0,0,0,0,0],
+     gameDates:['Nov08a','Nov08b','Nov09','Dec14','Jan17a','Jan17b','Jan19','Feb21','Feb22','Mar15a','Mar15b','Mar22'],
+     gamePitches:[4,47,71,78,14,53,79,43,59,10,32,40]},
+    {name:'Zant',   role:'Bridge',     ip:16.0,era:2.19,eraH:2.19,whip:1.44,k:13,bb:10,k9:7.3, bb9:5.6,kbb:1.30,sp:59.1,p:269,status:'active',
+     gameEras:[null,0,7.00,2.33,0,2.33,0,4.67],
+     gameDates:['Nov08','Nov09','Dec13','Jan18','Jan19','Mar14','Mar28a','Mar28b'],
+     gamePitches:[13,20,16,41,12,55,45,67]},
+    {name:'Denny',  role:'Spot/Bridge',ip:18.1,era:4.95,eraH:4.95,whip:1.58,k:17,bb:7, k9:8.3, bb9:3.4,kbb:2.43,sp:63.6,p:308,status:'active',
+     gameEras:[21.00,0,0,7.00,0,5.83,2.33,7.00,10.50],
+     gameDates:['Nov08','Dec13','Jan17','Feb21','Mar14','Mar15','Mar22','Mar28','Mar29'],
+     gamePitches:[20,24,35,37,33,32,39,50,38]},
+    {name:'Torres', role:'Emergency',  ip:4.0, era:0.00,eraH:0.00,whip:0.75,k:2, bb:2, k9:4.5, bb9:4.5,kbb:1.00,sp:58.2,p:55, status:'active',
+     gameEras:[0,0],gameDates:['Feb21','Mar29'],gamePitches:[9,46]},
+  ],
+  fielding: [
+    {name:'Lopes',    fpct:.977,e:1, dp:0,tc:43, C:0,  B1:17,B2:0, B3:0,  SS:0,  LF:0,  CF:100,RF:0,  conf:true,  note:'Best FPCT — 1 error in 43 chances'},
+    {name:'Zant',     fpct:1.00,e:0, dp:0,tc:12, C:0,  B1:6, B2:0, B3:0,  SS:0,  LF:33, CF:11, RF:10, conf:true,  note:'Perfect FPCT — zero errors'},
+    {name:'Murdock',  fpct:.943,e:4, dp:5,tc:70, C:13, B1:10,B2:71,B3:0,  SS:7,  LF:0,  CF:1,  RF:9,  conf:true,  note:'5 DP leads team'},
+    {name:'Herrera',  fpct:.954,e:7, dp:1,tc:152,C:76, B1:18,B2:0, B3:3,  SS:59, LF:10, CF:0,  RF:1,  conf:true,  note:'152 TC — most durable'},
+    {name:'Short',    fpct:.946,e:6, dp:3,tc:111,C:62, B1:12,B2:0, B3:71, SS:0,  LF:0,  CF:0,  RF:0,  conf:true,  note:'3 DP — catching improving'},
+    {name:'Denny',    fpct:.909,e:2, dp:0,tc:22, C:0,  B1:22,B2:0, B3:0,  SS:0,  LF:28, CF:39, RF:46, conf:true,  note:'All 3 OF spots versatile'},
+    {name:'Demmin',   fpct:.911,e:7, dp:5,tc:79, C:0,  B1:172,B2:0,B3:0,  SS:0,  LF:5,  CF:0,  RF:17, conf:true,  note:'5 DP at 1B — 172 innings'},
+    {name:'Firestone',fpct:.886,e:8, dp:4,tc:70, C:0,  B1:23,B2:0, B3:0,  SS:49, LF:0,  CF:0,  RF:0,  conf:false, note:'Age 11 — FPCT developing'},
+    {name:'Oswald',   fpct:.883,e:7, dp:1,tc:60, C:20, B1:18,B2:0, B3:0,  SS:38, LF:0,  CF:0,  RF:0,  conf:false, note:'Versatile — developing'},
+    {name:'Torres',   fpct:.839,e:5, dp:0,tc:31, C:1,  B1:13,B2:36,B3:0,  SS:11, LF:20, CF:0,  RF:32, conf:false, note:'Multi-pos plan — intentional'},
+    {name:'Swartz',   fpct:.800,e:3, dp:0,tc:15, C:0,  B1:6, B2:0, B3:0,  SS:0,  LF:11, CF:0,  RF:15, conf:false, note:'RF/LF on return'},
+  ],
+  flags: [
+    {type:'red',   player:'Eli Swartz',  title:'Health — out until Apr 21',      text:'Mono + chronic migraines. Return protocol: 60P max, no game-2 same day he pitches, 5-day rest min. RF/LF in field. Norris + Valencia coaching continuing.'},
+    {type:'red',   player:'3B depth',    title:'Position gap — urgent',          text:'Short only (71 inn). No confident backup. Oswald and Firestone need 3B reps immediately.'},
+    {type:'amber', player:'2B depth',    title:'Position depth — thin',          text:'Murdock strong (.943, 5 DP). Torres only backup (.839). Short or Firestone should begin 2B development.'},
+    {type:'amber', player:'Zant',        title:'Return workload management',     text:'Cleared from pneumonia. First return was 112P in one day — high. Use in bridge/closer role, not doubleheader starter.'},
+    {type:'green', player:'Demmin',      title:'Best arm right now',             text:'0.47 ERA last 4 outings. 10K in each of last 2 starts. Manage dual 1B + pitching workload.'},
+    {type:'green', player:'Firestone',   title:'Development standout',           text:'Age 11 in 13U. .667 AVG last 2 tournaments. Best QAB% (55.7%). Best individual development story.'},
+    {type:'green', player:'Short',       title:'Late-season surge',              text:'.714 T7, .583 T8. 19 SB and getting faster. Catching coach work showing.'},
+    {type:'amber', player:'Murdock',     title:'Valencia coaching — stay patient',text:'Pre-coaching .164 → post-coaching .333. T7/T8 zeroes from 4 AB each — small sample. Keep trusting the process.'},
+    {type:'green', player:'Offseason',   title:'Team-wide priority',             text:'Get in the gym, get stronger — every player. Physical development at 12-13 is a leverage point for bat speed, arm velocity, range, and durability.'},
+  ]
+};
+
+// Lineup recommendations by class
+const LINEUPS = {
+  'vs 13AA': {
+    note: 'Against 13AA competition we are dominant (6-0, 7.83 RS/G). Priority is to give everyone meaningful innings while managing workload. Rest Swartz completely. Rotate pitching broadly.',
+    lineup: [
+      {spot:1, name:'Torres',    pos:'SS',  reason:'OBP-first regardless of level'},
+      {spot:2, name:'Firestone', pos:'SS',  reason:'Plate discipline — 55.7% QAB'},
+      {spot:3, name:'Lopes',     pos:'CF',  reason:'Best bat — immovable'},
+      {spot:4, name:'Oswald',    pos:'3B',  reason:'Give him 3B reps — address gap'},
+      {spot:5, name:'Herrera',   pos:'C',   reason:'Steady — RBI production'},
+      {spot:6, name:'Demmin',    pos:'1B',  reason:'Reliable everyday bat'},
+      {spot:7, name:'Short',     pos:'C',   reason:'Surging — earned the spot'},
+      {spot:8, name:'Murdock',   pos:'2B',  reason:'Valencia work — getting reps'},
+      {spot:9, name:'Denny',     pos:'RF',  reason:'Consistent — bridge role'},
+      {spot:10,name:'Zant',      pos:'LF',  reason:'Build back — lower pressure spot'},
+      {spot:11,name:'Swartz',    pos:'RF',  reason:'Bat development — no pitching'},
+    ],
+    rotation: 'Game 1: Denny (3 IP) → Zant (2 IP) → Torres (2 IP). Game 2: Firestone (2 IP) → Murdock (2 IP) → Lopes (3 IP). Rest Swartz and Demmin completely.',
+  },
+  'vs 13AAA': {
+    note: 'Our primary competitive level (10-4, 6.07 RS/G). Won Chiller OC at this level. Stack the lineup analytically — OBP first, protect the best bats.',
+    lineup: [
+      {spot:1, name:'Torres',    pos:'2B',  reason:'.558 OBP — best leadoff on roster'},
+      {spot:2, name:'Firestone', pos:'SS',  reason:'55.7% QAB — deepens counts'},
+      {spot:3, name:'Lopes',     pos:'CF',  reason:'1.477 OPS — best bat'},
+      {spot:4, name:'Herrera',   pos:'C',   reason:'24 RBI — cleanup production'},
+      {spot:5, name:'Oswald',    pos:'SS',  reason:'.591 OBP protects Herrera'},
+      {spot:6, name:'Demmin',    pos:'1B',  reason:'1.110 OPS — second cleanup tier'},
+      {spot:7, name:'Short',     pos:'3B',  reason:'Surging + 19 SB — pressure'},
+      {spot:8, name:'Denny',     pos:'RF',  reason:'.463 OBP — non-throwaway 8-hole'},
+      {spot:9, name:'Murdock',   pos:'2B',  reason:'52% QAB — working counts'},
+      {spot:10,name:'Zant',      pos:'LF',  reason:'Returning — lower lineup while building'},
+      {spot:11,name:'Swartz',    pos:'RF',  reason:'In lineup — Valencia work continues'},
+    ],
+    rotation: 'Game 1: Demmin starter (4-5 IP), Lopes bridge (2 IP), Zant closer (1 IP). Game 2: Lopes starter (3-4 IP), Denny bridge (2 IP), Zant closer (1 IP). Swartz: if pitching, Game 1 only, 60P max, then field only.',
+  },
+  'vs 13Major': {
+    note: 'Even record (3-3, 4.67 RS/G). BC Pirates (PR 1010) beat us twice. This is where we need our best arms and tightest lineup. Every plate appearance counts.',
+    lineup: [
+      {spot:1, name:'Torres',    pos:'2B',  reason:'.558 OBP — must get on base'},
+      {spot:2, name:'Lopes',     pos:'CF',  reason:'Move Lopes to 2 — more PA at top'},
+      {spot:3, name:'Herrera',   pos:'C',   reason:'Elite contact — 3-hole vs tough arms'},
+      {spot:4, name:'Oswald',    pos:'SS',  reason:'.550 AVG — cannot be pitched around'},
+      {spot:5, name:'Demmin',    pos:'1B',  reason:'1.110 OPS — protection in lineup'},
+      {spot:6, name:'Firestone', pos:'SS',  reason:'Discipline — works counts'},
+      {spot:7, name:'Short',     pos:'3B',  reason:'SB threat disrupts pitchers'},
+      {spot:8, name:'Denny',     pos:'RF',  reason:'Never below .250 — reliable'},
+      {spot:9, name:'Murdock',   pos:'2B',  reason:'52% QAB — even here'},
+      {spot:10,name:'Zant',      pos:'LF',  reason:'Depth'},
+      {spot:11,name:'Swartz',    pos:'RF',  reason:'Bat development continues'},
+    ],
+    rotation: 'Game 1: Demmin full game (5-6 IP), Lopes bridge (1-2 IP). Game 2: Lopes starter (4 IP), Demmin (1 IP bridge if needed), Zant closer. If Swartz is medically cleared and rested: Swartz Game 1 max 60P, then Demmin finishes.',
+  },
+};
+
+var PIN='1327';
+var pe='';
+function pp(d){
+  if(pe.length>=4)return;
+  pe+=d;ud();
+  if(pe.length===4){
+    if(pe===PIN){
+      document.getElementById('auth').style.display='none';
+      document.getElementById('app').style.display='block';
+      if(typeof onUnlock==='function')onUnlock();
+    }else{
+      var dots=document.querySelectorAll('.dot');
+      for(var i=0;i<dots.length;i++)dots[i].classList.add('e');
+      document.getElementById('aerr').textContent='Incorrect PIN';
+      setTimeout(function(){
+        pe='';
+        var d2=document.querySelectorAll('.dot');
+        for(var i=0;i<d2.length;i++)d2[i].classList.remove('f','e');
+        document.getElementById('aerr').textContent='';
+      },800);
+    }
+  }
+}
+function pd(){if(!pe.length)return;pe=pe.slice(0,-1);ud();}
+function ud(){for(var i=0;i<4;i++){var d=document.getElementById('d'+i);if(i<pe.length)d.classList.add('f');else d.classList.remove('f');}}
+function onUnlock(){
+document.getElementById('upd').textContent='Updated: '+TEAM.lastUpdated;
+var tl=document.getElementById('t-list');
+tl.innerHTML=TEAM.tournaments.map(function(t){
+  var diff=t.rs-t.ra;
+  var dc=t.w>t.l?'#2e7d32':t.w<t.l?'#c62828':'#bf6f00';
+  var champ=t.champ?'<span class="badge g">Champion</span> ':'';
+  var pl=(t.place!='--'&&t.place!='N/A'&&t.place!='Swept')?'<span class="badge b">'+t.place+'</span>':(t.place=='Swept'?'<span class="badge g">Swept</span>':'');
+  return '<div class="card" style="margin-bottom:8px;padding:12px 14px"><div style="display:flex;align-items:flex-start;gap:10px"><div style="width:10px;height:10px;border-radius:50%;background:'+dc+';margin-top:4px;flex-shrink:0"></div><div style="flex:1"><div style="font-size:14px;font-weight:700">'+champ+t.name+' '+pl+'</div><div style="font-size:11px;color:#888;margin-top:2px">'+t.date+' &middot; '+t.cls+' &middot; '+t.note+'</div></div><div style="text-align:right;flex-shrink:0"><div style="font-size:14px;font-weight:700">'+t.w+'&ndash;'+t.l+'</div><div style="font-size:12px;color:'+(diff>0?'#2e7d32':diff<0?'#c62828':'#888')+'">'+(diff>0?'+':'')+diff+' runs</div></div></div></div>';
+}).join('');
+var classes=[{cls:'vs 13AA',w:6,l:0,rs:7.83,pct:100},{cls:'vs 13AAA',w:10,l:4,rs:6.07,pct:71},{cls:'vs 13Major',w:3,l:3,rs:4.67,pct:50}];
+document.getElementById('class-bd').innerHTML=classes.map(function(c){
+  return '<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0f0"><div style="font-size:13px;font-weight:600;width:80px">'+c.cls+'</div><div style="flex:1;height:7px;background:#f0f0f0;border-radius:4px;overflow:hidden"><div style="width:'+c.pct+'%;height:100%;background:#1565a3;border-radius:4px"></div></div><div style="font-size:12px;font-weight:700;color:'+(c.w>c.l?'#2e7d32':c.w<c.l?'#c62828':'#555')+';min-width:36px;text-align:right">'+c.w+'&ndash;'+c.l+'</div><div style="font-size:11px;color:#888;min-width:50px;text-align:right">'+c.rs.toFixed(1)+' RS</div></div>';
+}).join('');
+new Chart(document.getElementById('run-c'),{type:'line',data:{labels:TEAM.tournaments.map(function(t){return t.name.split(' ')[0];}),datasets:[{data:TEAM.tournaments.map(function(t){return+(t.rs/(t.w+t.l)).toFixed(1);}),borderColor:'#1565a3',tension:.3,pointRadius:4,pointBackgroundColor:'#1565a3',fill:false,borderWidth:2,label:'RS/G'},{data:TEAM.tournaments.map(function(t){return+(t.ra/(t.w+t.l)).toFixed(1);}),borderColor:'#c62828',borderDash:[4,3],tension:.3,pointRadius:4,pointBackgroundColor:'#c62828',fill:false,borderWidth:2,label:'RA/G'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9},maxRotation:30},grid:{display:false}},y:{min:0,max:13,ticks:{font:{size:9}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+}
+</script>
+</body>
+</html>
