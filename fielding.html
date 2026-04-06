@@ -336,11 +336,20 @@ const LINEUPS = {
 
 var PIN='1327';
 var pe='';
+
+// Check if already unlocked
+if(localStorage.getItem('bruins_auth')==='ok'){
+  document.getElementById('auth').style.display='none';
+  document.getElementById('app').style.display='block';
+  if(typeof onUnlock==='function') setTimeout(function(){onUnlock();},10);
+}
+
 function pp(d){
   if(pe.length>=4)return;
   pe+=d;ud();
   if(pe.length===4){
     if(pe===PIN){
+      localStorage.setItem('bruins_auth','ok');
       document.getElementById('auth').style.display='none';
       document.getElementById('app').style.display='block';
       if(typeof onUnlock==='function')onUnlock();
