@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PIN Test</title>
+<style>
+body{font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#2774AE;margin:0;}
+.box{background:#fff;border-radius:16px;padding:24px;width:280px;text-align:center;}
+.dots{display:flex;gap:12px;justify-content:center;margin:16px 0;}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid #ccc;}
+.dot.on{background:#2774AE;border-color:#2774AE;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.btn{padding:16px;font-size:20px;font-weight:bold;border:none;border-radius:10px;background:#DAEBFE;color:#003B5C;cursor:pointer;}
+.btn:active{background:#8BB8E8;}
+.wide{grid-column:span 2;}
+#msg{color:#c62828;font-size:13px;margin-top:8px;min-height:18px;}
+#ok{display:none;color:#2e7d32;font-size:18px;font-weight:bold;margin-top:12px;}
+</style>
+</head>
+<body>
+<div class="box">
+  <div style="font-size:16px;font-weight:bold;color:#003B5C;margin-bottom:4px">Bruins Gold</div>
+  <div style="font-size:12px;color:#888">Enter PIN</div>
+  <div class="dots">
+    <div class="dot" id="d0"></div>
+    <div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+  </div>
+  <div class="grid">
+    <button class="btn" data-v="1">1</button>
+    <button class="btn" data-v="2">2</button>
+    <button class="btn" data-v="3">3</button>
+    <button class="btn" data-v="4">4</button>
+    <button class="btn" data-v="5">5</button>
+    <button class="btn" data-v="6">6</button>
+    <button class="btn" data-v="7">7</button>
+    <button class="btn" data-v="8">8</button>
+    <button class="btn" data-v="9">9</button>
+    <button class="btn wide" data-v="0">0</button>
+    <button class="btn" id="del">&#9003;</button>
+  </div>
+  <div id="msg"></div>
+  <div id="ok">Unlocked!</div>
+</div>
+<script>
+var pin = '1327';
+var entry = '';
+
+function updateDots() {
+  for (var i = 0; i < 4; i++) {
+    var d = document.getElementById('d' + i);
+    if (i < entry.length) d.classList.add('on');
+    else d.classList.remove('on');
+  }
+}
+
+function pressDigit(v) {
+  if (entry.length >= 4) return;
+  entry += v;
+  updateDots();
+  if (entry.length === 4) {
+    if (entry === pin) {
+      document.getElementById('ok').style.display = 'block';
+      document.getElementById('msg').textContent = '';
+    } else {
+      document.getElementById('msg').textContent = 'Wrong PIN - try again';
+      setTimeout(function() {
+        entry = '';
+        updateDots();
+        document.getElementById('msg').textContent = '';
+      }, 800);
+    }
+  }
+}
+
+var buttons = document.querySelectorAll('.btn[data-v]');
+for (var i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', function() {
+    pressDigit(this.getAttribute('data-v'));
+  });
+}
+
+document.getElementById('del').addEventListener('click', function() {
+  if (!entry.length) return;
+  entry = entry.slice(0, -1);
+  updateDots();
+});
+</script>
+</body>
+</html>
