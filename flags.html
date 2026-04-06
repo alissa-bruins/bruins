@@ -95,10 +95,10 @@ canvas { width: 100% !important; }
 .pssv { font-size: 11px; font-weight: 700; color: #003B5C; }
 .pssl { font-size: 8px; color: #8BB8E8; text-transform: uppercase; }
 
-.fb { font-size:11px; padding:6px 13px; border-radius:20px; border:1.5px solid #DAEBFE; background:#fff; color:#005587; cursor:pointer; font-weight:600; white-space:nowrap; }
-.fb.active { background:#2774AE; color:#fff; border-color:#2774AE; }
-.filter-bar { display:flex; gap:5px; margin-bottom:10px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none; }
-.filter-bar::-webkit-scrollbar { display:none; }
+.fb{font-size:11px;padding:6px 13px;border-radius:20px;border:1.5px solid #DAEBFE;background:#fff;color:#005587;cursor:pointer;font-weight:600;white-space:nowrap;}
+.fb.active{background:#2774AE;color:#fff;border-color:#2774AE;}
+.filter-bar{display:flex;gap:5px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;}
+.filter-bar::-webkit-scrollbar{display:none;}
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -110,8 +110,10 @@ canvas { width: 100% !important; }
 <div class="pnav"><a href="index.html">Team</a><a href="batting.html">Batting</a><a href="pitching.html">Pitching</a><a href="fielding.html">Fielding</a><a href="trends.html">Trends</a><a href="lineups.html">Lineups</a><a href="scouting.html">Games</a><a href="players.html">Players</a><a href="flags.html" class="active">Flags</a></div>
 <div class="content" style="flex:1;padding-bottom:20px;">
 <div class="note b">Review before each tournament. Red = action required. Amber = monitor. Green = build on.</div>
-<div class="sl">Active flags</div><div id="fl"></div>
-<div class="sl">14U transition priorities</div><div id="pl"></div><div class="sl" style="margin-top:18px">Player snapshot</div><div id="_pswrap"></div></div>
+<div class="sl">Active flags</div>
+<div id="fl"></div>
+<div class="sl">14U transition priorities</div>
+<div id="pl"></div></div>
 </div>
 <script>
 
@@ -467,19 +469,24 @@ function buildPS() {
   el.innerHTML = h;
 }
 
+
 function onUnlock(){
-document.getElementById('fl').innerHTML=TEAM.flags.map(function(f){return'<div class="flag-card"><div class="flag-bar '+f.type+'"></div><div class="flag-body"><div class="flag-title">'+f.title+'</div><div class="flag-player">'+f.player+'</div><div class="flag-text">'+f.text+'</div></div></div>';}).join('');
+
+document.getElementById('fl').innerHTML=TEAM.flags.map(function(f){
+  return '<div class="fc"><div class="fb2 '+f.type+'"></div><div class="fbody"><div class="ftitle">'+f.title+'</div><div class="fplayer">'+f.player+'</div><div class="ftext">'+f.text+'</div></div></div>';
+}).join('');
 var pris=[
-  {n:'1',title:'Get in the gym - every player',type:'g',text:'Team-wide offseason priority. Physical development at 12-13 is the leverage point for bat speed, arm velocity, range, and durability.'},
-  {n:'2',title:'Swartz return protocol',type:'r',text:'Medical clearance required before pitching. 60P max, no game-2 same day, 5-day rest min. RF/LF in field. Mono recovery is not linear.'},
-  {n:'3',title:'2B depth - develop backup behind Murdock',type:'a',text:'Murdock is strong (115 inn). Torres is the only real backup. Short or Firestone beginning 2B reps gives a third option.'},
-  {n:'4',title:'Murdock toward SS long-term',type:'a',text:'Coach vision for Murdock is SS. Begin SS reps now alongside Valencia hitting work.'},
-  {n:'5',title:'Demmin workload management',type:'a',text:'Best arm right now AND primary 1B. Managing the dual role is the key pitching consideration.'},
-  {n:'6',title:'Firestone - protect the development arc',type:'a',text:'Age 12, posting elite AVG in 13U. Add positions deliberately. The ceiling here is significant.'},
-  {n:'7',title:'April 13 - High School Ready meeting',type:'b',text:'Introduce 14U Gold concept to players and families. Gym, classroom, community - all part of the program.'},
+  {n:1,title:'Get in the gym — every player',type:'g',text:'Team-wide. Physical development at 12-13 translates directly to bat speed, arm velocity, range, and injury durability.'},
+  {n:2,title:'Swartz return protocol',type:'r',text:'Medical clearance required before pitching. 60P max, no game-2 same day, 5-day rest min. RF/LF in field. Mono recovery is not linear.'},
+  {n:3,title:'2B depth — develop backup',type:'a',text:'Murdock is strong (115 inn, 5 DP). Torres is the only backup. Short or Firestone beginning 2B reps gives a third option.'},
+  {n:4,title:'Murdock toward SS long-term',type:'a',text:'Coach vision for Murdock ceiling is SS. Begin SS reps alongside Valencia hitting work.'},
+  {n:5,title:'Demmin workload management',type:'a',text:'Best arm right now AND primary 1B. Managing the dual role is the key pitching consideration heading into 14U.'},
+  {n:6,title:'Firestone — protect the arc',type:'a',text:'Age 12, posting elite AVG in 13U. Add positions deliberately. The ceiling here is significant.'},
+  {n:7,title:'April 13 — High School Ready meeting',type:'b',text:'Introduce 14U Gold concept to players and families. Gym, classroom, community — all part of the program.'},
 ];
-document.getElementById('pl').innerHTML=pris.map(function(p){return'<div class="flag-card"><div class="flag-bar '+p.type+'"></div><div class="flag-body"><div style="display:flex;align-items:center;gap:8px;margin-bottom:2px"><div style="font-size:11px;font-weight:700;color:#8BB8E8">'+p.n+'</div><div class="flag-title">'+p.title+'</div></div><div class="flag-text">'+p.text+'</div></div></div>';}).join('');
-buildPS();
+document.getElementById('pl').innerHTML=pris.map(function(p){
+  return '<div class="fc"><div class="fb2 '+p.type+'"></div><div class="fbody"><div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px"><div style="font-size:12px;font-weight:700;color:#8BB8E8;width:18px;flex-shrink:0">'+p.n+'</div><div class="ftitle">'+p.title+'</div></div><div class="ftext">'+p.text+'</div></div></div>';
+}).join('');
 }
 </script>
 </body>
