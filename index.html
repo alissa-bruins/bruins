@@ -364,7 +364,7 @@ function authPressDigit(v) {
       localStorage.setItem('bruins_ok', '1');
       document.getElementById('auth').style.display = 'none';
       document.getElementById('app').style.display = 'block';
-      if (typeof onUnlock === 'function') { if (window.Chart) { onUnlock(); } else { window.addEventListener('load', onUnlock); } }
+      if (typeof onUnlock === 'function') { onUnlock(); }
     } else {
       var dots = document.querySelectorAll('.adot');
       for (var i = 0; i < dots.length; i++) dots[i].classList.add('err');
@@ -391,7 +391,7 @@ window.addEventListener('load', function() {
   if (localStorage.getItem('bruins_ok') === '1') {
     document.getElementById('auth').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    if (typeof onUnlock === 'function') { if (window.Chart) { onUnlock(); } else { window.addEventListener('load', onUnlock); } }
+    if (typeof onUnlock === 'function') { onUnlock(); }
     return;
   }
   var btns = document.querySelectorAll('.abtn[data-v]');
@@ -406,6 +406,9 @@ window.addEventListener('load', function() {
     ENTRY = ENTRY.slice(0, -1);
     authUpdateDots();
   });
+  var lk = document.getElementById('lock-btn');
+  if (lk) lk.addEventListener('click', function() { localStorage.removeItem('bruins_ok'); location.reload(); });
+  if (window.location.search.indexOf('reset=1') > -1) { localStorage.removeItem('bruins_ok'); location.reload(); }
 });
 
 
@@ -485,25 +488,6 @@ document.getElementById('class-bd').innerHTML=classes.map(function(c){
 new Chart(document.getElementById('run-c'),{type:'line',data:{labels:TEAM.tournaments.map(function(t){return t.name.split(' ')[0];}),datasets:[{data:TEAM.tournaments.map(function(t){return+(t.rs/(t.w+t.l)).toFixed(1);}),borderColor:'#2774AE',tension:.3,pointRadius:4,pointBackgroundColor:'#FFD100',pointBorderColor:'#2774AE',fill:false,borderWidth:2.5,label:'RS/G'},{data:TEAM.tournaments.map(function(t){return+(t.ra/(t.w+t.l)).toFixed(1);}),borderColor:'#c62828',borderDash:[4,3],tension:.3,pointRadius:4,pointBackgroundColor:'#c62828',fill:false,borderWidth:2,label:'RA/G'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9},maxRotation:30},grid:{display:false}},y:{min:0,max:13,ticks:{font:{size:9}},grid:{color:'rgba(39,116,174,.15)'}}}}});
 buildPS();
 }
-
-window.addEventListener('load',function(){
-  if(window.location.search.indexOf('reset=1')>-1){localStorage.removeItem('bruins_ok');}
-  if(localStorage.getItem('bruins_ok')==='1'){
-    document.getElementById('auth').style.display='none';
-    document.getElementById('app').style.display='block';
-    onUnlock();
-    return;
-  }
-  var btns=document.querySelectorAll('.abtn[data-v]');
-  for(var i=0;i<btns.length;i++){
-    btns[i].addEventListener('click',function(){authPressDigit(this.getAttribute('data-v'));});
-  }
-  var del=document.getElementById('del-btn');
-  if(del)del.addEventListener('click',function(){if(!ENTRY.length)return;ENTRY=ENTRY.slice(0,-1);authUpdateDots();});
-  var lk=document.getElementById('lock-btn');
-  if(lk)lk.addEventListener('click',function(){localStorage.removeItem('bruins_ok');location.reload();});
-});
-
 </script>
 </body>
 </html>

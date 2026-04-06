@@ -355,7 +355,7 @@ function authPressDigit(v) {
       localStorage.setItem('bruins_ok', '1');
       document.getElementById('auth').style.display = 'none';
       document.getElementById('app').style.display = 'block';
-      if (typeof onUnlock === 'function') { if (window.Chart) { onUnlock(); } else { window.addEventListener('load', onUnlock); } }
+      if (typeof onUnlock === 'function') { onUnlock(); }
     } else {
       var dots = document.querySelectorAll('.adot');
       for (var i = 0; i < dots.length; i++) dots[i].classList.add('err');
@@ -382,7 +382,7 @@ window.addEventListener('load', function() {
   if (localStorage.getItem('bruins_ok') === '1') {
     document.getElementById('auth').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    if (typeof onUnlock === 'function') { if (window.Chart) { onUnlock(); } else { window.addEventListener('load', onUnlock); } }
+    if (typeof onUnlock === 'function') { onUnlock(); }
     return;
   }
   var btns = document.querySelectorAll('.abtn[data-v]');
@@ -397,6 +397,9 @@ window.addEventListener('load', function() {
     ENTRY = ENTRY.slice(0, -1);
     authUpdateDots();
   });
+  var lk = document.getElementById('lock-btn');
+  if (lk) lk.addEventListener('click', function() { localStorage.removeItem('bruins_ok'); location.reload(); });
+  if (window.location.search.indexOf('reset=1') > -1) { localStorage.removeItem('bruins_ok'); location.reload(); }
 });
 
 
@@ -473,25 +476,6 @@ var pris=[
 document.getElementById('pl').innerHTML=pris.map(function(p){return'<div class="flag-card"><div class="flag-bar '+p.type+'"></div><div class="flag-body"><div style="display:flex;align-items:center;gap:8px;margin-bottom:2px"><div style="font-size:11px;font-weight:700;color:#8BB8E8">'+p.n+'</div><div class="flag-title">'+p.title+'</div></div><div class="flag-text">'+p.text+'</div></div></div>';}).join('');
 buildPS();
 }
-
-window.addEventListener('load',function(){
-  if(window.location.search.indexOf('reset=1')>-1){localStorage.removeItem('bruins_ok');}
-  if(localStorage.getItem('bruins_ok')==='1'){
-    document.getElementById('auth').style.display='none';
-    document.getElementById('app').style.display='block';
-    onUnlock();
-    return;
-  }
-  var btns=document.querySelectorAll('.abtn[data-v]');
-  for(var i=0;i<btns.length;i++){
-    btns[i].addEventListener('click',function(){authPressDigit(this.getAttribute('data-v'));});
-  }
-  var del=document.getElementById('del-btn');
-  if(del)del.addEventListener('click',function(){if(!ENTRY.length)return;ENTRY=ENTRY.slice(0,-1);authUpdateDots();});
-  var lk=document.getElementById('lock-btn');
-  if(lk)lk.addEventListener('click',function(){localStorage.removeItem('bruins_ok');location.reload();});
-});
-
 </script>
 </body>
 </html>
