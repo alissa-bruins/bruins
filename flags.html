@@ -95,6 +95,11 @@ canvas { width: 100% !important; }
 .pssv { font-size: 11px; font-weight: 700; color: #003B5C; }
 .pssl { font-size: 8px; color: #8BB8E8; text-transform: uppercase; }
 
+.fb { font-size:11px; padding:6px 13px; border-radius:20px; border:1.5px solid #DAEBFE; background:#fff; color:#005587; cursor:pointer; font-weight:600; white-space:nowrap; }
+.fb.active { background:#2774AE; color:#fff; border-color:#2774AE; }
+.filter-bar { display:flex; gap:5px; margin-bottom:10px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none; }
+.filter-bar::-webkit-scrollbar { display:none; }
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </head>
@@ -106,7 +111,7 @@ canvas { width: 100% !important; }
 <div class="content" style="flex:1;padding-bottom:20px;">
 <div class="note b">Review before each tournament. Red = action required. Amber = monitor. Green = build on.</div>
 <div class="sl">Active flags</div><div id="fl"></div>
-<div class="sl">14U transition priorities</div><div id="pl"></div><div class="sl" style="margin-top:18px">Player performance &amp; trends</div><div id="_pswrap"></div></div>
+<div class="sl">14U transition priorities</div><div id="pl"></div><div class="sl" style="margin-top:18px">Player snapshot</div><div id="_pswrap"></div></div>
 </div>
 <script>
 
