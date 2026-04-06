@@ -129,7 +129,12 @@ canvas { width: 100% !important; }
 <div class="note a"><strong>2B depth:</strong> Murdock primary (115 inn). Torres backup (36 inn). Thin — develop Short or Firestone.</div>
 <div class="note b"><strong>3B depth:</strong> Short leads (71 inn). Firestone (37), Zant (13), Denny (12), Oswald (8), Torres (7) all have reps.</div>
 <div class="note g"><strong>Well covered:</strong> C, 1B, SS, and all 3 OF spots have strong depth.</div>
-<div class="note r"><strong>Development gap — Eli Swartz (#22):</strong> 39.2 innings on the mound, only 26.1 innings in the field total (LF/RF). For a development-first program this is underuse. He needs a designated second position with real reps — not just filler OF when not pitching. <strong>Recommendation: begin systematic 1B or RF development.</strong> 1B is low-stress on the arm, high-value positionally, and keeps him active every game. RF is already his stronger OF side (15 inn) and closer to an infield throwing lane. Either gives him a real role beyond pitcher.</div></div>
+
+<div class="sl" style="margin-top:18px">Player fielding breakdown</div>
+<div class="note b">Tap a player to see their full fielding profile — innings at each position, FPCT, errors, and development notes.</div>
+<div class="player-tabs" id="ftabs"></div>
+<div id="fplayer-detail"></div>
+</div>
 </div>
 <script>
 
@@ -484,6 +489,95 @@ function buildPS() {
   });
   el.innerHTML = h;
 }
+
+function renderFielder(name) {
+  document.querySelectorAll('.ptab').forEach(function(b){ b.classList.remove('active'); });
+  var btn = document.getElementById('ftab_'+name);
+  if (btn) btn.classList.add('active');
+
+  var f = TEAM.fielding ? TEAM.fielding.find(function(x){ return x.name===name; }) : null;
+  var p = TEAM.batting  ? TEAM.batting.find(function(x){  return x.name===name; }) : null;
+  if (!f || !p) return;
+
+  var posMap = [
+    {k:'C',  lbl:'C',  color:'#2774AE'},
+    {k:'B1', lbl:'1B', color:'#2e7d32'},
+    {k:'B2', lbl:'2B', color:'#FFB81C'},
+    {k:'B3', lbl:'3B', color:'#c62828'},
+    {k:'SS', lbl:'SS', color:'#6a1b9a'},
+    {k:'LF', lbl:'LF', color:'#00695c'},
+    {k:'CF', lbl:'CF', color:'#0277bd'},
+    {k:'RF', lbl:'RF', color:'#4a148c'},
+  ];
+
+  var positions = posMap.filter(function(pm){ return f[pm.k] > 0; });
+  var totalField = positions.reduce(function(s,pm){ return s + f[pm.k]; }, 0);
+
+  // Confidence color
+  var fpctColor = f.fpct >= .950 ? '#2e7d32' : f.fpct >= .900 ? '#2774AE' : '#FFB81C';
+  var confBadge = f.conf
+    ? '<span style="background:#e8f5e9;color:#1b5e20;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700">Confident</span>'
+    : '<span style="background:#FFF8E1;color:#856000;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700">Developing</span>';
+
+  var lhp = (p.bat==='L'&&p.thr==='L') ? ' <span style="font-size:10px;font-weight:700;color:#2774AE;background:#DAEBFE;padding:1px 6px;border-radius:4px">LHP</span>' : '';
+  var lhb = (p.bat==='L'&&p.thr!=='L') ? ' <span style="font-size:10px;font-weight:700;color:#2774AE;background:#DAEBFE;padding:1px 6px;border-radius:4px">LHB</span>' : '';
+
+  // Position bars
+  var bars = positions.map(function(pm){
+    var inn = f[pm.k];
+    var pct = totalField > 0 ? Math.round(inn/totalField*100) : 0;
+    return '<div style="margin-bottom:10px">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">'
+        +'<div style="font-size:12px;font-weight:700;color:#003B5C;width:28px">'+pm.lbl+'</div>'
+        +'<div style="flex:1;height:10px;background:#f0f4f8;border-radius:5px;overflow:hidden">'
+          +'<div style="width:'+pct+'%;height:100%;background:'+pm.color+';border-radius:5px"></div>'
+        +'</div>'
+        +'<div style="font-size:12px;color:#005587;width:55px;text-align:right">'+inn+' inn</div>'
+        +'<div style="font-size:11px;color:#8BB8E8;width:36px;text-align:right">'+pct+'%</div>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+
+  // Pitching line if applicable
+  var pit = (TEAM.pitching||[]).find(function(x){ return x.name===name; });
+  var pitLine = pit
+    ? '<div style="font-size:12px;color:#005587;padding:8px 10px;background:#f0f4f8;border-radius:8px;margin-bottom:10px">'
+        +'<strong style="color:#003B5C">Pitching:</strong> '+pit.ip+' IP &middot; '+pit.era.toFixed(2)+' ERA &middot; '+pit.k+'K &middot; '+pit.p+' pitches'
+      +'</div>'
+    : '';
+
+  document.getElementById('fplayer-detail').innerHTML =
+    '<div class="card" style="margin-bottom:12px">'
+      // Header
+      +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #f0f4f8">'
+        +'<div class="av" style="background:'+p.color+';color:'+p.tc+';width:44px;height:44px;font-size:14px;flex-shrink:0">'+name.slice(0,2)+'</div>'
+        +'<div style="flex:1">'
+          +'<div style="font-size:17px;font-weight:700;color:#003B5C">#'+p.num+' '+name+lhp+lhb+'</div>'
+          +'<div style="font-size:11px;color:#8BB8E8;margin-top:2px">'+p.pos+(p.dob?' &middot; '+p.dob:'')+(p.grad?' &middot; Class of '+p.grad:'')+'</div>'
+        +'</div>'
+        +'<div style="text-align:right;flex-shrink:0">'
+          +'<div style="font-size:20px;font-weight:700;color:'+fpctColor+'">'+f.fpct.toFixed(3)+'</div>'
+          +'<div style="font-size:10px;color:#8BB8E8">FPCT</div>'
+        +'</div>'
+      +'</div>'
+      // Stats row
+      +'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px">'
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:8px"><div style="font-size:15px;font-weight:700;color:'+fpctColor+'">'+f.fpct.toFixed(3)+'</div><div style="font-size:9px;color:#8BB8E8;text-transform:uppercase">FPCT</div></div>'
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:8px"><div style="font-size:15px;font-weight:700;color:'+(f.e>=7?'#FFB81C':'#003B5C')+'">'+f.e+'</div><div style="font-size:9px;color:#8BB8E8;text-transform:uppercase">Errors</div></div>'
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:8px"><div style="font-size:15px;font-weight:700;color:'+(f.dp>=4?'#2e7d32':'#003B5C')+'">'+f.dp+'</div><div style="font-size:9px;color:#8BB8E8;text-transform:uppercase">DP</div></div>'
+        +'<div style="text-align:center;background:#f0f4f8;border-radius:8px;padding:8px"><div style="font-size:15px;font-weight:700;color:#003B5C">'+f.tc+'</div><div style="font-size:9px;color:#8BB8E8;text-transform:uppercase">TC</div></div>'
+      +'</div>'
+      // Pitching if applicable
+      + pitLine
+      // Position innings bars
+      +'<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#005587;margin-bottom:10px">Innings by position (field only — '+totalField.toFixed(1)+' total)</div>'
+      + bars
+      // Confidence + note
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;margin-top:4px">'+confBadge+'</div>'
+      +'<div style="font-size:12px;color:#005587;padding:8px 10px;background:#f0f4f8;border-radius:8px;border-left:2px solid #FFD100;line-height:1.55">'+f.note+'</div>'
+    +'</div>';
+}
+
 function onUnlock(){
 
 var positions=[
@@ -502,7 +596,20 @@ document.getElementById('ft').innerHTML='<table><thead><tr><th class="l">Player<
 var nm=F.map(function(f){return f.name;});
 new Chart(document.getElementById('inf-c'),{type:'bar',data:{labels:nm,datasets:[{label:'C',data:F.map(function(f){return f.C;}),backgroundColor:'rgba(39,116,174,.8)',borderRadius:2},{label:'1B',data:F.map(function(f){return f.B1;}),backgroundColor:'rgba(46,125,50,.75)',borderRadius:2},{label:'2B',data:F.map(function(f){return f.B2;}),backgroundColor:'rgba(255,184,28,.85)',borderRadius:2},{label:'3B',data:F.map(function(f){return f.B3;}),backgroundColor:'rgba(198,40,40,.7)',borderRadius:2},{label:'SS',data:F.map(function(f){return f.SS;}),backgroundColor:'rgba(106,27,154,.7)',borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:9},boxWidth:8}}},scales:{x:{ticks:{font:{size:8}},grid:{display:false},stacked:true},y:{ticks:{font:{size:9}},stacked:true,grid:{color:'rgba(39,116,174,.1)'}}}}});
 new Chart(document.getElementById('out-c'),{type:'bar',data:{labels:nm,datasets:[{label:'LF',data:F.map(function(f){return f.LF;}),backgroundColor:'rgba(39,116,174,.8)',borderRadius:2},{label:'CF',data:F.map(function(f){return f.CF;}),backgroundColor:'rgba(46,125,50,.75)',borderRadius:2},{label:'RF',data:F.map(function(f){return f.RF;}),backgroundColor:'rgba(255,184,28,.85)',borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:9},boxWidth:8}}},scales:{x:{ticks:{font:{size:8}},grid:{display:false},stacked:true},y:{ticks:{font:{size:9}},stacked:true,grid:{color:'rgba(39,116,174,.1)'}}}}});
+// Player fielding tabs
+var ftabs = document.getElementById('ftabs');
+var fsorted = TEAM.batting.slice().sort(function(a,b){ return a.num-b.num; });
+fsorted.forEach(function(p, i) {
+  var btn = document.createElement('button');
+  btn.className = 'ptab' + (i===0?' active':'');
+  btn.id = 'ftab_'+p.name;
+  btn.textContent = '#'+p.num+' '+p.name;
+  btn.onclick = function(){ renderFielder(p.name); };
+  ftabs.appendChild(btn);
+});
+renderFielder(fsorted[0].name);
+
 }
 </script>
 </body>
-</html>
+</html> 
