@@ -484,6 +484,6 @@ document.getElementById('bat-cards').innerHTML=TEAM.batting.map(function(p,pi){
   return '<div class="card" style="margin-bottom:10px"><div class="ph"><div class="av" style="background:'+p.color+';color:'+p.tc+'">'+p.name.slice(0,2)+'</div><div style="flex:1"><div class="pn2">'+p.lineup+'. '+p.name+htag+'</div><div class="pp">'+p.pos+' &middot; Age '+p.age+'</div></div></div><div class="sr"><div class="sb"><div class="sbv">'+p.avg.toFixed(3)+'</div><div class="sbl">AVG</div></div><div class="sb"><div class="sbv '+obc+'">'+p.obp.toFixed(3)+'</div><div class="sbl">OBP</div></div><div class="sb"><div class="sbv '+oc+'">'+p.ops.toFixed(3)+'</div><div class="sbl">OPS</div></div><div class="sb"><div class="sbv">'+p.rbi+'</div><div class="sbl">RBI</div></div><div class="sb"><div class="sbv">'+p.sb+'</div><div class="sbl">SB</div></div></div><div style="font-size:10px;color:#8BB8E8;margin-bottom:4px;font-weight:600">AVG by tournament (T1&rarr;T8) &nbsp; Blue=.400+ &nbsp; Gold=mid &nbsp; Red=below .220</div><div class="spark">'+bars+'</div><div style="font-size:11px;color:#005587;margin-bottom:5px;padding:6px 8px;background:#f0f4f8;border-radius:8px;border-left:2px solid #FFD100">QAB: '+p.qab.toFixed(1)+'% &middot; '+p.coaching+'</div><div class="pnote">'+p.note+'</div></div>';
 }).join('');
 }
-</script> 
+</script>
 </body>
 </html>

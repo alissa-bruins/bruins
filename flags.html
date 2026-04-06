@@ -120,7 +120,10 @@ canvas { width: 100% !important; }
 <div class="sl">Active flags</div>
 <div id="fl"></div>
 <div class="sl">14U transition priorities</div>
-<div id="pl"></div></div>
+<div id="pl"></div>
+<div class="sl" style="margin-top:18px">Development gaps — positional underuse</div>
+<div class="note b">Identified from GC innings data. These are not failures — they are opportunities. Each gap below represents a player who, with targeted reps in 14U, becomes meaningfully more deployable.</div>
+<div id="dev-gaps"></div></div>
 </div>
 <script>
 
@@ -480,6 +483,28 @@ function onUnlock(){
 document.getElementById('fl').innerHTML=TEAM.flags.map(function(f){
   return '<div class="fc"><div class="fb2 '+f.type+'"></div><div class="fbody"><div class="ftitle">'+f.title+'</div><div class="fplayer">'+f.player+'</div><div class="ftext">'+f.text+'</div></div></div>';
 }).join('');
+
+// Development gaps section
+var devGaps=[
+  {player:'Eli Swartz #22',type:'r',
+   title:'No designated 2nd position',
+   text:'39.2 innings pitching, only 27 innings in the field (LF/RF split). For a development-first program this is underuse. When not pitching he needs a real positional role, not filler OF. Recommendation: begin systematic 1B or RF development. 1B is arm-safe and high-value. RF is already his stronger side (15 inn). Either gives him a genuine 2nd skill.'},
+  {player:'Rio Lopes #13',type:'a',
+   title:'Single-position field player — zero positional breadth',
+   text:'100% of his 100 field innings are at CF. Zero innings anywhere else. When he pitches he is on the mound. When he fields he is in CF. Two elite skills but no fallback. At 14U a LHP/CF who can also play 1B or RF on off days is significantly more deployable than one who cannot.'},
+  {player:'Aiden Herrera #5',type:'a',
+   title:'C/SS only — no corner infield exposure',
+   text:'76 innings at C, 59 at SS. Zero innings at 1B, 2B, or 3B. Catchers who can play 3B or 1B on off days are far more valuable at the high school level. 20 innings at 3B this season would have been low-cost and high-upside. Priority for 14U.'},
+  {player:'James Short #2',type:'b',
+   title:'No middle infield development',
+   text:'C, 1B, and 3B only — zero innings at SS or 2B. With 19 SB and clear athleticism, some middle infield exposure would have paid off. Not urgent but worth noting. 20 innings at SS in 14U would open options at the high school level.'},
+];
+var devEl=document.getElementById('dev-gaps');
+if(devEl){
+  devEl.innerHTML=devGaps.map(function(d){
+    return '<div class="fc"><div class="fb2 '+d.type+'"></div><div class="fbody"><div class="ftitle">'+d.title+'</div><div class="fplayer">'+d.player+'</div><div class="ftext">'+d.text+'</div></div></div>';
+  }).join('');
+}
 var pris=[
   {n:1,title:'Get in the gym — every player',type:'g',text:'Team-wide. Physical development at 12-13 translates directly to bat speed, arm velocity, range, and injury durability.'},
   {n:2,title:'Swartz return protocol',type:'r',text:'Medical clearance required before pitching. 60P max, no game-2 same day, 5-day rest min. RF/LF in field. Mono recovery is not linear.'},
@@ -495,4 +520,4 @@ document.getElementById('pl').innerHTML=pris.map(function(p){
 }
 </script>
 </body>
-</html> 
+</html>
